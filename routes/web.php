@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/wayway', function() {
+    return Auth::user();
+});
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -1,9 +1,14 @@
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+/**
+ * The Vutify CSS Files
+ * You can find the complete documentation in the official website
+ * Because this is just a simple example I am loading just the minified version
+ */
 
-// Variables
-@import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+ th{
+   text-align: center;
+ }
+ td{
+   text-align: center;
+ }
