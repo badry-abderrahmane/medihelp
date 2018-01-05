@@ -21,6 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('email')->nullable();
             $table->string('adress')->nullable();
             $table->string('secteur')->nullable();
+            $table->integer('typeclient_id')->unsigned();
 
             $table->foreign('typeclient_id')
                   ->references('id')->on('typeclients')

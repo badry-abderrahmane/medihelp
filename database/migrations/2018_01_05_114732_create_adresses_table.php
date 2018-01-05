@@ -18,6 +18,7 @@ class CreateAdressesTable extends Migration
             $table->string('libele');
             $table->string('adress')->nullable();
             $table->string('phone')->nullable();
+            $table->integer('client_id')->unsigned();
 
             $table->foreign('client_id')
                   ->references('id')->on('clients')

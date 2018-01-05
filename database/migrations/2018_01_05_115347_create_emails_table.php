@@ -18,6 +18,10 @@ class CreateEmailsTable extends Migration
             $table->date('date');
             $table->string('sujet');
             $table->string('message')->nullable();
+            $table->integer('typecomm_id')->unsigned();
+            $table->integer('action_id')->unsigned();
+            $table->integer('etat_id')->unsigned();
+            $table->integer('ticket_id')->unsigned();
 
             $table->foreign('typecomm_id')
                   ->references('id')->on('typecomms')

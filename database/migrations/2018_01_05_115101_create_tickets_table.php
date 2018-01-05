@@ -19,6 +19,8 @@ class CreateTicketsTable extends Migration
             $table->date('date');
             $table->string('sujet');
             $table->string('note')->nullable();
+            $table->integer('action_id')->unsigned();
+            $table->integer('contact_id')->unsigned();
 
             $table->foreign('action_id')
                   ->references('id')->on('actions')

@@ -21,11 +21,12 @@ class CreateContactsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('fonction')->nullable();
-
+            $table->integer('client_id')->unsigned();
+            
             $table->foreign('client_id')
                   ->references('id')->on('clients')
                     ->onDelete('cascade');
-                    
+
             $table->timestamps();
         });
     }
