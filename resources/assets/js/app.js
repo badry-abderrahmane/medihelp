@@ -33,8 +33,8 @@ const app = new Vue({
   store,
   router,
   mounted(){
-    // this.$store.dispatch('LOAD_PROSPECT_LIST')
-    // this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
+    this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
+    this.$store.dispatch('LOAD_CLIENTS_LIST')
     // this.$store.dispatch('LOAD_CLIENT_LIST')
     // this.$store.dispatch('LOAD_CATEGORY_LIST')
     // this.$store.dispatch('LOAD_PRODUIT_LIST')

@@ -19,10 +19,10 @@
         <i class="zmdi zmdi-more"></i>
       </li>
       <li>
-        <a style="cursor:pointer;" @click="$router.push({ path: `/entreprises` })" :class="$route.name == 'Entreprises' ? 'active':'' ">
+        <a style="cursor:pointer;" @click="$router.push({ path: `/clients` })" :class="$route.name == 'Clients' ? 'active':'' ">
           <div class="pull-left">
             <i class="fa fa-building mr-20"></i>
-            <span class="right-nav-text">Entreprises</span>
+            <span class="right-nav-text">Clients</span>
           </div>
           <div class="clearfix"></div>
         </a>
@@ -32,6 +32,15 @@
           <div class="pull-left">
             <i class="fa fa-phone mr-20"></i>
             <span class="right-nav-text">Appels</span>
+          </div>
+          <div class="clearfix"></div>
+        </a>
+      </li>
+      <li>
+        <a style="cursor:pointer;" @click="$router.push({ path: `/typeclients` })" :class="$route.name == 'List Types Client' ? 'active':'' ">
+          <div class="pull-left">
+            <i class="fa fa-phone mr-20"></i>
+            <span class="right-nav-text">Type clients</span>
           </div>
           <div class="clearfix"></div>
         </a>

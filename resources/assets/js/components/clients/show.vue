@@ -1,0 +1,96 @@
+<template lang="html">
+  <div>
+    <div class="col-md-3">
+      <part-panel-profile title="Entreprise" :name="client.name">
+        <div slot="count1">
+          <span class="counts block head-font"><span class="counter-anim">{{ countTickets }}</span></span>
+          <span class="counts-text block">Tickets</span>
+        </div>
+        <div slot="count2">
+          <span class="counts block head-font"><span class="counter-anim">{{ countAppels }}</span></span>
+          <span class="counts-text block">Appels</span>
+        </div>
+        <div slot="links">
+          <br><br>
+            <div class="col-md-8 col-md-offset-2">
+              <button class="btn btn-warning btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/clients/edit/`+client.id })">
+                 <span class="btn-label"><i class="fa fa-edit"></i> </span>
+                 <span class="btn-text">Modifier client</span>
+              </button>
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/contacts/add` })">
+                 <span class="btn-label"><i class="fa fa-plus"></i> </span>
+                 <span class="btn-text">Nouveau contact</span>
+              </button>
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/adresses/add` })">
+                 <span class="btn-label"><i class="fa fa-plus"></i> </span>
+                 <span class="btn-text">Nouvelle adresse</span>
+              </button>
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/tickets/add/` })">
+                 <span class="btn-label"><i class="fa fa-plus"></i> </span>
+                 <span class="btn-text">Nouveau ticket</span>
+              </button>
+            </div>
+        </div>
+      </part-panel-profile>
+    </div>
+    <div class="col-md-9">
+      <part-panel-tabs :tabs="tabs">
+        <div slot="1" class="text-center"><br>
+          <infos-client :client="client"></infos-client>
+        </div>
+        <div slot="2">
+          <infos-client-contacts :contacts="client.contacts"></infos-client-contacts>
+        </div>
+        <div slot="3">
+          <infos-client-adresses :adresses="client.adresses"></infos-client-adresses>
+        </div>
+        <div slot="4">
+          <infos-client-incidents :tickets="client.tickets"></infos-client-incidents>
+        </div>
+      </part-panel-tabs>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data(){
+    return {
+      tabs: [{id: '1', name: 'Informations'},{id: '2', name: 'Contacts'},{id: '3', name: 'Adresses'},{id: '4', name: 'Tickets'}],
+      client: { typeclient:{ value:'' } },
+    }
+  },
+
+  computed:{
+    clientId: function(){
+      return this.$route.params.id
+    },
+    countAppels: function(){
+      if (this.client.appels) {
+        return this.client.appels.length
+      }else{
+        return 0
+      }
+    },
+    countTickets: function(){
+      if (this.client.tickets) {
+        return this.client.tickets.length
+      }else{
+        return 0
+      }
+    },
+  },
+  created(){
+    axios.get('/clients/'+this.clientId)
+      .then(response => {
+        this.client = response.data;
+        Vue.nextTick(function () {
+          Event.$emit('init-datatable', 'tableAdd');
+        })
+    });
+  }
+}
+</script>
+
+<style lang="css">
+</style>

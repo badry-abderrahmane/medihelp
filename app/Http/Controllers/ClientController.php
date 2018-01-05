@@ -14,7 +14,7 @@ class ClientController extends Controller
     {
         $clients = Client::all();
         $clients->filter->typeclient;
-        $clients->filter->contacts;
+        $clients->filter->contacts->filter->tickets;
         $clients->filter->adresses;
         return $clients;
     }
@@ -29,7 +29,7 @@ class ClientController extends Controller
     {
         $client = Client::findOrfail($id);
         $client->typeclient;
-        $client->contacts;
+        $client->contacts->filter->tickets;
         $client->adresses;
         return Response::json($client, 200);
     }

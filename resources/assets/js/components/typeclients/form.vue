@@ -2,17 +2,11 @@
   <div>
     <part-panel>
       <div slot="heading">
-        Nouvelle entreprise
+        Nouveau type d'entreprise
       </div>
       <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
         <div class="row">
-          <part-input v-model="form" name="name" label="Nom complet/Raison sociale"></part-input>
-          <part-input v-model="form" name="type" label="Type"></part-input>
-          <part-input v-model="form" name="phone" label="Numéro téléphone"></part-input>
-          <part-input v-model="form" name="fax" label="Fax"></part-input>
-          <part-input v-model="form" name="email" label="Email"></part-input>
-          <part-input v-model="form" name="adress" label="Adresse"></part-input>
-          <part-input v-model="form" name="secteur" label="Secteur d'activité"></part-input>
+          <part-input v-model="form" name="value" label="Nom"></part-input>
         </div>
         <div class="row">
           <part-button-submit :editing="editing"></part-button-submit>
@@ -23,16 +17,17 @@
 </template>
 
 <script>
+    import { ModelSelect } from 'vue-search-select'
     import { Form } from './../../api/form.js';
     export default {
+        components: {
+          ModelSelect
+        },
         data(){
           return{
             form : new Form({
               id:'',
-              name: '',
-              phone: '',
-              adress: '',
-              specialite: '',
+              value:''
             }),
           }
         },
@@ -44,13 +39,13 @@
               return false
             }
           },
-          fournisseurId: function(){
+          typeclientId: function(){
             return this.$route.params.id
           }
         },
         created(){
-          if (this.fournisseurId) {
-            axios.get('/fournisseurs/'+this.fournisseurId)
+          if (this.typeclientId) {
+            axios.get('/typeclients/'+this.typeclientId)
               .then(response => {
                 this.form.load(response.data);
             });
@@ -60,9 +55,9 @@
         methods: {
           onSubmit(){
             if (this.form.id == '') {
-              this.form.post('/fournisseurs')
+              this.form.post('/typeclients')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
+                  this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })
@@ -70,9 +65,9 @@
                   console.log(errors);
                 });
             }else{
-              this.form.put('/fournisseurs')
+              this.form.put('/typeclients')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
+                  this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })

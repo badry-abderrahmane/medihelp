@@ -38,3 +38,18 @@ Route::resources([
     'emails' => 'EmailController',
     'appels' => 'AppelController',
 ]);
+
+
+/**
+** Get Lists
+**
+**/
+Route::get('list/typeclients', function(){
+  $list = \App\Typeclient::pluck('value as name','id')->toJson();
+  return $list;
+});
+
+Route::get('list/clients', function(){
+  $list = \App\Client::pluck('name','id')->toJson();
+  return $list;
+});

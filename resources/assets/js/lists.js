@@ -3,4 +3,6 @@
 * Lists components
 *
 */
-Vue.component('list-entreprises', require('./components/entreprises/list.vue'));
+Vue.component('list-typeclients', require('./components/typeclients/list.vue'));
+
+Vue.component('list-clients', require('./components/clients/list.vue'));

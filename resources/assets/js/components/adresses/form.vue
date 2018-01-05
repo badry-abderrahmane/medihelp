@@ -8,13 +8,13 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="Entreprise" class="control-label mb-10">Entreprise</label>
-              <model-select :options="entreprises" v-model="form['entreprise_id']">
+              <label for="Entreprise" class="control-label mb-10">Client</label>
+              <model-select :options="clients" v-model="form['client_id']">
              </model-select>
             </div>
           </div>
           <part-input v-model="form" name="libele" label="Libélé"></part-input>
-          <part-input v-model="form" name="value" label="Adresse"></part-input>
+          <part-input v-model="form" name="adress" label="Adresse"></part-input>
           <part-input v-model="form" name="phone" label="Telephone"></part-input>
         </div>
         <div class="row">
@@ -35,9 +35,12 @@
         data(){
           return{
             form : new Form({
-
+              id:'',
+              client_id:'',
+              libele:'',
+              adress:'',
+              phone:'',
             }),
-            entreprises:[{id:'1', text:'test'},{id:'2', text:'test 2'}],
           }
         },
         computed:{
@@ -48,13 +51,16 @@
               return false
             }
           },
-          fournisseurId: function(){
+          adressId: function(){
             return this.$route.params.id
-          }
+          },
+          clients: function(){
+            return this.$store.state.clients
+          },
         },
         created(){
-          if (this.fournisseurId) {
-            axios.get('/fournisseurs/'+this.fournisseurId)
+          if (this.adressId) {
+            axios.get('/adresses/'+this.adressId)
               .then(response => {
                 this.form.load(response.data);
             });
@@ -64,9 +70,8 @@
         methods: {
           onSubmit(){
             if (this.form.id == '') {
-              this.form.post('/fournisseurs')
+              this.form.post('/adresses')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })
@@ -74,9 +79,8 @@
                   console.log(errors);
                 });
             }else{
-              this.form.put('/fournisseurs')
+              this.form.put('/adresses')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })

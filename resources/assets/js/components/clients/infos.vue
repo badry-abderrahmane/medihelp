@@ -3,35 +3,35 @@
     <div class="row mb-40">
       <div class="col-md-6"><br>
         <h6 class="text-success">#ID:</h6>
-        <h5><span class="label label-default">{{ entreprise.id }}</span></h5>
+        <h5><span class="label label-default">{{ client.id }}</span></h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Nom:</h6>
-        <h5>{{ entreprise.name }}</h5>
+        <h5>{{ client.name }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Type:</h6>
-        <h5>{{ entreprise.type }}</h5>
+        <h5>{{ client.typeclient.value }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Telephone:</h6>
-        <h5>{{ entreprise.phone }}</h5>
+        <h5>{{ client.phone }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Fax:</h6>
-        <h5>{{ entreprise.fax }}</h5>
+        <h5>{{ client.fax }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Email:</h6>
-        <h5>{{ entreprise.email }}</h5>
+        <h5>{{ client.email }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Adresse:</h6>
-        <h5>{{ entreprise.adress }}</h5>
+        <h5>{{ client.adress }}</h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Secteur:</h6>
-        <h5>{{ entreprise.secteur }}</h5>
+        <h5>{{ client.secteur }}</h5>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  props:["entreprise"]
+  props:["client"]
 }
 </script>
 
