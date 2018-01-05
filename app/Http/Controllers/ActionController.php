@@ -13,6 +13,9 @@ class ActionController extends Controller
     public function index()
     {
         $actions = Action::all();
+        $actions->filter->tickets;
+        $actions->filter->emails;
+        $actions->filter->appels;
         return $actions;
     }
 
@@ -25,6 +28,9 @@ class ActionController extends Controller
     public function show($id)
     {
         $action = Action::findOrfail($id);
+        $action->tickets;
+        $action->emails;
+        $action->appels;
         return Response::json($action, 200);
     }
 

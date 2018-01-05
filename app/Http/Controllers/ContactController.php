@@ -12,6 +12,8 @@ class ContactController extends Controller
       public function index()
       {
           $contacts = Contact::all();
+          $contacts->filter->client;
+          $contacts->filter->tickets;
           return $contacts;
       }
 
@@ -24,6 +26,8 @@ class ContactController extends Controller
       public function show($id)
       {
           $contact = Contact::findOrfail($id);
+          $contact->client;
+          $contact->tickets;
           return Response::json($contact, 200);
       }
 

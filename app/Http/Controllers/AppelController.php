@@ -13,6 +13,10 @@ class AppelController extends Controller
     public function index()
     {
         $appels = Appel::all();
+        $appels->filter->typecomm;
+        $appels->filter->action;
+        $appels->filter->etat;
+        $appels->filter->ticket;
         return $appels;
     }
 
@@ -25,6 +29,10 @@ class AppelController extends Controller
     public function show($id)
     {
         $appel = Appel::findOrfail($id);
+        $appel->typecomm;
+        $appel->action;
+        $appel->etat;
+        $appel->ticket;
         return Response::json($appel, 200);
     }
 

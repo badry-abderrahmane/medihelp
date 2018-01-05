@@ -12,6 +12,10 @@ class TicketController extends Controller
       public function index()
       {
           $tickets = Ticket::all();
+          $tickets->filter->action;
+          $tickets->filter->contact;
+          $tickets->filter->emails;
+          $tickets->filter->appels;
           return $tickets;
       }
 
@@ -24,6 +28,10 @@ class TicketController extends Controller
       public function show($id)
       {
           $ticket = Ticket::findOrfail($id);
+          $ticket->action;
+          $ticket->contact;
+          $ticket->emails;
+          $ticket->appels;
           return Response::json($ticket, 200);
       }
 

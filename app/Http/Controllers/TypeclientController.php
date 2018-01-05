@@ -12,6 +12,7 @@ class TypeclientController extends Controller
       public function index()
       {
           $typeclients = Typeclient::all();
+          $typeclients->filter->clients;
           return $typeclients;
       }
 
@@ -24,6 +25,7 @@ class TypeclientController extends Controller
       public function show($id)
       {
           $typeclient = Typeclient::findOrfail($id);
+          $typeclient->clients;
           return Response::json($typeclient, 200);
       }
 

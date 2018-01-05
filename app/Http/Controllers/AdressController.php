@@ -13,6 +13,7 @@ class AdressController extends Controller
     public function index()
     {
         $adresses = Adress::all();
+        $adresses->filter->client;
         return $adresses;
     }
 
@@ -25,6 +26,7 @@ class AdressController extends Controller
     public function show($id)
     {
         $adress = Adress::findOrfail($id);
+        $adress->client;
         return Response::json($adress, 200);
     }
 

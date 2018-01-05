@@ -13,4 +13,8 @@ class Contact extends Model
       public function client(){
           return $this->belongsTo('App\Client');
       }
+
+      public function tickets(){
+          return $this->hasMany('App\Ticket');
+      }
 }

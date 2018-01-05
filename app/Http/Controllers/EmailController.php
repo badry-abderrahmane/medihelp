@@ -12,6 +12,10 @@ class EmailController extends Controller
       public function index()
       {
           $emails = Email::all();
+          $emails->filter->typecomm;
+          $emails->filter->action;
+          $emails->filter->etat;
+          $emails->filter->ticket;
           return $emails;
       }
 
@@ -24,6 +28,10 @@ class EmailController extends Controller
       public function show($id)
       {
           $email = Email::findOrfail($id);
+          $email->typecomm;
+          $email->action;
+          $email->etat;
+          $email->ticket;
           return Response::json($email, 200);
       }
 

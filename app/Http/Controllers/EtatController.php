@@ -12,6 +12,8 @@ class EtatController extends Controller
       public function index()
       {
           $etats = Etat::all();
+          $etats->filter->appels;
+          $etats->filter->emails;
           return $etats;
       }
 
@@ -24,6 +26,8 @@ class EtatController extends Controller
       public function show($id)
       {
           $etat = Etat::findOrfail($id);
+          $etat->appels;
+          $etat->emails;
           return Response::json($etat, 200);
       }
 

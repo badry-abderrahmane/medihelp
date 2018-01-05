@@ -13,4 +13,12 @@ class Client extends Model
       public function typeclient(){
           return $this->belongsTo('App\Typeclient');
       }
+
+      public function contacts(){
+          return $this->hasMany('App\Contact');
+      }
+
+      public function adresses(){
+          return $this->hasMany('App\Adress');
+      }
 }

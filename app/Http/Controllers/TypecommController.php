@@ -12,6 +12,8 @@ class TypecommController extends Controller
       public function index()
       {
           $typecomms = Typecomm::all();
+          $typecomms->filter->appels;
+          $typecomms->filter->emails;
           return $typecomms;
       }
 
@@ -24,6 +26,8 @@ class TypecommController extends Controller
       public function show($id)
       {
           $typecomm = Typecomm::findOrfail($id);
+          $typecomm->appels;
+          $typecomm->emails;
           return Response::json($typecomm, 200);
       }
 
