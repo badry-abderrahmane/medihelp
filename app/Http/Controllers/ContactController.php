@@ -2,83 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\Response;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+      public function index()
+      {
+          $contacts = Contact::all();
+          return $contacts;
+      }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+      public function store(ContactRequest $request)
+      {
+          $contact = Contact::create($request->toArray());
+          return Response::json(['message' => 'Contact bien ajouté'], 200);
+      }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+      public function show($id)
+      {
+          $contact = Contact::findOrfail($id);
+          return Response::json($contact, 200);
+      }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+      public function update(ContactRequest $request, $id)
+      {
+          $contact = Contact::findOrfail($id);
+          $contact->update($request->toArray());
+          return Response::json(['message' => 'Contact bien mis à jour'], 200);
+      }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+      public function destroy($id)
+      {
+          Contact::destroy($id);
+          return Response::json(['message' => 'Contact bien supprimé'], 200);
+      }
 }

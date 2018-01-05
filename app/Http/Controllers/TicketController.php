@@ -2,83 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Ticket;
 use Illuminate\Http\Request;
+use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Response;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+      public function index()
+      {
+          $tickets = Ticket::all();
+          return $tickets;
+      }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+      public function store(TicketRequest $request)
+      {
+          $ticket = Ticket::create($request->toArray());
+          return Response::json(['message' => 'Ticket bien ajouté'], 200);
+      }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+      public function show($id)
+      {
+          $ticket = Ticket::findOrfail($id);
+          return Response::json($ticket, 200);
+      }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+      public function update(TicketRequest $request, $id)
+      {
+          $ticket = Ticket::findOrfail($id);
+          $ticket->update($request->toArray());
+          return Response::json(['message' => 'Ticket bien mis à jour'], 200);
+      }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+      public function destroy($id)
+      {
+          Ticket::destroy($id);
+          return Response::json(['message' => 'Ticket bien supprimé'], 200);
+      }
 }
