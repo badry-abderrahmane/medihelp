@@ -24,3 +24,17 @@ Route::get('/wayway', function() {
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::resources([
+    'typeclients' => 'TypeclientController',
+    'clients' => 'ClientController',
+    'adresses' => 'AdressController',
+    'contacts' => 'ContactController',
+    'actions' => 'ActionController',
+    'tickets' => 'TicketController',
+    'typecomms' => 'TypecommController',
+    'etats' => 'EtatController',
+    'emails' => 'EmailController',
+    'appels' => 'AppelController',
+]);
