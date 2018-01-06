@@ -26,8 +26,10 @@ class TicketRequest extends FormRequest
         return [
             'date' => 'required',
             'sujet' => 'required',
+            'state' => 'required',
             'action_id' => 'required',
             'contact_id' => 'required',
+            'client_id' => 'required',
         ];
     }
 }

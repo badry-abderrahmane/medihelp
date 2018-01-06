@@ -19,8 +19,10 @@ class CreateTicketsTable extends Migration
             $table->date('date');
             $table->string('sujet');
             $table->string('note')->nullable();
+            $table->string('state');
             $table->integer('action_id')->unsigned();
             $table->integer('contact_id')->unsigned();
+            $table->integer('client_id')->unsigned();
 
             $table->foreign('action_id')
                   ->references('id')->on('actions')
@@ -28,6 +30,10 @@ class CreateTicketsTable extends Migration
 
             $table->foreign('contact_id')
                   ->references('id')->on('contacts')
+                    ->onDelete('cascade');
+
+            $table->foreign('client_id')
+                  ->references('id')->on('clients')
                     ->onDelete('cascade');
 
             $table->timestamps();

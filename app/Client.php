@@ -18,6 +18,10 @@ class Client extends Model
           return $this->hasMany('App\Contact');
       }
 
+      public function tickets(){
+          return $this->hasMany('App\Ticket');
+      }
+
       public function adresses(){
           return $this->hasMany('App\Adress');
       }

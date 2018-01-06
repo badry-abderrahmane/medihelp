@@ -53,3 +53,8 @@ Route::get('list/clients', function(){
   $list = \App\Client::pluck('name','id')->toJson();
   return $list;
 });
+
+Route::get('list/actions', function(){
+  $list = \App\Action::pluck('value as name','id')->toJson();
+  return $list;
+});

@@ -29,26 +29,26 @@ module.exports = {
       **/
       // { name:'List Entreprises', path: '/entreprises', component: require('./components/entreprises/home.vue')},
       // { name:'Détail Entreprise', path: '/entreprises/show/:id', component: require('./components/entreprises/show.vue')},
-      { name:'Ajout Contact', path: '/contacts/add', component: require('./components/contacts/form.vue')},
-      // { name:'Modification Entreprise', path: '/entreprises/edit/:id', component: require('./components/entreprises/form.vue')},
-      // { name:'Suppression Entreprise', path: '/entreprises/delete/:id', component: require('./components/entreprises/delete.vue')},
+      { name:'Ajout Contact', path: '/contacts/add/:clientid', component: require('./components/contacts/form.vue')},
+      { name:'Modification Contact', path: '/contacts/edit/:clientid/:id', component: require('./components/contacts/form.vue')},
+      { name:'Suppression Contact', path: '/contacts/delete/:id', component: require('./components/contacts/delete.vue')},
 
       /**
       **    Adresses routes
       **/
       // { name:'List Entreprises', path: '/entreprises', component: require('./components/entreprises/home.vue')},
       // { name:'Détail Entreprise', path: '/entreprises/show/:id', component: require('./components/entreprises/show.vue')},
-      { name:'Ajout Adresse', path: '/adresses/add', component: require('./components/adresses/form.vue')},
-      { name:'Modification Adresse', path: '/adresses/edit/:id', component: require('./components/adresses/form.vue')},
+      { name:'Ajout Adresse', path: '/adresses/add/:clientid', component: require('./components/adresses/form.vue')},
+      { name:'Modification Adresse', path: '/adresses/edit/:clientid/:id', component: require('./components/adresses/form.vue')},
       // { name:'Suppression Entreprise', path: '/entreprises/delete/:id', component: require('./components/entreprises/delete.vue')},
 
       /**
-      **    Adresses routes
+      **    Tickets routes
       **/
-      // { name:'List Entreprises', path: '/entreprises', component: require('./components/entreprises/home.vue')},
-      // { name:'Détail Entreprise', path: '/entreprises/show/:id', component: require('./components/entreprises/show.vue')},
-      { name:'Ajout Incident', path: '/incidents/add', component: require('./components/incidents/form.vue')},
-      // { name:'Modification Entreprise', path: '/entreprises/edit/:id', component: require('./components/entreprises/form.vue')},
-      // { name:'Suppression Entreprise', path: '/entreprises/delete/:id', component: require('./components/entreprises/delete.vue')},
+      { name:'List Tickets', path: '/tickets', component: require('./components/tickets/home.vue')},
+      { name:'Détail Ticket', path: '/tickets/show/:id', component: require('./components/tickets/show.vue')},
+      { name:'Ajout Ticket', path: '/tickets/add/:clientid', component: require('./components/tickets/form.vue')},
+      { name:'Modification Ticket', path: '/tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},
+      { name:'Suppression Ticket', path: '/tickets/delete/:id', component: require('./components/tickets/delete.vue')},
     ]
   }

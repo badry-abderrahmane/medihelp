@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
   state: {
     typeclients: [],
     clients: [],
-    // clients: [],
+    actions: [],
     // categories: [],
     // produits: [],
     // produitsprix: [],
@@ -24,11 +24,11 @@ export const store = new Vuex.Store({
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.clients = array
     },
-    // SET_CLIENT_LIST: (state, { list }) => {
-    //   let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
-    //   for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
-    //   state.clients = array
-    // },
+    SET_ACTIONS_LIST: (state, { list }) => {
+      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
+      state.actions = array
+    },
     // SET_CATEGORY_LIST: (state, { list }) => {
     //   let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
     //   for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
@@ -61,15 +61,15 @@ export const store = new Vuex.Store({
         console.log(err)
       })
     },
-    //
-    // LOAD_CLIENT_LIST: function ({ commit }) {
-    //   axios.get('list/clients').then((response) => {
-    //     commit('SET_CLIENT_LIST', { list: response.data })
-    //   }, (err) => {
-    //     console.log(err)
-    //   })
-    // },
-    //
+
+    LOAD_ACTIONS_LIST: function ({ commit }) {
+      axios.get('list/actions').then((response) => {
+        commit('SET_ACTIONS_LIST', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    },
+
     // LOAD_CATEGORY_LIST: function ({ commit }) {
     //   axios.get('list/categories').then((response) => {
     //     commit('SET_CATEGORY_LIST', { list: response.data })

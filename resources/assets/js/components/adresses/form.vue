@@ -8,9 +8,10 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="Entreprise" class="control-label mb-10">Client</label>
-              <model-select :options="clients" v-model="form['client_id']">
-             </model-select>
+              <label for="Clients" class="control-label mb-10">Client</label>
+              <select class="form-control" name="client_id" v-model="form['client_id']" disabled>
+                <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
+              </select>
             </div>
           </div>
           <part-input v-model="form" name="libele" label="Libélé"></part-input>
@@ -54,11 +55,17 @@
           adressId: function(){
             return this.$route.params.id
           },
+          clientId: function(){
+            return this.$route.params.clientid
+          },
           clients: function(){
             return this.$store.state.clients
           },
         },
         created(){
+          if (this.clientId) {
+            this.form.client_id = this.clientId;
+          }
           if (this.adressId) {
             axios.get('/adresses/'+this.adressId)
               .then(response => {

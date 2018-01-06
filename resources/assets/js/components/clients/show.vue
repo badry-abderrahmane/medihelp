@@ -3,11 +3,11 @@
     <div class="col-md-3">
       <part-panel-profile title="Entreprise" :name="client.name">
         <div slot="count1">
-          <span class="counts block head-font"><span class="counter-anim">{{ countTickets }}</span></span>
+          <span class="counts block head-font"><span>{{ countTickets }}</span></span>
           <span class="counts-text block">Tickets</span>
         </div>
         <div slot="count2">
-          <span class="counts block head-font"><span class="counter-anim">{{ countAppels }}</span></span>
+          <span class="counts block head-font"><span></span></span>
           <span class="counts-text block">Appels</span>
         </div>
         <div slot="links">
@@ -17,15 +17,15 @@
                  <span class="btn-label"><i class="fa fa-edit"></i> </span>
                  <span class="btn-text">Modifier client</span>
               </button>
-              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/contacts/add` })">
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/contacts/add/`+client.id })">
                  <span class="btn-label"><i class="fa fa-plus"></i> </span>
                  <span class="btn-text">Nouveau contact</span>
               </button>
-              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/adresses/add` })">
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/adresses/add/`+client.id })">
                  <span class="btn-label"><i class="fa fa-plus"></i> </span>
                  <span class="btn-text">Nouvelle adresse</span>
               </button>
-              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/tickets/add/` })">
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/tickets/add/`+client.id })">
                  <span class="btn-label"><i class="fa fa-plus"></i> </span>
                  <span class="btn-text">Nouveau ticket</span>
               </button>
@@ -39,13 +39,13 @@
           <infos-client :client="client"></infos-client>
         </div>
         <div slot="2">
-          <infos-client-contacts :contacts="client.contacts"></infos-client-contacts>
+          <infos-client-contacts :contacts="client.contacts" :clientid="client.id"></infos-client-contacts>
         </div>
         <div slot="3">
-          <infos-client-adresses :adresses="client.adresses"></infos-client-adresses>
+          <infos-client-adresses :adresses="client.adresses" :clientid="client.id"></infos-client-adresses>
         </div>
         <div slot="4">
-          <infos-client-incidents :tickets="client.tickets"></infos-client-incidents>
+          <infos-client-tickets :tickets="client.tickets" :clientid="client.id"></infos-client-tickets>
         </div>
       </part-panel-tabs>
     </div>
@@ -57,7 +57,7 @@ export default {
   data(){
     return {
       tabs: [{id: '1', name: 'Informations'},{id: '2', name: 'Contacts'},{id: '3', name: 'Adresses'},{id: '4', name: 'Tickets'}],
-      client: { typeclient:{ value:'' } },
+      client: { typeclient:{ value:'' }},
     }
   },
 
@@ -65,13 +65,13 @@ export default {
     clientId: function(){
       return this.$route.params.id
     },
-    countAppels: function(){
-      if (this.client.appels) {
-        return this.client.appels.length
-      }else{
-        return 0
-      }
-    },
+    // countAppels: function(){
+    //   if (this.client.appels) {
+    //     return this.client.appels.length
+    //   }else{
+    //     return 0
+    //   }
+    // },
     countTickets: function(){
       if (this.client.tickets) {
         return this.client.tickets.length

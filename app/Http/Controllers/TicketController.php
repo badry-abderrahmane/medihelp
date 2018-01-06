@@ -14,6 +14,7 @@ class TicketController extends Controller
           $tickets = Ticket::all();
           $tickets->filter->action;
           $tickets->filter->contact;
+          $tickets->filter->client;
           $tickets->filter->emails;
           $tickets->filter->appels;
           return $tickets;
@@ -30,6 +31,7 @@ class TicketController extends Controller
           $ticket = Ticket::findOrfail($id);
           $ticket->action;
           $ticket->contact;
+          $ticket->client;
           $ticket->emails;
           $ticket->appels;
           return Response::json($ticket, 200);

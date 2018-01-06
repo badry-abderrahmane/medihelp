@@ -8,16 +8,30 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="Entreprise" class="control-label mb-10">Entreprise</label>
-              <model-select :options="entreprises" v-model="form['entreprise_id']">
-             </model-select>
+              <label for="Entreprise" class="control-label mb-10">Client</label>
+              <select class="form-control" name="client_id" v-model="form['client_id']" disabled>
+                <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
+              </select>
             </div>
           </div>
           <part-input v-model="form" name="name" label="Nom"></part-input>
-          <part-input v-model="form" name="civilite" label="Civilité"></part-input>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div v-bind:class="[ form.errors.get('civilite') ? 'has-error' : '', 'form-group']">
+              <label for="Entreprise" class="control-label mb-10">Civilité</label>
+              <model-select :options="cilivilites" v-model="form['civilite']">
+             </model-select>
+             <div class="help-block" v-if="form.errors.has('civilite')" v-text="form.errors.get('civilite')"></div>
+            </div>
+          </div>
           <part-input v-model="form" name="adress" label="Adresse"></part-input>
+        </div>
+        <div class="row">
           <part-input v-model="form" name="phone" label="Telephone"></part-input>
           <part-input v-model="form" name="email" label="Email"></part-input>
+        </div>
+        <div class="row">
           <part-input v-model="form" name="fonction" label="Fonction"></part-input>
         </div>
         <div class="row">
@@ -38,9 +52,16 @@
         data(){
           return{
             form : new Form({
-
+              id: '',
+              client_id: '',
+              name: '',
+              civilite: '',
+              adress: '',
+              phone: '',
+              email: '',
+              fonction: '',
             }),
-            entreprises:[{id:'1', text:'test'},{id:'2', text:'test 2'}],
+            cilivilites: [{value:'H',text:'Homme'},{value:'F',text:'Femme'}],
           }
         },
         computed:{
@@ -51,13 +72,22 @@
               return false
             }
           },
-          fournisseurId: function(){
+          contactId: function(){
             return this.$route.params.id
-          }
+          },
+          clientId: function(){
+            return this.$route.params.clientid
+          },
+          clients: function(){
+            return this.$store.state.clients
+          },
         },
         created(){
-          if (this.fournisseurId) {
-            axios.get('/fournisseurs/'+this.fournisseurId)
+          if (this.clientId) {
+            this.form.client_id = this.clientId;
+          }
+          if (this.contactId) {
+            axios.get('/contacts/'+this.contactId)
               .then(response => {
                 this.form.load(response.data);
             });
@@ -67,9 +97,8 @@
         methods: {
           onSubmit(){
             if (this.form.id == '') {
-              this.form.post('/fournisseurs')
+              this.form.post('/contacts')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })
@@ -77,9 +106,8 @@
                   console.log(errors);
                 });
             }else{
-              this.form.put('/fournisseurs')
+              this.form.put('/contacts')
                 .then(data => {
-                  this.$store.dispatch('LOAD_FOURNISSEUR_LIST')
                   Event.$emit('publish-success-message', data.message);
                   this.goback();
                 })

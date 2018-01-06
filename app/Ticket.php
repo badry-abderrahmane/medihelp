@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-      'reference','date','sujet','note','action_id','contact_id'
+      'reference','date','sujet','note','state','action_id','contact_id','client_id'
     ];
 
     public function action(){
@@ -16,6 +16,10 @@ class Ticket extends Model
 
     public function contact(){
         return $this->belongsTo('App\Contact');
+    }
+
+    public function client(){
+        return $this->belongsTo('App\Client');
     }
 
     public function emails(){
