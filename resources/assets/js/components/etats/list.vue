@@ -7,12 +7,12 @@
           <th>Nom</th>
           <th></th>
         </tr>
-        <tr slot="tbody" v-for="typeclient in typeclients">
-          <td>{{ typeclient.id }}</td>
-          <td>{{ typeclient.value }}</td>
+        <tr slot="tbody" v-for="etat in etats">
+          <td>{{ etat.id }}</td>
+          <td>{{ etat.value }}</td>
           <td>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typeclients/edit/`+typeclient.id })"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typeclients/delete/`+typeclient.id })"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/etats/edit/`+etat.id })"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/etats/delete/`+etat.id })"><i class="fa fa-trash"></i></button>
           </td>
         </tr>
       </datatable-buttons>
@@ -24,14 +24,14 @@
 export default {
   data(){
     return {
-      typeclients:  [],
+      etats:  [],
     }
   },
 
   created(){
-    axios.get('/typeclients')
+    axios.get('/etats')
       .then(response => {
-        this.typeclients = response.data;
+        this.etats = response.data;
         Vue.nextTick(function () {
           Event.$emit('init-datatable', 'tableAdd');
         })

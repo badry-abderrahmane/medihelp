@@ -3,12 +3,12 @@
     <div class="col-md-3">
       <part-panel-profile title="Entreprise" :name="client.name">
         <div slot="count1">
-          <span class="counts block head-font"><span>{{ countTickets }}</span></span>
-          <span class="counts-text block">Tickets</span>
+          <span class="counts block head-font"><span>{{ countContacts }}</span></span>
+          <span class="counts-text block">Contacts</span>
         </div>
         <div slot="count2">
-          <span class="counts block head-font"><span></span></span>
-          <span class="counts-text block">Appels</span>
+          <span class="counts block head-font"><span>{{ countTickets }}</span></span>
+          <span class="counts-text block">Tickets</span>
         </div>
         <div slot="links">
           <br><br>
@@ -65,13 +65,13 @@ export default {
     clientId: function(){
       return this.$route.params.id
     },
-    // countAppels: function(){
-    //   if (this.client.appels) {
-    //     return this.client.appels.length
-    //   }else{
-    //     return 0
-    //   }
-    // },
+    countContacts: function(){
+      if (this.client.contacts) {
+        return this.client.contacts.length
+      }else{
+        return 0
+      }
+    },
     countTickets: function(){
       if (this.client.tickets) {
         return this.client.tickets.length

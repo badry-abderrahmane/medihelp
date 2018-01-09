@@ -5,7 +5,7 @@
       <th>Libélé</th>
       <th>Adresse</th>
       <th>Tel</th>
-      <th>Action</th>
+      <th></th>
     </tr>
     <tr slot="tbody" v-for="adresse in adresses">
       <td>{{ adresse.id }}</td>

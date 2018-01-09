@@ -58,3 +58,13 @@ Route::get('list/actions', function(){
   $list = \App\Action::pluck('value as name','id')->toJson();
   return $list;
 });
+
+Route::get('list/typecomms', function(){
+  $list = \App\Typecomm::pluck('value as name','id')->toJson();
+  return $list;
+});
+
+Route::get('list/etats', function(){
+  $list = \App\Etat::pluck('value as name','id')->toJson();
+  return $list;
+});

@@ -36,8 +36,8 @@ const app = new Vue({
     this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
     this.$store.dispatch('LOAD_CLIENTS_LIST')
     this.$store.dispatch('LOAD_ACTIONS_LIST')
-    // this.$store.dispatch('LOAD_CATEGORY_LIST')
-    // this.$store.dispatch('LOAD_PRODUIT_LIST')
+    this.$store.dispatch('LOAD_TYPECOMMS_LIST')
+    this.$store.dispatch('LOAD_ETATS_LIST')
     // this.$store.dispatch('LOAD_PRODUIT_PRIX')
   },
   created(){

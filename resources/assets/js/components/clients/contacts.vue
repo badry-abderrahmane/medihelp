@@ -8,7 +8,7 @@
       <th>Tel</th>
       <th>Email</th>
       <th>Fonction</th>
-      <th>Action</th>
+      <th></th>
     </tr>
     <tr slot="tbody" v-for="contact in contacts">
       <td>{{ contact.id }}</td>

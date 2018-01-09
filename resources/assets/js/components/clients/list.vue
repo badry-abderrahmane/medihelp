@@ -8,7 +8,7 @@
           <th>Type</th>
           <th>Tel</th>
           <th>Secteur</th>
-          <th>Action</th>
+          <th></th>
         </tr>
         <tr slot="tbody" v-for="client in clients">
           <td>{{ client.id }}</td>

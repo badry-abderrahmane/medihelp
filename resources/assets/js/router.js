@@ -16,6 +16,30 @@ module.exports = {
       { name:'Suppression Type Client', path: '/typeclients/delete/:id', component: require('./components/typeclients/delete.vue')},
 
       /**
+      **    Typecomm routes
+      **/
+      { name:'List Types Comm', path: '/typecomms', component: require('./components/typecomms/home.vue')},
+      { name:'Ajout Type Comm', path: '/typecomms/add', component: require('./components/typecomms/form.vue')},
+      { name:'Modification Type Comm', path: '/typecomms/edit/:id', component: require('./components/typecomms/form.vue')},
+      { name:'Suppression Type Comm', path: '/typecomms/delete/:id', component: require('./components/typecomms/delete.vue')},
+
+      /**
+      **    Actions routes
+      **/
+      { name:'List Actions', path: '/actions', component: require('./components/actions/home.vue')},
+      { name:'Ajout Action', path: '/actions/add', component: require('./components/actions/form.vue')},
+      { name:'Modification Action', path: '/actions/edit/:id', component: require('./components/actions/form.vue')},
+      { name:'Suppression Action', path: '/actions/delete/:id', component: require('./components/actions/delete.vue')},
+
+      /**
+      **    Etats routes
+      **/
+      { name:'List Etats', path: '/etats', component: require('./components/etats/home.vue')},
+      { name:'Ajout Etat', path: '/etats/add', component: require('./components/etats/form.vue')},
+      { name:'Modification Etat', path: '/etats/edit/:id', component: require('./components/etats/form.vue')},
+      { name:'Suppression Etat', path: '/etats/delete/:id', component: require('./components/etats/delete.vue')},
+
+      /**
       **    Entreprises routes
       **/
       { name:'Clients', path: '/clients', component: require('./components/clients/home.vue')},
@@ -40,12 +64,17 @@ module.exports = {
       // { name:'Détail Entreprise', path: '/entreprises/show/:id', component: require('./components/entreprises/show.vue')},
       { name:'Ajout Adresse', path: '/adresses/add/:clientid', component: require('./components/adresses/form.vue')},
       { name:'Modification Adresse', path: '/adresses/edit/:clientid/:id', component: require('./components/adresses/form.vue')},
-      // { name:'Suppression Entreprise', path: '/entreprises/delete/:id', component: require('./components/entreprises/delete.vue')},
+      { name:'Suppression Adresse', path: '/adresses/delete/:id', component: require('./components/adresses/delete.vue')},
 
       /**
       **    Tickets routes
       **/
-      { name:'List Tickets', path: '/tickets', component: require('./components/tickets/home.vue')},
+      {
+         name:'Tickets', path: '/tickets', component: require('./components/tickets/home.vue'),
+         children: [
+            { path: 'show/:id', component: require('./components/tickets/chatShow.vue') },
+          ]
+      },
       { name:'Détail Ticket', path: '/tickets/show/:id', component: require('./components/tickets/show.vue')},
       { name:'Ajout Ticket', path: '/tickets/add/:clientid', component: require('./components/tickets/form.vue')},
       { name:'Modification Ticket', path: '/tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},

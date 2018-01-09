@@ -7,7 +7,7 @@
       <th>Sujet</th>
       <th>Action</th>
       <!-- <th>Communication</th> -->
-      <th>Action</th>
+      <th></th>
     </tr>
     <tr slot="tbody" v-for="ticket in tickets">
       <td>{{ ticket.id }}</td>
@@ -18,7 +18,7 @@
       <!-- <td>{{ ticket.communication.length }}</td> -->
       <td>
         <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/show/`+ticket.id })"><i class="fa fa-eye"></i></button>
-        <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/edit/`+ticket.id })"><i class="fa fa-pencil"></i></button>
+        <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/edit/`+clientid+`/`+ticket.id })"><i class="fa fa-pencil"></i></button>
         <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/delete/`+ticket.id })"><i class="fa fa-trash"></i></button>
       </td>
     </tr>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props:["tickets"],
+  props:["tickets","clientid"],
 }
 </script>
 
