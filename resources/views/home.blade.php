@@ -27,8 +27,15 @@
 
 
     <!-- Preloader -->
-  	<div class="preloader-it">
+  	<div class="preloader-it" style="opacity: 0.9;filter: alpha(opacity=80); /* For IE8 and earlier */">
   		<div class="la-anim-1"></div>
+      <div class="col-md-8" style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;">
+        <center>
+        <img src="images/loader.gif"/><br>
+        <span class="inline-block capitalize-font mr-5">Chargement en cours...</span>
+        <h5 class=""></h5>
+        </center>
+      </div>
   	</div>
   	<!-- /Preloader -->
     <div id="app">
@@ -81,9 +88,6 @@
       /*Form advanced Init*/
       $(document).ready(function() {
         "use strict";
-        /* Select2 Init*/
-        // $(".select2").select2();
-        $("input[name='tch3']").TouchSpin();
 
       });
     </script>

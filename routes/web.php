@@ -39,6 +39,11 @@ Route::resources([
     'appels' => 'AppelController',
 ]);
 
+/**
+** Communcations Routes
+**
+**/
+Route::get('tickets/communications/{id}', 'CommuncationController@getComms' );
 
 /**
 ** Get Lists

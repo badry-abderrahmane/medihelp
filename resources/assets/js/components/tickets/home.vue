@@ -1,25 +1,17 @@
 <template lang="html">
-  <chat>
-    <!-- *
-    * List
-    * -->
-    <li class="chat-list" slot="list">
-      <list-tickets-chat/>
-    </li>
-
-
-    <!-- *
-    * Content
-    * -->
+  <chat-container>
+    <div slot="list">
+      <chat-list></chat-list>
+    </div>
     <router-view slot="content"></router-view>
-
-
-  </chat>
+  </chat-container>
 </template>
 
 <script>
 export default {
-
+  mounted(){
+    
+  }
 }
 </script>
 

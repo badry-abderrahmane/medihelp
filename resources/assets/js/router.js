@@ -70,14 +70,34 @@ module.exports = {
       **    Tickets routes
       **/
       {
-         name:'Tickets', path: '/tickets', component: require('./components/tickets/home.vue'),
+         path: '/tickets', component: require('./components/tickets/home.vue'),
          children: [
-            { path: 'show/:id', component: require('./components/tickets/chatShow.vue') },
+            { name:'Tickets',  path: '', component: require('./components/tickets/holder.vue') },
+            { name:'Tickets Manager', path: 'show/:id', component: require('./components/tickets/show.vue') },
           ]
       },
       { name:'Détail Ticket', path: '/tickets/show/:id', component: require('./components/tickets/show.vue')},
       { name:'Ajout Ticket', path: '/tickets/add/:clientid', component: require('./components/tickets/form.vue')},
       { name:'Modification Ticket', path: '/tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},
       { name:'Suppression Ticket', path: '/tickets/delete/:id', component: require('./components/tickets/delete.vue')},
+
+
+      /**
+      **    Appels routes
+      **/
+      { name:'List Appels', path: '/appels', component: require('./components/appels/home.vue')},
+      { name:'Détail Appel', path: '/appels/show/:id', component: require('./components/appels/show.vue')},
+      { name:'Ajout Appel', path: '/appels/add/:ticketid', component: require('./components/appels/form.vue')},
+      { name:'Modification Appel', path: '/appels/edit/:ticketid/:id', component: require('./components/appels/form.vue')},
+      { name:'Suppression Appel', path: '/appels/delete/:id', component: require('./components/appels/delete.vue')},
+
+      /**
+      **    Emails routes
+      **/
+      { name:'List Emails', path: '/emails', component: require('./components/emails/home.vue')},
+      { name:'Détail Email', path: '/emails/show/:id', component: require('./components/emails/show.vue')},
+      { name:'Ajout Email', path: '/emails/add/:ticketid', component: require('./components/emails/form.vue')},
+      { name:'Modification Email', path: '/emails/edit/:ticketid/:id', component: require('./components/emails/form.vue')},
+      { name:'Suppression Email', path: '/emails/delete/:id', component: require('./components/emails/delete.vue')},
     ]
   }

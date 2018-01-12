@@ -44,6 +44,14 @@ const app = new Vue({
     Event.$on('init-datatable', (tableid) => {
       this.datatableThis(tableid);
     });
+
+    Event.$on('init-slimscroll-list', () => {
+      this.slimThisList();
+    });
+    Event.$on('init-slimscroll-chat', () => {
+      this.slimThisChat();
+    });
+
     Event.$on('publish-success-message', (message) => {
       this.notifSuccess(message);
     });
@@ -117,6 +125,16 @@ const app = new Vue({
               hideAfter: 3500
             });
   		return false;
+    },
+    /**
+    * Slimscroll Functions
+    *
+    **/
+    slimThisList(){
+      $('.chatapp-nicescroll-bar').slimscroll({height:'643px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0,start: 'bottom',});
+    },
+    slimThisChat(){
+      $('.chatapp-chat-nicescroll-bar').slimscroll({height:'583px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0,start: 'bottom',});
     },
     /**
     * DataTables Functions

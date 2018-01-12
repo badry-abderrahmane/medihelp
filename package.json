@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "bulma-pageloader": "^0.1.0",
         "vue-router": "^3.0.1",
         "vue-search-select": "^2.4.0",
         "vue2-filters": "^0.2.2",
