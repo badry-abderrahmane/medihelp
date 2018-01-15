@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default border-panel card-view pa-0">
-        <div class="panel-wrapper collapse in">
+        <div class="panel-wrapper collapse in" >
           <div class="panel-body pa-0">
             <div class="chat-cmplt-wrap chat-for-widgets-1">
               <div class="chat-box-wrap">
@@ -34,6 +34,6 @@ export default {
 
 <style lang="css">
 .chat-for-widgets-1{
-  height: 696px !important;
+  height: 100% !important;
 }
 </style>

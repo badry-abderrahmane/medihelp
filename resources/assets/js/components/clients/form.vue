@@ -1,39 +1,87 @@
 <template lang="html">
   <div>
-    <part-panel>
-      <div slot="heading">
-        Nouvelle entreprise
-      </div>
-      <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
-        <div class="row">
-          <div class="col-md-12">
-            <part-input v-model="form" name="name" label="Nom complet/Raison sociale"></part-input>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="Entreprise" class="control-label mb-10">Type client</label>
-                <model-select :options="typeclients" v-model="form['typeclient_id']">
-               </model-select>
-              </div>
+    <global-unite-first>
+      <div class="col-md-12" slot="content">
+        <part-panel-default>
+          <div slot="heading">
+            Liens utiles
+          </div>
+          <div class="row" slot="body">
+            <div class="col-md-8 col-md-offset-2">
+              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/clients` })">
+                <span class="btn-label"><i class="fa fa-list"></i></span>
+                <span class="btn-text">Liste des clients</span>
+              </button>
             </div>
           </div>
-          <div class="col-md-12">
-            <part-input v-model="form" name="phone" label="Numéro téléphone"></part-input>
-            <part-input v-model="form" name="fax" label="Fax"></part-input>
+        </part-panel-default>
+        <part-panel-default>
+          <div slot="heading">
+            Statistiques
           </div>
-          <div class="col-md-12">
-            <part-input v-model="form" name="email" label="Email"></part-input>
-            <part-input v-model="form" name="adress" label="Adresse"></part-input>
+          <div class="row" slot="body">
+            <div class="col-md-12">
+              <div class="sm-data-box">
+  							<div class="container-fluid">
+  								<div class="row">
+                    <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+  										<i class="icon-user-following data-right-rep-icon txt-light-grey"></i>
+  									</div>
+  									<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+  										<span class="txt-dark block counter"><span class="counter-anim">2245</span></span>
+  										<span class="weight-500 uppercase-font block font-13">Clients</span>
+  									</div>
+  								</div>
+  							</div>
+  						</div>
+            </div>
           </div>
-          <div class="col-md-12">
-            <part-input v-model="form" name="secteur" label="Secteur d'activité"></part-input>
+        </part-panel-default>
+      </div>
+    </global-unite-first>
+    <global-unite-middle>
+      <div class="col-md-12" slot="content">
+        <part-panel>
+          <div slot="heading">
+            Nouveau client
           </div>
+          <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+            <div class="row">
+              <div class="col-md-12">
+                <part-input v-model="form" name="name" label="Nom complet/Raison sociale"></part-input>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Entreprise" class="control-label mb-10">Type client</label>
+                    <model-select :options="typeclients" v-model="form['typeclient_id']">
+                   </model-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <part-input v-model="form" name="phone" label="Numéro téléphone"></part-input>
+                <part-input v-model="form" name="fax" label="Fax"></part-input>
+              </div>
+              <div class="col-md-12">
+                <part-input v-model="form" name="email" label="Email"></part-input>
+                <part-input v-model="form" name="adress" label="Adresse"></part-input>
+              </div>
+              <div class="col-md-12">
+                <part-input v-model="form" name="secteur" label="Secteur d'activité"></part-input>
+              </div>
 
-        </div>
-        <div class="row">
-          <part-button-submit :editing="editing"></part-button-submit>
-        </div>
-      </form>
-    </part-panel>
+            </div>
+            <div class="row">
+              <part-button-goback></part-button-goback>
+              <part-button-submit :editing="editing"></part-button-submit>
+            </div>
+          </form>
+        </part-panel>
+      </div>
+    </global-unite-middle>
+    <global-unite-last>
+
+    </global-unite-last>
+
   </div>
 </template>
 

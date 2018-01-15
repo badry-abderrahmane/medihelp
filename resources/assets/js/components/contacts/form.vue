@@ -1,44 +1,53 @@
 <template lang="html">
   <div>
-    <part-panel>
-      <div slot="heading">
-        Nouveau contact
+    <global-unite-first>
+      <side-client slot="content"></side-client>
+    </global-unite-first>
+    <global-unite-middle>
+      <div class="col-md-12" slot="content">
+        <part-panel>
+          <div slot="heading">
+            Nouveau contact
+          </div>
+          <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Entreprise" class="control-label mb-10">Client</label>
+                  <select class="form-control" name="client_id" v-model="form['client_id']" disabled>
+                    <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
+                  </select>
+                </div>
+              </div>
+              <part-input v-model="form" name="name" label="Nom"></part-input>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div v-bind:class="[ form.errors.get('civilite') ? 'has-error' : '', 'form-group']">
+                  <label for="Entreprise" class="control-label mb-10">Civilité</label>
+                  <model-select :options="cilivilites" v-model="form['civilite']">
+                 </model-select>
+                 <div class="help-block" v-if="form.errors.has('civilite')" v-text="form.errors.get('civilite')"></div>
+                </div>
+              </div>
+              <part-input v-model="form" name="adress" label="Adresse"></part-input>
+            </div>
+            <div class="row">
+              <part-input v-model="form" name="phone" label="Telephone"></part-input>
+              <part-input v-model="form" name="email" label="Email"></part-input>
+            </div>
+            <div class="row">
+              <part-input v-model="form" name="fonction" label="Fonction"></part-input>
+            </div>
+            <div class="row">
+              <part-button-goback></part-button-goback>
+              <part-button-submit :editing="editing"></part-button-submit>
+            </div>
+          </form>
+        </part-panel>
       </div>
-      <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="Entreprise" class="control-label mb-10">Client</label>
-              <select class="form-control" name="client_id" v-model="form['client_id']" disabled>
-                <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
-              </select>
-            </div>
-          </div>
-          <part-input v-model="form" name="name" label="Nom"></part-input>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div v-bind:class="[ form.errors.get('civilite') ? 'has-error' : '', 'form-group']">
-              <label for="Entreprise" class="control-label mb-10">Civilité</label>
-              <model-select :options="cilivilites" v-model="form['civilite']">
-             </model-select>
-             <div class="help-block" v-if="form.errors.has('civilite')" v-text="form.errors.get('civilite')"></div>
-            </div>
-          </div>
-          <part-input v-model="form" name="adress" label="Adresse"></part-input>
-        </div>
-        <div class="row">
-          <part-input v-model="form" name="phone" label="Telephone"></part-input>
-          <part-input v-model="form" name="email" label="Email"></part-input>
-        </div>
-        <div class="row">
-          <part-input v-model="form" name="fonction" label="Fonction"></part-input>
-        </div>
-        <div class="row">
-          <part-button-submit :editing="editing"></part-button-submit>
-        </div>
-      </form>
-    </part-panel>
+    </global-unite-middle>
+
   </div>
 </template>
 

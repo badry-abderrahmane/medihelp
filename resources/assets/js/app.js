@@ -21,6 +21,7 @@ require('./plugins');
 
 require('./lists');
 require('./infos');
+require('./sides');
 
 window.Event = new Vue();
 
@@ -131,10 +132,10 @@ const app = new Vue({
     *
     **/
     slimThisList(){
-      $('.chatapp-nicescroll-bar').slimscroll({height:'643px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0,start: 'bottom',});
+      $('.chatapp-nicescroll-bar').slimscroll({height:'743px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0});
     },
     slimThisChat(){
-      $('.chatapp-chat-nicescroll-bar').slimscroll({height:'583px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0,start: 'bottom',});
+    	$('.chatapp-chat-nicescroll-bar').slimscroll({height:'683px',size: '4px',color: '#878787',disableFadeOut : true,borderRadius:0,start: 'bottom'});
     },
     /**
     * DataTables Functions

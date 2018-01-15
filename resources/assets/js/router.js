@@ -74,6 +74,8 @@ module.exports = {
          children: [
             { name:'Tickets',  path: '', component: require('./components/tickets/holder.vue') },
             { name:'Tickets Manager', path: 'show/:id', component: require('./components/tickets/show.vue') },
+            { name:'Tickets - Nouveau Appel', path: 'appels/add/:ticketid', component: require('./components/appels/form.vue')},
+            { name:'Tickets - Nouveau Email', path: 'emails/add/:ticketid', component: require('./components/emails/form.vue')},
           ]
       },
       { name:'Détail Ticket', path: '/tickets/show/:id', component: require('./components/tickets/show.vue')},
@@ -99,5 +101,13 @@ module.exports = {
       { name:'Ajout Email', path: '/emails/add/:ticketid', component: require('./components/emails/form.vue')},
       { name:'Modification Email', path: '/emails/edit/:ticketid/:id', component: require('./components/emails/form.vue')},
       { name:'Suppression Email', path: '/emails/delete/:id', component: require('./components/emails/delete.vue')},
+
+      {
+         path: '/instances', component: require('./components/instances/home.vue'),
+         // children: [
+         //    { name:'Tickets',  path: '', component: require('./components/tickets/holder.vue') },
+         //    { name:'Tickets Manager', path: 'show/:id', component: require('./components/tickets/show.vue') },
+         //  ]
+      },
     ]
   }

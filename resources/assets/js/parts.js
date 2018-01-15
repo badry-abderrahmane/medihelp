@@ -4,6 +4,7 @@
 *
 */
 Vue.component('part-panel', require('./parts/panels/panel.vue'));
+Vue.component('part-panel-default', require('./parts/panels/panelDefault.vue'));
 Vue.component('part-panel-danger', require('./parts/panels/panelDanger.vue'));
 Vue.component('part-panel-profile', require('./parts/panels/panelProfile.vue'));
 Vue.component('part-panel-tabs', require('./parts/panels/panelTabs.vue'));
@@ -26,6 +27,7 @@ Vue.component('part-textarea', require('./parts/inputs/textarea.vue'));
 *
 */
 Vue.component('part-button-submit', require('./parts/buttons/buttonSubmit.vue'));
+Vue.component('part-button-goback', require('./parts/buttons/buttonGoback.vue'));
 
 
 /*

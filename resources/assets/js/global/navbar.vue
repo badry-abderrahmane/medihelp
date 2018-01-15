@@ -1,15 +1,23 @@
 <template lang="html">
   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div id="mobile_only_nav" class="mobile-only-nav pull-left">
+        <ul class="nav navbar-right top-nav pull-left">
+          <li class="ml-60 pl-20 mt-20">
+            <h5>{{ $route.name }}</h5>
+            <a id="open_right_sidebar" href="#"></a>
+          </li>
+        </ul>
+      </div>
 			<div class="mobile-only-brand pull-left">
-				<div class="nav-header pull-left">
+				<!-- <div class="nav-header pull-left">
 					<div class="logo-wrap">
 						<a href="index.html">
 							<img class="brand-img" src="dist/img/logo.png" alt="brand"/>
 							<span class="brand-text">HelpDesk</span>
 						</a>
 					</div>
-				</div>
-				<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
+				</div> -->
+				<!-- <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a> -->
 				<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-search"></i></a>
 				<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
 				<!-- <form id="search_form" role="search" class="top-nav-search collapse pull-left">
@@ -320,4 +328,5 @@ export default {
 </script>
 
 <style lang="css">
+
 </style>

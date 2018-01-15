@@ -14,12 +14,12 @@
           <div class="chat-body">
             <a @click="$router.push({ path: '/tickets/show/'+ticket.id })" v-for="ticket in tickets">
               <div class="chat-data">
-                <div class="col-md-2 mr-0 pr-0">
+                <div class="col-md-3">
                   <button v-if="ticket.state == 1" class="btn btn-danger btn-xs">F</button>
                   <button v-if="ticket.state == 2" class="btn btn-warning btn-xs">E</button>
                   <button v-if="ticket.state == 3" class="btn btn-success btn-xs">O</button>
                 </div>
-                <div class="user-data col-md-9" style="cursor:pointer;">
+                <div class="user-data col-md-9 " style="cursor:pointer;">
                   <span class="name block capitalize-font">{{ ticket.sujet }}</span>
                   <span class="time block truncate txt-grey">{{ ticket.client.name }}</span>
                 </div>

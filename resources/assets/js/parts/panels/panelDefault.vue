@@ -8,7 +8,7 @@
 		</div>
 		<div class="panel-wrapper collapse in">
 			<div class="panel-body">
-				<slot name="content"></slot>
+				<slot name="body"></slot>
 			</div>
 		</div>
 	</div>

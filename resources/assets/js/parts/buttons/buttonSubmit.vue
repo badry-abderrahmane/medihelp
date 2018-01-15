@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="col-sm-offset-4 col-sm-4">
-    <label class="label">&nbsp;</label>
+  <div class=" col-sm-4">
+    <!-- <label class="label">&nbsp;</label> --><br>
     <button type="submit"
             v-bind:class="[editing ? 'btn-warning' : 'btn-primary', 'btn  btn-block']"
             >

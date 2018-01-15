@@ -1,12 +1,19 @@
 <template lang="html">
   <div>
-    <div class="col-md-9 pr-0">
-      <chat-title :ticket="ticket"></chat-title>
-      <chat-msgs :ticket="ticket"></chat-msgs>
-    </div>
-    <div class="col-md-3" style="border-left: solid 0.1px;border-color: lightgrey;min-height:696px;">
-      <chat-infos :ticket="ticket"></chat-infos>
-    </div>
+    <global-unite-middle>
+      <div class="col-md-12 pr-0" slot="content">
+        <chat-title :ticket="ticket"></chat-title>
+        <chat-msgs :ticket="ticket"></chat-msgs>
+      </div>
+    </global-unite-middle>
+    <!-- chat Content -->
+    <global-unite-last>
+      <div class="col-md-12" slot="content">
+        <chat-infos :ticket="ticket"></chat-infos>
+      </div>
+    </global-unite-last>
+
+
   </div>
 </template>
 

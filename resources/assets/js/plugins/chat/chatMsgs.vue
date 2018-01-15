@@ -24,7 +24,7 @@
           <li v-for="comm in comms" class=""v-bind:class="[ comm.typecomm.value == 'Recus' ? 'friend' : 'self', '']">
 
             <!-- Case : Recu -->
-            <div v-if="comm.typecomm.value == 'Recus'" class="friend-msg-wrap">
+            <div v-if="comm.typecomm.value == 'Recus'" class="friend-msg-wrap" >
               <i class="fa fa-call"></i>
               <div class="msg pull-left">
                 <p v-bind:class="[ comm.duree ? 'text-success' : 'text-danger', 'mb-10']">
@@ -113,10 +113,10 @@
 
         </div>
         <div class="col-md-3 chatBtns">
-          <button class="btn btn-block btn-sm btn-default" @click="$router.push({ path: '/appels/add/'+ticket.id })"><i class="fa fa-phone-square mr-10"></i>Nouveau appel</button>
+          <button class="btn btn-block btn-sm btn-default" @click="$router.push({ path: '/tickets/appels/add/'+ticket.id })"><i class="fa fa-phone-square mr-10"></i>Nouveau appel</button>
         </div>
         <div class="col-md-3 chatBtns">
-          <button class="btn btn-block btn-sm btn-default" @click="$router.push({ path: '/emails/add/'+ticket.id })"><i class="fa fa-envelope-o mr-10"></i>Nouveau Email</button>
+          <button class="btn btn-block btn-sm btn-default" @click="$router.push({ path: '/tickets/emails/add/'+ticket.id })"><i class="fa fa-envelope-o mr-10"></i>Nouveau Email</button>
         </div>
         <div class="col-md-3 chatBtns">
           <button class="btn btn-block btn-sm btn-default" @click="$router.push({ path: '/tickets/edit/'+ticket.client.id+'/'+ticket.id })"><i class="fa fa-edit mr-10"></i>Modifier ticket</button>

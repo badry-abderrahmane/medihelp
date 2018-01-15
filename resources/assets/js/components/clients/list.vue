@@ -1,5 +1,8 @@
 <template lang="html">
   <table-warper>
+    <div slot="heading">
+      Liste des clients
+    </div>
     <div class="table-responsive" slot="content">
       <datatable-buttons>
         <tr slot="thead">

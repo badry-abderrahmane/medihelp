@@ -12,7 +12,7 @@
               <button class="btn btn-danger btn-block" @click="deleteMe">Supprimer&nbsp;&nbsp;</button>
             </div>
             <div class="col-md-4">
-              <button class="btn btn-default btn-block" @click="$router.push({ path: `/entreprises`})">Annuler</button>
+              <button class="btn btn-default btn-block" @click="goback">Annuler</button>
             </div>
           </div>
         </div>
@@ -37,7 +37,10 @@ export default {
       .catch(function(err){
         console.log(err);
       });
-      this.$router.push({ path: `/entreprises`})
+      this.goback()
+    },
+    goback(){
+        this.$router.go(-1);
     }
   }
 }
