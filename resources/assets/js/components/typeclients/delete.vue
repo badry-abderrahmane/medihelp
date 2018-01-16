@@ -7,7 +7,7 @@
         <div slot="body">
           <h4 class="text-danger text-center">Etes vous sur de vouloir supprimer ce type de client?</h4>
           <div class="row"><br><br>
-            <div class="col-md-2"></div>
+            <div class="col-md-2"></div> 
             <div class="col-md-4">
               <button class="btn btn-danger btn-block" @click="deleteMe">Supprimer&nbsp;&nbsp;</button>
             </div>
