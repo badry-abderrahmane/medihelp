@@ -1,8 +1,10 @@
 <template lang="html">
   <div class="col-md-6">
-    <button class="btn btn-inverse waves-effect waves-light" @click="goback">
-      <i class="fa fa-arrow-left m-r-10"></i><span>Annuler</span>
-    </button>
+    <div class="pull-left">
+      <button class="btn btn-inverse waves-effect waves-light" @click="goback">
+        <i class="fa fa-arrow-left m-r-10"></i><span>Annuler</span>
+      </button>
+    </div>
   </div>
 </template>
 

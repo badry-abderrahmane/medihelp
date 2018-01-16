@@ -1,75 +1,68 @@
 <template lang="html">
   <div>
-    <global-unite-first>
-      <side-client slot="content"></side-client>
-    </global-unite-first>
-    <global-unite-middle>
-      <div class="col-md-12" slot="content">
-        <part-panel>
-          <div slot="heading">
-            Nouveau ticket
+    <div class="col-md-12">
+      <part-panel :color="color">
+        <div slot="heading">
+          Nouveau ticket
+        </div>
+        <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+          <div class="row">
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('client_id') ? 'has-danger' : '', 'form-group']">
+                <label for="Clients" class="control-label mb-10">Client</label>
+                <select class="form-control" name="client_id" v-model="form['client_id']" :disabled="existClient">
+                  <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
+                </select>
+                <div class="form-control-feedback" v-if="form.errors.has('client_id')" v-text="form.errors.get('client_id')"></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="Clients" class="control-label mb-10">Référence</label>
+                <input name="reference" v-model="form['reference']" class="form-control" disabled>
+              </div>
+            </div>
+            <part-input v-model="form" name="date" label="Date et heure"></part-input>
           </div>
-          <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="Clients" class="control-label mb-10">Client</label>
-                  <select class="form-control" name="client_id" v-model="form['client_id']" disabled>
-                    <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="Clients" class="control-label mb-10">Référence</label>
-                  <input name="reference" v-model="form['reference']" class="form-control" disabled>
-                </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('state') ? 'has-danger' : '', 'form-group']">
+                <label for="State" class="control-label mb-10">Status</label>
+                <model-select :options="states" v-model="form['state']">
+               </model-select>
+               <div class="form-control-feedback" v-if="form.errors.has('state')" v-text="form.errors.get('state')"></div>
               </div>
             </div>
-            <div class="row">
-              <part-input v-model="form" name="date" label="Date et heure"></part-input>
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('state') ? 'has-error' : '', 'form-group']">
-                  <label for="State" class="control-label mb-10">Status</label>
-                  <model-select :options="states" v-model="form['state']">
-                 </model-select>
-                 <div class="help-block" v-if="form.errors.has('state')" v-text="form.errors.get('state')"></div>
-                </div>
+            <part-input v-model="form" name="sujet" label="Sujet"></part-input>
+            <part-input v-model="form" name="note" label="Note"></part-input>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('contact_id') ? 'has-danger' : '', 'form-group']">
+                <label for="Contacts" class="control-label mb-10">Contact</label>
+                <select class="form-control" name="contact_id" v-model="form['contact_id']">
+                  <option v-for="contact in contacts" :value="contact.id">{{ contact.name }}</option>
+                </select>
+                <div class="form-control-feedback" v-if="form.errors.has('contact_id')" v-text="form.errors.get('contact_id')"></div>
               </div>
             </div>
-            <div class="row">
-              <part-input v-model="form" name="sujet" label="Sujet"></part-input>
-              <part-input v-model="form" name="note" label="Note"></part-input>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('contact_id') ? 'has-error' : '', 'form-group']">
-                  <label for="Contacts" class="control-label mb-10">Contact</label>
-                  <select class="form-control" name="contact_id" v-model="form['contact_id']">
-                    <option v-for="contact in contacts" :value="contact.id">{{ contact.name }}</option>
-                  </select>
-                  <div class="help-block" v-if="form.errors.has('contact_id')" v-text="form.errors.get('contact_id')"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('state') ? 'has-error' : '', 'form-group']">
-                  <label for="Actions" class="control-label mb-10">Action</label>
-                  <select class="form-control" name="action_id" v-model="form['action_id']">
-                    <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
-                  </select>
-                  <div class="help-block" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
-                </div>
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('state') ? 'has-danger' : '', 'form-group']">
+                <label for="Actions" class="control-label mb-10">Action</label>
+                <select class="form-control" name="action_id" v-model="form['action_id']">
+                  <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
+                </select>
+                <div class="form-control-feedback" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
               </div>
             </div>
-            <div class="row">
-              <part-button-goback></part-button-goback>
-              <part-button-submit :editing="editing"></part-button-submit>
-            </div>
-          </form>
-        </part-panel>
-      </div>
-    </global-unite-middle>
-
+          </div>
+          <div class="row">
+            <part-button-submit :editing="editing"></part-button-submit>
+            <part-button-goback></part-button-goback>
+          </div>
+        </form>
+      </part-panel>
+    </div>
   </div>
 </template>
 
@@ -95,13 +88,17 @@
             }),
             contacts:'',
             states: [{value:'1',text:'Fermé'},{value:'2',text:'En cours'},{value:'3',text:'Ouvert'}],
+            color:'',
+            existClient:'',
           }
         },
         computed:{
           editing: function(){
             if (this.$route.params.id) {
+              this.color='warning'
               return true
             }else{
+              this.color='success'
               return false
             }
           },
@@ -126,8 +123,11 @@
         },
         created(){
           if (this.clientId) {
+            this.existClient = true
             this.form.reference = this.guid+'-'+this.clientId;
             this.form.client_id = this.clientId;
+          }else {
+            this.existClient = false
           }
 
           if (this.clientId) {

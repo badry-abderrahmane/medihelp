@@ -1,47 +1,96 @@
 <template lang="html">
-  <div>
-    <div class="chat-cmplt-wrap chat-for-widgets-1">
-      <div class="chat-box-wrap">
-        <global-unite-first>
-          <div class="col-md-12" slot="content">
-            <div class="panel panel-default card-view">
-							<div class="panel-wrapper">
-                <div class="panel-body sm-data-box-1">
-									<chat-list ></chat-list>
-								</div>
-              </div>
-            </div>
-          </div>
-        </global-unite-first>
-        <!-- chat list -->
-      </div>
-      <div class="recent-chat-box-wrap">
-        <div class="recent-chat-wrap">
-          <div class="row">
-            <global-unite-middle>
-              <router-view slot="content"></router-view>
-            </global-unite-middle>
-            <!-- chat Content -->
+  <div class="row">
+    <div v-if="$route.name != 'Chat Tickets' && $route.name != 'Chat Tickets - Détails'" class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+      <part-panel-default>
+        <div slot="heading">
+          Liens Utiles
+        </div>
+        <div v-if="$route.name == 'Liste Tickets'" class="row m-b-10" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+            <button @click="$router.push({ path: `/tickets/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
           </div>
         </div>
-      </div>
+        <div v-if="$route.name == 'Nouveau Ticket Générale'" class="row m-b-10" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+            <button @click="$router.push({ path: `/tickets` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste tickets</button>
+          </div>
+        </div>
+      </part-panel-default>
+
+      <part-panel-default>
+        <div slot="heading">
+          Filter
+        </div>
+        <div class="row" slot="body">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" class="form-control">
+            </div>
+          </div>
+
+        </div>
+      </part-panel-default>
+
+      <part-panel-default>
+        <div slot="heading">
+          Statistiques
+        </div>
+        <div class="row" slot="body">
+          <div class="col-md-12">
+            <div class="d-flex flex-row">
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">2690</h3>
+                    <h5 class="text-muted m-b-0">Clients</h5>
+                  </div>
+                </center>
+                </div>
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">112</h3>
+                    <h5 class="text-muted m-b-0">Contacts</h5>
+                  </div>
+                  </center>
+                </div>
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">56</h3>
+                    <h5 class="text-muted m-b-0">Tickets</h5>
+                  </div>
+                  </center>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </part-panel-default>
+    </div>
+    <div v-else class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+      <part-panel-default-center>
+        <div slot="heading">
+          Infomations Générales
+        </div>
+        <div class="row" slot="body">
+          <infos-ticket></infos-ticket>
+        </div>
+      </part-panel-default-center>
+    </div>
+    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12" >
+      <router-view></router-view>
     </div>
 
   </div>
-
-  <!-- <chat-container>
-    <div slot="list">
-      <chat-list></chat-list>
-    </div>
-    <router-view slot="content"></router-view>
-  </chat-container> -->
 </template>
 
 <script>
 export default {
-  mounted(){
 
-  }
 }
 </script>
 

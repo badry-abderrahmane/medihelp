@@ -1,23 +1,24 @@
 <template lang="html">
-  <div class="panel panel-default card-view pa-0">
-  	<div class="panel-wrapper collapse in">
-  		<div class="panel-body pb-0">
-  			<div class="tab-struct custom-tab-1">
-  				<ul role="tablist" class="nav nav-tabs nav-tabs-responsive" id="myTabs_8">
-            <li role="presentation" v-for="tab,key in tabs" :class="key == 0 ? 'active':''">
-              <a data-toggle="tab" :id="tab.id+'_tab_8'" role="tab" :href="'#'+tab.id" aria-expanded="false">
-                <span>{{ tab.name }}</span>
-              </a>
-            </li>
-  				</ul>
-  				<div class="tab-content" id="myTabContent_8" style="min-height:300px !important;">
-  					<div v-for="tab,key in tabs" :id="tab.id" :class="key == 0 ? 'tab-pane fade active in':'tab-pane fade'" role="tabpanel">
-              <slot :name="tab.id"></slot>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
+  <div class="card">
+      <div class="card-body p-b-0">
+          <h4 class="card-title"><slot name="heading1"></slot></h4>
+          <h6 class="card-subtitle"><slot name="heading2"></slot></h6>
+      </div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs customtab" role="tablist">
+          <li class="nav-item" v-for="tab,key in tabs" >
+            <a :class="key == 0 ? 'nav-link active':'nav-link'" data-toggle="tab" role="tab" :id="tab.id+'_tab_8'" :href="'#__'+tab.id">
+              <span class="hidden-sm-up"><i class="ti-home"></i></span>
+              <span class="hidden-xs-down">{{ tab.name }}</span>
+            </a>
+          </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content m-b-30" style="min-height:300px !important;">
+          <div v-for="tab,key in tabs" :id="'__'+tab.id" :class="key == 0 ? 'tab-pane active':'tab-pane p-20'" role="tabpanel">
+            <slot :name="tab.id"></slot>
+          </div>
+      </div>
   </div>
 </template>
 
