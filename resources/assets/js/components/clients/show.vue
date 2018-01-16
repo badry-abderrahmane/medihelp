@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <global-unite-first>
-      <div class="col-md-12" slot="content">
+
+      <div class="col-md-12" >
         <part-panel-profile title="Entreprise" :name="client.name">
           <div slot="count1">
             <span class="counts block head-font"><span>{{ countContacts }}</span></span>
@@ -34,9 +34,8 @@
           </div>
         </part-panel-profile>
       </div>
-    </global-unite-first>
-    <global-unite-middle>
-      <div class="col-md-12" slot="content">
+
+      <div class="col-md-12" >
         <part-panel-tabs :tabs="tabs">
           <div slot="1" class="text-center"><br>
             <infos-client :client="client"></infos-client>
@@ -52,11 +51,7 @@
           </div>
         </part-panel-tabs>
       </div>
-    </global-unite-middle>
-    <!-- chat Content -->
-    <global-unite-last>
-
-    </global-unite-last>
+    
 
 
   </div>

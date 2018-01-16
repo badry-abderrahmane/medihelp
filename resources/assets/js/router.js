@@ -42,11 +42,20 @@ module.exports = {
       /**
       **    Entreprises routes
       **/
-      { name:'Clients', path: '/clients', component: require('./components/clients/home.vue')},
-      { name:'Détail Client', path: '/clients/show/:id', component: require('./components/clients/show.vue')},
-      { name:'Ajout Client', path: '/clients/add', component: require('./components/clients/form.vue')},
-      { name:'Modification Client', path: '/clients/edit/:id', component: require('./components/clients/form.vue')},
-      { name:'Suppression Client', path: '/clients/delete/:id', component: require('./components/clients/delete.vue')},
+      { path: '/clients', component: require('./components/clients/home.vue'),
+          children: [
+            { name:'Clients', path: '', component: require('./components/clients/list.vue')},
+            { name:'Détail Client', path: 'show/:id', component: require('./components/clients/show.vue')},
+            { name:'Nouveau Client',  path: 'add', component: require('./components/clients/form.vue')},
+            { name:'Modification Client', path: 'edit/:id', component: require('./components/clients/form.vue')},
+            { name:'Suppression Client', path: 'delete/:id', component: require('./components/clients/delete.vue')},
+          ]
+      },
+
+      // { name:'Détail Client', path: '/clients/show/:id', component: require('./components/clients/show.vue')},
+      // { name:'Ajout Client', path: '/clients/add', component: require('./components/clients/form.vue')},
+      // { name:'Modification Client', path: '/clients/edit/:id', component: require('./components/clients/form.vue')},
+      // { name:'Suppression Client', path: '/clients/delete/:id', component: require('./components/clients/delete.vue')},
 
       /**
       **    Contact routes

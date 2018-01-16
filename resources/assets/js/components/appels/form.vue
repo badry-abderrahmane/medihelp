@@ -71,8 +71,11 @@
               </div>
             </div>
             <div class="row">
-              <part-button-goback></part-button-goback>
-              <part-button-submit :editing="editing"></part-button-submit>
+              <div class="col-md-12">
+                <part-button-goback></part-button-goback>
+                <part-button-submit :editing="editing"></part-button-submit>
+              </div>
+
             </div>
           </form>
         </part-panel>
