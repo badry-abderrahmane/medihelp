@@ -1,144 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>HelpDesk</title>
-		<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
-		<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
-		<meta name="author" content="hencework"/>
 
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>STG HelpDesk | Connexion</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/default-dark.css" id="theme" rel="stylesheet">
+</head>
 
-		<!-- vector map CSS -->
-		<link href="vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-
-
-		<!-- Custom CSS -->
-		<link href="dist/css/style.css" rel="stylesheet" type="text/css">
-    <style media="screen">
-        body, html {
-          height: 100%;
-        }
-
-        .bg-image {
-          /* The image used */
-          background-image: url("dist/img/background.jpg") !important;
-          /* Full height */
-          height: 100% !important;
-
-          /* Center and scale the image nicely */
-          background-position: center;
-          background-repeat: no-repeat !important;
-          background-size: cover;
-          -webkit-background-size: cover;
-          -moz-background-size: cover;
-          background-size: 100% !important;
-        }
-        /* Responsive */
-
-        @media (max-width: 768px) {
-
-          .bg-image {
-            background-image: url("dist/img/background2.jpg") !important;
-          }
-        }
-    </style>
-	</head>
-	<body>
-		<!--Preloader-->
-		<div class="preloader-it">
-			<div class="la-anim-1"></div>
-		</div>
-		<!--/Preloader-->
-
-		<div class="wrapper pa-0 ">
-			<!-- Main Content -->
-			<div class="page-wrapper pa-0 ma-0 auth-page bg-green bg-image">
-				<div class="container-fluid">
-					<!-- Row -->
-					<div class="table-struct full-width full-height">
-						<div class="table-cell vertical-align-middle auth-form-wrap">
-							<div class="auth-form  ml-auto mr-auto no-float">
-								<div class="row panel">
-									<div class="col-sm-12 col-xs-12">
-										<div class="mb-30"><br>
-											<h3 class="text-center txt-primary mb-10">Authentification</h3>
-											{{-- <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6> --}}
-										</div>
-										<div class="form-wrap">
-											<form method="POST" action="{{ route('login') }}">
-												{{ csrf_field() }}
-												<div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-													<label class="control-label mb-10" for="email">Email</label>
-													<input type="email" class="form-control" required autofocus id="email" name="email" value="{{ old('email') }}" placeholder="Entrez votre email">
-													@if ($errors->has('email'))
-															<span class="help-block">
-																	<strong>{{ $errors->first('email') }}</strong>
-															</span>
-													@endif
-												</div>
-												<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-													<label class="pull-left control-label mb-10" for="password">Mot de passe</label>
-													{{-- <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="forgot-password.html">forgot password ?</a> --}}
-													<div class="clearfix"></div>
-													<input id="password" type="password" class="form-control" name="password" required placeholder="Entrez votre mot de passe">
-													@if ($errors->has('password'))
-															<span class="help-block">
-																	<strong>{{ $errors->first('password') }}</strong>
-															</span>
-													@endif
-												</div>
-												<div class="form-group">
-	                          <div class="checkbox">
-	                              &nbsp;&nbsp;&nbsp;<label>
-	                                  <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
-	                              </label>
-	                          </div>
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-color:#02bec9;">
+            <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material" method="POST" action="{{ route('login') }}">
+                  {{ csrf_field() }}
+                    <h3 class="box-title m-b-20">Authentification</h3>
+                    <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }}">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="email" required autofocus id="email" name="email" value="{{ old('email') }}" placeholder="Entrez votre email">
+                            @if ($errors->has('email'))
+  															<span class="form-control-feedback">
+  																	<strong>{{ $errors->first('email') }}</strong>
+  															</span>
+  													@endif
                         </div>
-												{{-- <div class="form-group">
-													<div class="checkbox checkbox-primary pr-10 pull-left">
-														<input id="checkbox_2" required="" type="checkbox">
-														<label for="checkbox_2"> Rester connecté</label>
-													</div>
-													<div class="clearfix"></div>
-												</div> --}}
-												<div class="form-group text-center">
-													<button type="submit" class="btn btn-info btn-primary btn-rounded">Se connecter</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /Row -->
-				</div>
+                    </div>
+                    <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }}" >
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" name="password" required placeholder="Entrez votre mot de passe">
+                            @if ($errors->has('password'))
+  															<span class="form-control-feedback">
+  																	<strong>{{ $errors->first('password') }}</strong>
+  															</span>
+  													@endif
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-primary pull-left p-t-0">
+                                <input id="checkbox-signup" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label for="checkbox-signup"> Se souvenir de moi </label>
+                            </div>
+                            {{-- <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div> --}}
+                    </div><br>
 
-			</div>
-			<!-- /Main Content -->
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Se connecter</button>
+                        </div>
+                    </div>
+                    {{-- <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social">
+                                <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                                <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                            </div>
+                        </div>
+                    </div> --}}
+                    {{-- <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>Don't have an account? <a href="register.html" class="text-info m-l-5"><b>Sign Up</b></a></p>
+                        </div>
+                    </div> --}}
+                </form>
+                {{-- <form class="form-horizontal" id="recoverform" action="index.html">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h3>Recover Password</h3>
+                            <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Email"> </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                        </div>
+                    </div>
+                </form> --}}
+            </div>
+          </div>
+        </div>
 
-		</div>
-		<!-- /#wrapper -->
+    </section>
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
 
-		<!-- JavaScript -->
-
-		<!-- jQuery -->
-		<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-
-		<!-- Bootstrap Core JavaScript -->
-		<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
-
-		<!-- Slimscroll JavaScript -->
-		<script src="dist/js/jquery.slimscroll.js"></script>
-
-		<!-- Init JavaScript -->
-		<script src="dist/js/init.js"></script>
-	</body>
 </html>

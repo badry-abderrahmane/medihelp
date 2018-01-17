@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="row">
-    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
       <part-panel-default>
         <div slot="heading">
           Liens Utiles
@@ -119,7 +119,7 @@
       </part-panel-default>
     </div>
 
-    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
+    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12" >
       <router-view></router-view>
     </div>
 

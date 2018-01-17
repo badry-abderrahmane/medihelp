@@ -12,8 +12,12 @@ import VueRouter from 'vue-router';
 import { store } from './store';
 import Vue2Filters from 'vue2-filters'
 
+
+
 Vue.use(Vue2Filters)
 Vue.use(VueRouter);
+
+require('./plugins/sweet-alert-plugin');
 
 require('./global');
 require('./parts');
@@ -33,6 +37,11 @@ Vue.component('full-app', require('./components/home.vue'));
 const app = new Vue({
   store,
   router,
+  data(){
+    return {
+      table: '',
+    }
+  },
   mounted(){
     this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
     this.$store.dispatch('LOAD_CLIENTS_LIST')
@@ -45,7 +54,9 @@ const app = new Vue({
     Event.$on('init-datatable', (tableid) => {
       this.datatableThis(tableid);
     });
-
+    Event.$on('destroy-datatable', (tableid) => {
+      this.destroyThis(tableid);
+    });
     // Event.$on('init-slimscroll-list', () => {
     //   this.slimThisList();
     // });
@@ -73,59 +84,48 @@ const app = new Vue({
     *
     **/
     notifSuccess(message){
-      $.toast().reset('all');
-  		$("body").removeAttr('class');
-  		$.toast({
-              heading: message,
-              text: '',
-              position: 'top-right',
-              loaderBg:'#fec107',
-              icon: 'success',
-              hideAfter: 3500,
-              stack: 6
-            });
-  		return false;
+      $.toast({
+       heading: message,
+       text: '',
+       position: 'bottom-center',
+       loaderBg:'#ff6849',
+       icon: 'success',
+       hideAfter: 3500,
+       stack: 6
+     });
     },
     notifWarning(message){
-      $.toast().reset('all');
-  		$("body").removeAttr('class');
-  		$.toast({
-              heading: message,
-              text: '',
-              position: 'top-right',
-              loaderBg:'#ff2a00',
-              icon: 'warning',
-              hideAfter: 3500,
-              stack: 6
-            });
-  		return false;
+      $.toast({
+       heading: message,
+       text: '',
+       position: 'bottom-center',
+       loaderBg:'#ff6849',
+       icon: 'warning',
+       hideAfter: 3500,
+       stack: 6
+     });
     },
     notifInfo(message){
-      $.toast().reset('all');
-  		$("body").removeAttr('class');
-  		$.toast({
-              heading: message,
-              text: '',
-              position: 'top-right',
-              loaderBg:'#fec107',
-              icon: 'info',
-              hideAfter: 3000,
-              stack: 6
-            });
-  		return false;
+      $.toast({
+       heading: message,
+       text: '',
+       position: 'bottom-center',
+       loaderBg:'#ff6849',
+       icon: 'info',
+       hideAfter: 3000,
+       stack: 6
+     });
     },
     notifDanger(message){
-      $.toast().reset('all');
-  		$("body").removeAttr('class');
-  		$.toast({
-              heading: message,
-              text: '',
-              position: 'top-right',
-              loaderBg:'#fec107',
-              icon: 'error',
-              hideAfter: 3500
-            });
-  		return false;
+      $.toast({
+       heading: message,
+       text: '',
+       position: 'bottom-center',
+       loaderBg:'#ff6849',
+       icon: 'error',
+       hideAfter: 3500,
+       stack: 6,
+     });
     },
     /**
     * Slimscroll Functions
@@ -176,8 +176,11 @@ const app = new Vue({
     * DataTables Functions
     *
     **/
+    destroyThis(tableid){
+      this.table.destroy();
+    },
     datatableThis(tableid){
-      $('table.display').DataTable({
+      this.table = $('table.display').DataTable({
         "bDestroy": true,
         dom: 'Bfrtip',
         buttons: [

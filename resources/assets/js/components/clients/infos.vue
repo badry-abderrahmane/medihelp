@@ -3,7 +3,7 @@
     <div class="row mb-40">
       <div class="col-md-6"><br>
         <h6 class="text-success">#ID:</h6>
-        <h5><span class="label label-default">{{ client.id }}</span></h5>
+        <h5><span class="label label-inverse">{{ client.id }}</span></h5>
       </div>
       <div class="col-md-6"><br>
         <h6 class="text-success">Nom:</h6>

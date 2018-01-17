@@ -13,10 +13,13 @@
       <title>HelpDesk v1.8</title>
       <!-- Bootstrap Core CSS -->
       <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- toast CSS -->
+      <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
       <!-- Custom CSS -->
       <link href="css/style.css" rel="stylesheet">
       <!-- You can change the theme colors from here -->
       <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+
       <link rel="stylesheet" href="/css/app.css">
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,8 +71,8 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
 
-    
     <script src="/js/app.js" charset="utf-8"></script>
 </body>
 </html>

@@ -24,9 +24,9 @@
           </td>
           <td>{{ ticket.contact.name }}</td>
           <td>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/show/`+ticket.id })"><i class="fa fa-eye"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/edit/`+ticket.id })"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/tickets/delete/`+ticket.id })"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-outline-info" @click="$router.push({ path: `/tickets/chat/show/`+ticket.id })"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/tickets/edit/`+ticket.client.id+`/`+ticket.id })"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-outline-info" @click="deleteThis(ticket.id)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>
       </datatable-buttons>
@@ -41,15 +41,48 @@ export default {
       tickets:  [],
     }
   },
-
   created(){
-    axios.get('/tickets')
-      .then(response => {
-        this.tickets = response.data;
-        Vue.nextTick(function () {
-          Event.$emit('init-datatable', 'tableAdd');
+    this.getTickets()
+  },
+  methods:{
+    getTickets(){
+      axios.get('/tickets')
+        .then(response => {
+          this.tickets = response.data;
+          Vue.nextTick(function () {
+            Event.$emit('init-datatable', 'tableAdd');
+          })
+      });
+    },
+    deleteThis(id){
+      this.$swal({
+        title: 'Etes vous sur de vouloir supprimer ce ticket?',
+        text: 'En supprimant ce ticket vous allez supprimer tous ses conversations',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.value) {
+          this.persistDelete(id);
+        }
+      })
+    },
+    persistDelete(id){
+      axios.delete('/tickets/'+id)
+        .then(response => {
+          this.getTickets()
+          this.$swal(
+            'Bien Supprimé!',
+            'Ticket #ID '+id+' supprimé',
+            'success'
+          )
+          Event.$emit('destroy-datatable', 'tableAdd');
         })
-    });
+        .catch(function(err){
+          console.log(err);
+        });
+    }
   }
 }
 </script>

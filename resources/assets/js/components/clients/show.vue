@@ -2,7 +2,7 @@
   <div class="col-md-12" >
     <part-panel-tabs :tabs="tabs">
       <div slot="heading1">
-        <center><span class="label label-warning" style="border-radius: 4px 0px 0px 4px;"><h4 class="text-light">Client :</h4></span><span class="label label-inverse" style="border-radius: 0px 4px 4px 0px;"><h4 class="text-light">{{ client.name }}</h4></span></center>
+        <center><span class="label label-warning" style="border-radius: 4px 0px 0px 4px;"><h4 class="text-light">Client :</h4></span><span class="label label-inverse" style="border-radius: 0px 4px 4px 0px;"><h4 class="text-light">{{ client.name }}</h4></span>&nbsp;&nbsp;<span class="label label-success label-xs"><h4 class="text-light"><i class="fa fa-check-circle-o"></i>ACTIF</h4></span><span class="label label-danger label-xs"><h4 class="text-light"><i class="fa fa-ban"></i> SUSPENDUE </h4></span></center>
       </div>
       <div slot="heading2">
         <!-- <span class="label label-inverse">{{ client.name }}</span> -->
@@ -52,13 +52,18 @@ export default {
     },
   },
   created(){
-    axios.get('/clients/'+this.clientId)
-      .then(response => {
-        this.client = response.data;
-        Vue.nextTick(function () {
-          Event.$emit('init-datatable', 'tableAdd');
-        })
-    });
+    this.getClient()
+  },
+  methods:{
+    getClient(){
+      axios.get('/clients/'+this.clientId)
+        .then(response => {
+          this.client = response.data;
+          Vue.nextTick(function () {
+            Event.$emit('init-datatable', 'tableAdd');
+          })
+      });
+    }
   }
 }
 </script>

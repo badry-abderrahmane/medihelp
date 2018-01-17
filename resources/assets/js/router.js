@@ -48,19 +48,19 @@ module.exports = {
             { name:'Détail Client', path: 'show/:id', component: require('./components/clients/show.vue')},
             { name:'Nouveau Client',  path: 'add', component: require('./components/clients/form.vue')},
             { name:'Modification Client', path: 'edit/:id', component: require('./components/clients/form.vue')},
-            { name:'Suppression Client', path: 'delete/:id', component: require('./components/clients/delete.vue')},
+            // { name:'Suppression Client', path: 'delete/:id', component: require('./components/clients/delete.vue')},
 
             { name:'Nouveau Contact', path: 'contacts/add/:clientid', component: require('./components/contacts/form.vue')},
             { name:'Modification Contact', path: 'contacts/edit/:clientid/:id', component: require('./components/contacts/form.vue')},
-            { name:'Suppression Contact', path: 'contacts/delete/:id', component: require('./components/contacts/delete.vue')},
+            // { name:'Suppression Contact', path: 'contacts/delete/:id', component: require('./components/contacts/delete.vue')},
 
             { name:'Nouvelle Adresse', path: 'adresses/add/:clientid', component: require('./components/adresses/form.vue')},
             { name:'Modification Adresse', path: 'adresses/edit/:clientid/:id', component: require('./components/adresses/form.vue')},
-            { name:'Suppression Adresse', path: 'adresses/delete/:id', component: require('./components/adresses/delete.vue')},
+            // { name:'Suppression Adresse', path: 'adresses/delete/:id', component: require('./components/adresses/delete.vue')},
 
             { name:'Nouveau Ticket', path: 'tickets/add/:clientid', component: require('./components/tickets/form.vue')},
             { name:'Modification Ticket', path: 'tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},
-            { name:'Suppression Ticket', path: 'tickets/delete/:id', component: require('./components/tickets/delete.vue')},
+            // { name:'Suppression Ticket', path: 'tickets/delete/:id', component: require('./components/tickets/delete.vue')},
           ]
       },
 
@@ -108,7 +108,7 @@ module.exports = {
       },
       // { name:'Détail Ticket', path: '/tickets/show/:id', component: require('./components/tickets/show.vue')},
       // { name:'Ajout Ticket', path: '/tickets/add/:clientid', component: require('./components/tickets/form.vue')},
-      // { name:'Modification Ticket', path: '/tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},
+
       // { name:'Suppression Ticket', path: '/tickets/delete/:id', component: require('./components/tickets/delete.vue')},
 
 
