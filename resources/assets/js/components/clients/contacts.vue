@@ -20,7 +20,7 @@
       <td>{{ contact.fonction }}</td>
       <td>
         <!-- <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/contacts/show/`+contact.id })"><i class="fa fa-eye"></i></button> -->
-        <button class="btn btn-outline-info" @click="$router.push({ path: `/contacts/edit/`+clientid+`/`+contact.id })"><i class="fa fa-pencil"></i></button>
+        <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/contacts/edit/`+clientid+`/`+contact.id })"><i class="fa fa-pencil"></i></button>
         <button class="btn btn-outline-info" @click="deleteThis(contact.id)"><i class="fa fa-trash"></i></button>
       </td>
     </tr>
@@ -30,8 +30,36 @@
 <script>
 export default {
   props:["contacts","clientid"],
-  created(){
-    console.log($vm);
+  methods:{
+    deleteThis(id){
+      this.$swal({
+        title: 'Etes vous sur de vouloir supprimer ce contact?',
+        text: 'En supprimant ce contact vous allez supprimer tous ses tickets!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.value) {
+          this.persistDelete(id);
+        }
+      })
+    },
+    persistDelete(id){
+      Event.$emit('destroy-datatable', 'tableAdd');
+      axios.delete('/contacts/'+id)
+        .then(response => {
+          this.$swal(
+            'Bien Supprimé!',
+            'Contact #ID '+id+' supprimé',
+            'success'
+          )
+          this.$router.push({ path: `/clients` })
+        })
+        .catch(function(err){
+
+        });
+    }
   }
 }
 </script>

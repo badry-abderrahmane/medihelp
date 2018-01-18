@@ -3,7 +3,8 @@
     <div class="col-md-12" >
       <part-panel :color="color">
         <div slot="heading">
-          Nouveau contact
+          <span v-if="!editing">Nouveau contact</span>
+          <span v-else>Mise à jour contact</span>
         </div>
         <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
           <div class="row">

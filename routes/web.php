@@ -21,6 +21,16 @@ Route::get('/wayway', function() {
     return Auth::user();
 });
 
+// Route::get('/users', function() {
+//     return \App\User::All();
+// });
+
+// Route::get('/user', function() {
+//     $user = Auth::user();
+//     $user->roles->filter->perms;
+//     return $user;
+// });
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -37,6 +47,9 @@ Route::resources([
     'etats' => 'EtatController',
     'emails' => 'EmailController',
     'appels' => 'AppelController',
+    'users' => 'UserController',
+    'roles' => 'RoleController',
+    'permissions' => 'PermissionController',
 ]);
 
 /**

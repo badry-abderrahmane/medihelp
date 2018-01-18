@@ -51,7 +51,7 @@
             <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
           </div>
         </div>
-        <div v-if="$route.name == 'Nouveau Ticket'" slot="body">
+        <div v-if="$route.name == 'Nouveau Ticket' || $route.name == 'Modification Ticket'" slot="body">
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
             <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
           </div>

@@ -136,14 +136,15 @@ const app = new Vue({
           height: '100%',
           position: 'right',
           size: "5px",
-          color: '#dcdcdc'
-
+          color: '#dcdcdc',
+          start: 'bottom',
       });
       $('.chat-list').slimScroll({
-          position: 'right'
-          , size: "5px"
-          , height: '100%'
-          , color: '#dcdcdc'
+          position: 'right',
+          size: "5px",
+          height: '100%',
+          color: '#dcdcdc',
+          start: 'bottom',
        });
 
       var cht = function () {

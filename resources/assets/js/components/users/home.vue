@@ -1,23 +1,19 @@
 <template lang="html">
   <div class="row">
-    <div v-if="$route.name != 'Chat Tickets' && $route.name != 'Chat Tickets - Détails'" class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
       <part-panel-default>
         <div slot="heading">
           Liens Utiles
         </div>
-        <div v-if="$route.name == 'Liste Tickets'" class="row m-b-10" slot="body">
+        <div class="row m-b-10" slot="body">
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
-            <button @click="$router.push({ path: `/tickets/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+            <button @click="$router.push({ path: `/users/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau utilisateur</button>
           </div>
-        </div>
-        <div v-if="$route.name == 'Nouveau Ticket Générale' || $route.name == 'Tickets - Nouveau Email' || $route.name == 'Tickets - Nouveau Appel'" class="row m-b-10" slot="body">
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
-            <button @click="$router.push({ path: `/tickets` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste tickets</button>
+            <button @click="$router.push({ path: `/users/roles/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau role</button>
           </div>
-        </div>
-        <div v-if="$route.name == 'Tickets - Nouveau Email' || $route.name == 'Tickets - Nouveau Appel'" class="row m-b-10" slot="body">
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
-            <button @click="$router.go(-1)" type="button" class="btn btn-block waves-effect waves-light btn-inverse" >Retour au ticket</button>
+            <button @click="$router.push({ path: `/users/permissions/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle permission</button>
           </div>
         </div>
       </part-panel-default>
@@ -76,16 +72,7 @@
         </div>
       </part-panel-default>
     </div>
-    <div v-else class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-      <part-panel-default-center>
-        <div slot="heading">
-          Infomations Générales
-        </div>
-        <div class="row" slot="body">
-          <infos-ticket></infos-ticket>
-        </div>
-      </part-panel-default-center>
-    </div>
+
     <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12" >
       <router-view></router-view>
     </div>
