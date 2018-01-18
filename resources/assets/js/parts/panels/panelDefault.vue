@@ -1,17 +1,11 @@
 <template lang="html">
-  <div class="panel panel-default border-panel card-view">
-		<div class="panel-heading">
-			<div class="pull-left">
-				<h6 class="panel-title"><slot name="heading"></slot></h6>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="panel-wrapper collapse in">
-			<div class="panel-body">
-				<slot name="body"></slot>
-			</div>
-		</div>
-	</div>
+  <div class="card card-outline-info">
+      <div class="card-header">
+          <h4 class="m-b-0 text-white"><slot name="heading"></slot></h4></div>
+      <div class="card-body">
+          <slot name="body"></slot>
+      </div>
+  </div>
 </template>
 
 <script>

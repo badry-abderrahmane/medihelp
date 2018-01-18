@@ -1,68 +1,128 @@
 <template lang="html">
   <div class="row">
-    <global-unite-first>
-      <div class="col-md-12" slot="content">
-        <part-panel-default>
-          <div slot="heading">
-            Liens utiles
+    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+      <part-panel-default>
+        <div slot="heading">
+          Liens Utiles
+        </div>
+        <div v-if="$route.name == 'Clients'" class="row m-b-10" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+            <button @click="$router.push({ path: `/clients/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau client</button>
           </div>
-          <div class="row" slot="body">
-            <div class="col-md-8 col-md-offset-2">
-              <button class="btn btn-success btn-block btn-lable-wrap left-label" @click="$router.push({ path: `/clients/add` })">
-                <span class="btn-label"><i class="fa fa-plus"></i></span>
-                <span class="btn-text">Nouveau client</span>
-              </button>
+        </div>
+        <div v-if="$route.name == 'Nouveau Client' || $route.name == 'Modification Client'" class="row m-b-10" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+            <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
+          </div>
+        </div>
+        <div v-if="$route.name == 'Détail Client'" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/contacts/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau contact</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/adresses/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle adresse</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+          </div>
+        </div>
+        <div v-if="$route.name == 'Nouvelle Adresse'" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/contacts/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau contact</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+          </div>
+        </div>
+        <div v-if="$route.name == 'Nouveau Contact'" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/adresses/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle adresse</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+          </div>
+        </div>
+        <div v-if="$route.name == 'Nouveau Ticket' || $route.name == 'Modification Ticket'" slot="body">
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button  @click="$router.push({ path: `/tickets` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste tickets</button>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/tickets/chat` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Chat tickets</button>
+          </div>
+        </div>
+      </part-panel-default>
+
+      <part-panel-default>
+        <div slot="heading">
+          Filter
+        </div>
+        <div class="row" slot="body">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" class="form-control">
             </div>
           </div>
-        </part-panel-default>
-        <part-panel-default>
-          <div slot="heading">
-            Statistiques
-          </div>
-          <div class="row" slot="body">
-            <div class="col-md-12">
-              <div class="sm-data-box">
-  							<div class="container-fluid">
-  								<div class="row">
-                    <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-  										<i class="icon-user-following data-right-rep-icon txt-light-grey"></i>
-  									</div>
-  									<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-  										<span class="txt-dark block counter"><span class="counter-anim">2245</span></span>
-  										<span class="weight-500 uppercase-font block font-13">Clients</span>
-  									</div>
-  								</div>
-  							</div>
-  						</div>
+
+        </div>
+      </part-panel-default>
+
+      <part-panel-default>
+        <div slot="heading">
+          Statistiques
+        </div>
+        <div class="row" slot="body">
+          <div class="col-md-12">
+            <div class="d-flex flex-row">
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">2690</h3>
+                    <h5 class="text-muted m-b-0">Clients</h5>
+                  </div>
+                </center>
+                </div>
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">112</h3>
+                    <h5 class="text-muted m-b-0">Contacts</h5>
+                  </div>
+                  </center>
+                </div>
+                <div class="col-md-4">
+                  <center>
+                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0">56</h3>
+                    <h5 class="text-muted m-b-0">Tickets</h5>
+                  </div>
+                  </center>
+                </div>
             </div>
           </div>
-        </part-panel-default>
-      </div>
-    </global-unite-first>
 
+        </div>
+      </part-panel-default>
+    </div>
 
-    <global-unite-middle>
-      <div class="col-md-12" slot="content">
-        <list-clients></list-clients>
-      </div>
-    </global-unite-middle>
-    <global-unite-last>
-      <div class="col-md-12" slot="content">
-        <part-panel-default>
-          <div slot="heading">
-            Filter
-          </div>
-          <div class="row" slot="body">
-            <div class="col-md-12">
-              <div class="form-group">
-                <input type="text" class="form-control">
-              </div>
-            </div>
+    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12" >
+      <router-view></router-view>
+    </div>
 
-          </div>
-        </part-panel-default>
-      </div>
-    </global-unite-last>
   </div>
 </template>
 

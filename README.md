@@ -1,4 +1,4 @@
-# medihelp
+
 # Laravel 5 Ticket Management System
 Laravel 5.5 and Vue JS 2.5 project.
 
@@ -19,4 +19,3 @@ To get this working, you need to install dependencies and set up your .env...
 - Now add the app key to your .env file, this is also where you define your database (there is an example in root called .env.example)
 - Next, you need to run the database migrations...
 - <code>php artisan migrate</code> Creates the tables in the database
-

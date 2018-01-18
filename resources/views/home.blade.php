@@ -1,95 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
-    <link href="vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-    <link href="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
-    <!-- select2 CSS -->
-		<link href="vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
-    <!-- bootstrap-touchspin CSS -->
-		<link href="vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Jasny-bootstrap CSS -->
-		<link href="vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Bootstrap Datetimepicker CSS -->
-		<link href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Calendar CSS -->
-		<link href="vendors/bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" type="text/css"/>
-    <link href="dist/css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/app.css">
-    <title></title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+      <!-- Tell the browser to be responsive to screen width -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- Favicon icon -->
+      <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+      <title>HelpDesk v1.8</title>
+      <!-- Bootstrap Core CSS -->
+      <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- toast CSS -->
+      <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/style.css" rel="stylesheet">
+      <!-- You can change the theme colors from here -->
+      <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+
+      <link rel="stylesheet" href="/css/app.css">
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
   </head>
-  <body>
-
-
-    <!-- Preloader -->
-  	<div class="preloader-it" style="opacity: 0.9;filter: alpha(opacity=80); /* For IE8 and earlier */">
-  		<div class="la-anim-1"></div>
-      <div class="col-md-8" style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;">
-        <center>
-        <img src="images/loader.gif"/><br>
-        <span class="inline-block capitalize-font mr-5">Chargement en cours...</span>
-        <h5 class=""></h5>
-        </center>
+  <body class="fix-header card-no-border">
+      <!-- ============================================================== -->
+      <!-- Preloader - style you can find in spinners.css -->
+      <!-- ============================================================== -->
+      <div class="preloader">
+          <svg class="circular" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
       </div>
-  	</div>
-  	<!-- /Preloader -->
+
+
     <div id="app">
       <full-app></full-app>
     </div>
 
-    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
-    <!-- Data table JavaScript -->
-    <script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="/js/select2.min.js"></script>
-    <script src="vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
-    <!-- Moment JavaScript -->
-		<script type="text/javascript" src="vendors/bower_components/moment/min/moment-with-locales.min.js"></script>
-    <!-- Bootstrap Datetimepicker JavaScript -->
-		<script type="text/javascript" src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
 
     <script src="/js/app.js" charset="utf-8"></script>
-
-    <!-- Select2 JavaScript -->
-
-    <!-- Bootstrap Touchspin JavaScript -->
-		<script src="vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-
-    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="dist/js/jquery.slimscroll.js"></script>
-	  <script src="vendors/bower_components/moment/min/moment.min.js"></script>
-    <script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
-    <script src="dist/js/simpleweather-data.js"></script>
-	  <script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
-	  <script src="vendors/bower_components/jquery.counterup/jquery.counterup.min.js"></script>
-	  <script src="dist/js/dropdown-bootstrap-extended.js"></script>
-	  <script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-	  <script src="vendors/bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
-	  <script src="vendors/chart.js/Chart.min.js"></script>
-    <script src="vendors/bower_components/raphael/raphael.min.js"></script>
-    <script src="vendors/bower_components/morris.js/morris.min.js"></script>
-
-	  <script src="vendors/bower_components/switchery/dist/switchery.min.js"></script>
-  	<script src="dist/js/init.js"></script>
-    <script type="text/javascript">
-      /*Form advanced Init*/
-      $(document).ready(function() {
-        "use strict";
-
-      });
-    </script>
-
+</body>
 </html>

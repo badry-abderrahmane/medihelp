@@ -1,7 +1,10 @@
 <template lang="html">
-  <div class="col-sm-offset-3 col-sm-2">
-    <!-- <label class="label">&nbsp;</label> --><br>
-    <button class="btn btn-primary btn-block btn-outline btn-icon " @click="goback"><i class="fa fa-arrow-left"></i><span>Retour</span>  </button>
+  <div class="col-md-6">
+    <div class="pull-left">
+      <button class="btn btn-inverse waves-effect waves-light" @click="goback">
+        <i class="fa fa-arrow-left m-r-10"></i><span>Annuler</span>
+      </button>
+    </div>
   </div>
 </template>
 

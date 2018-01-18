@@ -12,3 +12,8 @@ Vue.component('list-appels', require('./components/appels/list.vue'));
 Vue.component('list-emails', require('./components/emails/list.vue'));
 
 Vue.component('list-clients', require('./components/clients/list.vue'));
+
+
+
+Vue.component('chat-list', require('./components/tickets/chatList.vue'));
+Vue.component('chat-msgs', require('./components/tickets/chatMsgs.vue'));

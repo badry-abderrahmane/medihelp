@@ -1,10 +1,10 @@
 <template lang="html">
   <div>
-    <global-unite-middle>
-      <div class="col-md-12" slot="content">
-        <part-panel>
+      <div class="col-md-12">
+        <part-panel :color="color">
           <div slot="heading">
-            Nouveau email
+            <span v-if="!editing">Nouveau email</span>
+            <span v-else>Mise à jour email</span>
           </div>
           <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
             <div class="row">
@@ -23,62 +23,54 @@
 
             </div>
             <div class="row">
-              <part-input v-model="form" name="date" label="Date et heure"></part-input>
               <part-input v-model="form" name="sujet" label="Sujet"></part-input>
-
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('message') ? 'has-error' : '', 'form-group']">
-                  <label for="Message" class="control-label mb-10">Message</label>
-                  <textarea name="name" rows="8" class="form-control" v-model="form['message']"></textarea>
-                  <div class="help-block" v-if="form.errors.has('message')" v-text="form.errors.get('message')"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('typecomm_id') ? 'has-error' : '', 'form-group']">
+              <part-input v-model="form" name="date" label="Date et heure"></part-input>
+              <div class="col-md-4">
+                <div v-bind:class="[ form.errors.get('typecomm_id') ? 'has-danger' : '', 'form-group']">
                   <label for="typecomm_id" class="control-label mb-10">Type de communication</label>
                   <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']">
                     <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
                   </select>
-                  <div class="help-block" v-if="form.errors.has('typecomm_id')" v-text="form.errors.get('typecomm_id')"></div>
-                </div>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('etat_id') ? 'has-error' : '', 'form-group']">
-                  <label for="etat_id" class="control-label mb-10">Etat</label>
-                  <select class="form-control" name="etat_id" v-model="form['etat_id']">
-                    <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
-                  </select>
-                  <div class="help-block" v-if="form.errors.has('etat_id')" v-text="form.errors.get('etat_id')"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div v-bind:class="[ form.errors.get('action_id') ? 'has-error' : '', 'form-group']">
-                  <label for="Actions" class="control-label mb-10">Action</label>
-                  <select class="form-control" name="action_id" v-model="form['action_id']">
-                    <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
-                  </select>
-                  <div class="help-block" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
+                  <div class="form-control-feedback" v-if="form.errors.has('typecomm_id')" v-text="form.errors.get('typecomm_id')"></div>
                 </div>
               </div>
             </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div v-bind:class="[ form.errors.get('message') ? 'has-danger' : '', 'form-group']">
+                    <label for="Message" class="control-label mb-10">Message</label>
+                    <textarea name="name" rows="8" class="form-control" v-model="form['message']"></textarea>
+                    <div class="form-control-feedback" v-if="form.errors.has('message')" v-text="form.errors.get('message')"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div v-bind:class="[ form.errors.get('etat_id') ? 'has-danger' : '', 'form-group']">
+                    <label for="etat_id" class="control-label mb-10">Etat</label>
+                    <select class="form-control" name="etat_id" v-model="form['etat_id']">
+                      <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
+                    </select>
+                    <div class="form-control-feedback" v-if="form.errors.has('etat_id')" v-text="form.errors.get('etat_id')"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div v-bind:class="[ form.errors.get('action_id') ? 'has-danger' : '', 'form-group']">
+                    <label for="Actions" class="control-label mb-10">Action</label>
+                    <select class="form-control" name="action_id" v-model="form['action_id']">
+                      <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
+                    </select>
+                    <div class="form-control-feedback" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
+                  </div>
+                </div>
+              </div>
             <div class="row">
-              <part-button-goback></part-button-goback>
               <part-button-submit :editing="editing"></part-button-submit>
+              <part-button-goback></part-button-goback>
             </div>
           </form>
         </part-panel>
       </div>
-    </global-unite-middle>
-    <global-unite-last>
-      <div class="col-md-12" slot="content">
-        <chat-infos :ticket="ticket"></chat-infos>
-      </div>
-    </global-unite-last>
 
   </div>
 </template>
@@ -105,13 +97,16 @@
             reference:'',
             contact:'',
             ticket:'',
+            color:'',
           }
         },
         computed:{
           editing: function(){
             if (this.$route.params.id) {
+              this.color = 'warning'
               return true
             }else{
+              this.color = 'success'
               return false
             }
           },

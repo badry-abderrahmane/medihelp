@@ -1,5 +1,5 @@
 <template lang="html">
-  <table id="datatable" class="display">
+  <table id="datatable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
       <slot name="thead"></slot>
     </thead>
