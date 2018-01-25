@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserroleRequest;
 use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
@@ -25,6 +27,15 @@ class UserController extends Controller
         return Response::json(['message' => 'User bien ajouté'], 200);
     }
 
+    public function attachRole(UserroleRequest $request)
+    {
+        $user = User::findOrfail($request->user_id);
+        $user->detachAllRoles();
+        $user->attachRole($request->role_id);
+
+    return Response::json(['message' => 'Role bien attaché à l\'utilisateur'], 200);
+    }
+
     public function show($id)
     {
         $user = User::findOrfail($id);
@@ -32,10 +43,21 @@ class UserController extends Controller
         return Response::json($user, 200);
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $user = User::findOrfail($id);
-        $user->update($request->toArray());
+        if ($request['password'] != '') {
+          $user->update([
+              'name' => $request['name'],
+              'email' => $request['email'],
+              'password' => bcrypt($request['password']),
+          ]);
+        }else {
+          $user->update([
+              'name' => $request['name'],
+              'email' => $request['email'],
+          ]);
+        }
         return Response::json(['message' => 'User bien mis à jour'], 200);
     }
 

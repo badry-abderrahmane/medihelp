@@ -18,16 +18,34 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>
-            <span class="label label-info" v-for="role in user.roles">{{ role.name }}</span>
+            <div v-for="role in user.roles">
+              <span class="label label-info">{{ role.name }}</span>&nbsp;
+              <button @click="changeRole(user.id,role.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-retweet"></i> </button>
+
+              &nbsp;
+              <button @click="showPermissions(role.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-shield"></i> </button>
+            </div>
+            <div v-if="user.roles.length < 1">
+              <button @click="addRole(user.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-plus"></i> Assigner</button>
+            </div>
           </td>
           <td>{{ user.created_at }}</td>
           <td>
-            <button class="btn btn-outline-info" @click="$router.push({ path: `/users/show/`+user.id })"><i class="fa fa-eye"></i></button>
+            <!-- <button class="btn btn-outline-info" @click="$router.push({ path: `/users/show/`+user.id })"><i class="fa fa-eye"></i></button> -->
             <button class="btn btn-outline-info" @click="$router.push({ path: `/users/edit/`+user.id })"><i class="fa fa-pencil"></i></button>
             <button class="btn btn-outline-info" @click="deleteThis(user.id)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>
       </datatable-buttons>
+      <!-- use the modal component, pass in the prop -->
+      <modal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">Role utilisateur</h3>
+        <form-user-role :userid="userid" :roleid="roleid" slot="body"></form-user-role>
+      </modal>
+      <modal-large v-if="showModalP" @close="showModalP = false">
+        <h3 slot="header">Permissions utilisateur</h3>
+        <show-user-permissions :roleid="roleid" slot="body"></show-user-permissions>
+      </modal-large>
     </div>
   </table-warper>
 </template>
@@ -37,6 +55,10 @@ export default {
   data(){
     return {
       users:  [],
+      userid: '',
+      roleid: '',
+      showModal: false,
+      showModalP: false,
     }
   },
   created(){
@@ -51,6 +73,26 @@ export default {
             Event.$emit('init-datatable', 'tableAdd');
           })
       });
+    },
+    addRole(id){
+      this.userid = id;
+      this.roleid = false;
+      Vue.nextTick( () => {
+        this.showModal = true
+      })
+    },
+    changeRole(user_id,role_id){
+      this.userid = user_id;
+      this.roleid = role_id;
+      Vue.nextTick( () => {
+        this.showModal = true
+      })
+    },
+    showPermissions(id){
+      this.roleid = id;
+      Vue.nextTick( () => {
+        this.showModalP = true
+      })
     },
     deleteThis(id){
       this.$swal({

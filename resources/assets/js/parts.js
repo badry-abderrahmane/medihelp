@@ -38,3 +38,12 @@ Vue.component('part-button-goback', require('./parts/buttons/buttonGoback.vue'))
 */
 // Vue.component('select2', require('./parts/selects/select2.vue'));
 // Vue.component('part-select-devis', require('./parts/selects/selectDevis.vue'));
+
+
+/*
+*
+* Modals components
+*
+*/
+Vue.component('modal', require('./parts/modals/default.vue'));
+Vue.component('modal-large', require('./parts/modals/large.vue'));

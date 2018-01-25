@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Database\Eloquent;
+use DB;
 
 class User extends Authenticatable
 {
@@ -29,7 +30,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    
+    /**
+     * Detach all roles from a user
+     *
+     * @return object
+     */
+      public function detachAllRoles()
+      {
+          DB::table('role_user')->where('user_id', $this->id)->delete();
+
+      return $this;
+      }
 
     function withRole($name)
     {
