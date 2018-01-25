@@ -1,87 +1,97 @@
 <template lang="html">
   <div>
-    <part-panel>
+    <part-panel color="success">
       <div slot="heading">
-        Nouvelle etat
+        Etats
       </div>
-      <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+      <div slot="body">
         <div class="row">
-          <part-input v-model="form" name="value" label="Nom"></part-input>
+          <div class="col-md-8">
+            <input type="text" name="name" class="form-control" v-model="value">
+          </div>
+          <div class="col-md-4">
+            <div v-if="!editing">
+              <button v-if="!editing" class="btn btn-success" @click="onSubmit">
+                <i class="fa fa-plus m-r-10"></i>Ajouter
+              </button>
+            </div>
+            <div v-else>
+              <button class="btn btn-warning" @click="onSubmit">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-success" @click="prepareAdd">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <part-button-submit :editing="editing"></part-button-submit>
-        </div>
-      </form>
+        <br>
+        <EtatsList></EtatsList>
+      </div>
+
     </part-panel>
   </div>
 </template>
 
 <script>
-    import { ModelSelect } from 'vue-search-select'
-    import { Form } from './../../api/form.js';
-    export default {
-        components: {
-          ModelSelect
-        },
-        data(){
-          return{
-            form : new Form({
-              id:'',
-              value:''
-            }),
-          }
-        },
-        computed:{
-          editing: function(){
-            if (this.$route.params.id) {
-              return true
-            }else{
-              return false
-            }
-          },
-          etatId: function(){
-            return this.$route.params.id
-          }
-        },
-        created(){
-          if (this.etatId) {
-            axios.get('/etats/'+this.etatId)
-              .then(response => {
-                this.form.load(response.data);
+  import EtatsList from './../etats/list.vue';
+
+  export default {
+    components: {
+      EtatsList,
+    },
+    data(){
+      return{
+        id: '',
+        value: '',
+        editing: false,
+      }
+    },
+    created(){
+      Event.$on('edit-etat', (etat) => {
+        this.id    = etat.id;
+        this.value = etat.value;
+        this.editing = true;
+      });
+    },
+    methods: {
+      onSubmit(){
+        if (this.value != '') {
+          if (this.id != '') {
+            axios.put('/etats/'+this.id, {
+              id: this.id,
+              value: this.value,
+            })
+            .then((response) => {
+              this.$store.dispatch('LOAD_ETATS_LIST')
+              Event.$emit('publish-success-message', data.message);
+              this.prepareAdd();
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          }else{
+            axios.post('/etats', {
+              value: this.value,
+            })
+            .then((response) => {
+              this.$store.dispatch('LOAD_ETATS_LIST')
+              Event.$emit('publish-success-message', data.message);
+              this.prepareAdd();
+            })
+            .catch(function (error) {
+              console.log(error);
             });
           }
-        },
-
-        methods: {
-          onSubmit(){
-            if (this.form.id == '') {
-              this.form.post('/etats')
-                .then(data => {
-                  this.$store.dispatch('LOAD_ETATS_LIST')
-                  Event.$emit('publish-success-message', data.message);
-                  this.goback();
-                })
-                .catch(errors =>{
-                  console.log(errors);
-                });
-            }else{
-              this.form.put('/etats')
-                .then(data => {
-                  this.$store.dispatch('LOAD_ETATS_LIST')
-                  Event.$emit('publish-success-message', data.message);
-                  this.goback();
-                })
-                .catch(errors => {
-                  console.log(errors);
-                });
-            }
-          },
-
-          goback(){
-              this.$router.go(-1);
-          }
         }
+      },
+      prepareAdd(){
+        this.id    = '';
+        this.value = '';
+        this.editing = false;
+      }
     }
+}
 </script>
 
 <style lang="css">

@@ -1,41 +1,61 @@
 <template lang="html">
-  <table-warper>
-    <div class="table-responsive" slot="content">
-      <datatable-buttons>
-        <tr slot="thead">
-          <th>#ID</th>
-          <th>Nom</th>
-          <th></th>
-        </tr>
-        <tr slot="tbody" v-for="typeclient in typeclients">
-          <td>{{ typeclient.id }}</td>
-          <td>{{ typeclient.value }}</td>
-          <td>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typeclients/edit/`+typeclient.id })"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typeclients/delete/`+typeclient.id })"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-      </datatable-buttons>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table">
+          <tbody>
+              <tr v-for="typeclient in typeclients">
+                  <td>{{ typeclient.text }}</td>
+                  <td>
+                    <button class="btn btn-outline-info" @click="editTypeclient(typeclient)"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-outline-info" @click="deleteThis(typeclient.value)"><i class="fa fa-trash"></i></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </div>
-  </table-warper>
+  </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
-      typeclients:  [],
-    }
+  computed:{
+    typeclients: function(){
+      return this.$store.state.typeclients;
+    },
   },
 
-  created(){
-    axios.get('/typeclients')
-      .then(response => {
-        this.typeclients = response.data;
-        Vue.nextTick(function () {
-          Event.$emit('init-datatable', 'tableAdd');
+  methods:{
+    editTypeclient(typeclient){
+      Event.$emit('edit-typeclient', {
+        id: typeclient.value,
+        value: typeclient.text
+      });
+    },
+    deleteThis(id){
+      this.$swal({
+        title: 'Etes vous sur de vouloir supprimer ce type client?',
+        text: 'En supprimant ce type client vous allez supprimer tous ses données!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.value) {
+          this.persistDelete(id);
+        }
+      })
+    },
+    persistDelete(id){
+      axios.delete('/typeclients/'+id)
+        .then(response => {
+          this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
+          this.$swal(
+            'Bien Supprimé!',
+            'Type client #ID '+id+' supprimé',
+            'success'
+          )
         })
-    });
+    }
   }
 }
 </script>

@@ -1,84 +1,92 @@
 <template lang="html">
   <div>
-    <part-panel>
+    <part-panel color="success">
       <div slot="heading">
-        Nouveau type d'entreprise
+        Types de clients
       </div>
-      <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+      <div slot="body">
         <div class="row">
-          <part-input v-model="form" name="value" label="Nom"></part-input>
+          <div class="col-md-8">
+            <input type="text" name="name" class="form-control" v-model="value">
+          </div>
+          <div class="col-md-4">
+            <div v-if="!editing">
+              <button v-if="!editing" class="btn btn-success" @click="onSubmit">
+                <i class="fa fa-plus m-r-10"></i>Ajouter
+              </button>
+            </div>
+            <div v-else>
+              <button class="btn btn-warning" @click="onSubmit">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-success" @click="prepareAdd">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <part-button-submit :editing="editing"></part-button-submit>
-        </div>
-      </form>
+        <br>
+        <TypeclientsList></TypeclientsList>
+      </div>
     </part-panel>
   </div>
 </template>
 
 <script>
-    import { ModelSelect } from 'vue-search-select'
-    import { Form } from './../../api/form.js';
+    import TypeclientsList from './../typeclients/list.vue';
     export default {
         components: {
-          ModelSelect
+          TypeclientsList
         },
         data(){
           return{
-            form : new Form({
-              id:'',
-              value:''
-            }),
-          }
-        },
-        computed:{
-          editing: function(){
-            if (this.$route.params.id) {
-              return true
-            }else{
-              return false
-            }
-          },
-          typeclientId: function(){
-            return this.$route.params.id
+            id: '',
+            value: '',
+            editing: false,
           }
         },
         created(){
-          if (this.typeclientId) {
-            axios.get('/typeclients/'+this.typeclientId)
-              .then(response => {
-                this.form.load(response.data);
-            });
-          }
+          Event.$on('edit-typeclient', (typeclient) => {
+            this.id    = typeclient.id;
+            this.value = typeclient.value;
+            this.editing = true;
+          });
         },
-
         methods: {
           onSubmit(){
-            if (this.form.id == '') {
-              this.form.post('/typeclients')
-                .then(data => {
+            if (this.value != '') {
+              if (this.id != '') {
+                axios.put('/typeclients/'+this.id, {
+                  id: this.id,
+                  value: this.value,
+                })
+                .then((response) => {
                   this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.prepareAdd();
                 })
-                .catch(errors =>{
-                  console.log(errors);
+                .catch(function (error) {
+                  console.log(error);
                 });
-            }else{
-              this.form.put('/typeclients')
-                .then(data => {
+              }else{
+                axios.post('/typeclients', {
+                  value: this.value,
+                })
+                .then((response) => {
                   this.$store.dispatch('LOAD_TYPECLIENTS_LIST')
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.prepareAdd();
                 })
-                .catch(errors => {
-                  console.log(errors);
+                .catch(function (error) {
+                  console.log(error);
                 });
+              }
             }
           },
-
-          goback(){
-              this.$router.go(-1);
+          prepareAdd(){
+            this.id    = '';
+            this.value = '';
+            this.editing = false;
           }
         }
     }
