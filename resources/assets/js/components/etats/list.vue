@@ -1,41 +1,61 @@
 <template lang="html">
-  <table-warper>
-    <div class="table-responsive" slot="content">
-      <datatable-buttons>
-        <tr slot="thead">
-          <th>#ID</th>
-          <th>Nom</th>
-          <th></th>
-        </tr>
-        <tr slot="tbody" v-for="etat in etats">
-          <td>{{ etat.id }}</td>
-          <td>{{ etat.value }}</td>
-          <td>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/etats/edit/`+etat.id })"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/etats/delete/`+etat.id })"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-      </datatable-buttons>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table">
+          <tbody>
+              <tr v-for="etat in etats">
+                  <td>{{ etat.text }}</td>
+                  <td>
+                    <button class="btn btn-outline-info" @click="editEtat(etat)"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-outline-info" @click="deleteThis(etat.value)"><i class="fa fa-trash"></i></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </div>
-  </table-warper>
+  </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
-      etats:  [],
-    }
+  computed:{
+    etats: function(){
+      return this.$store.state.etats;
+    },
   },
 
-  created(){
-    axios.get('/etats')
-      .then(response => {
-        this.etats = response.data;
-        Vue.nextTick(function () {
-          Event.$emit('init-datatable', 'tableAdd');
+  methods:{
+    editEtat(etat){
+      Event.$emit('edit-etat', {
+        id: etat.value,
+        value: etat.text
+      });
+    },
+    deleteThis(id){
+      this.$swal({
+        title: 'Etes vous sur de vouloir supprimer cet etat?',
+        text: 'En supprimant cet etat vous allez supprimer tous ses données!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.value) {
+          this.persistDelete(id);
+        }
+      })
+    },
+    persistDelete(id){
+      axios.delete('/etats/'+id)
+        .then(response => {
+          this.$store.dispatch('LOAD_ETATS_LIST')
+          this.$swal(
+            'Bien Supprimé!',
+            'Etat #ID '+id+' supprimé',
+            'success'
+          )
         })
-    });
+    }
   }
 }
 </script>

@@ -64,13 +64,13 @@
                       </ul>
                   </li>
                   <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Paramètres système</span></a>
+                      <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Paramètres système</span></a>
                       <ul aria-expanded="false" class="collapse">
-                          <li><a @click="$router.push({ path: `/params` })">Paramètres générales</a></li>
-                          <li><a @click="$router.push({ path: `/params/types` })">Gestion de types</a></li>
-                          <li><a @click="$router.push({ path: `/params/export` })">Export/Import</a></li>
-                          <li><a @click="$router.push({ path: `/params/reports` })">Rapports</a></li>
-                          <li><a @click="$router.push({ path: `/params/divers` })">Divers</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/parametres` })">Paramètres générales</a></li> -->
+                          <li><a @click="$router.push({ path: `/parametres/types` })">Gestion de types</a></li>
+                          <li><a @click="$router.push({ path: `/parametres/imports` })">Export/Import</a></li>
+                          <li><a @click="$router.push({ path: `/parametres/rapports` })">Rapports</a></li>
+                          <li><a @click="$router.push({ path: `/parametres/divers` })">Divers</a></li>
                       </ul>
                   </li>
               </ul>

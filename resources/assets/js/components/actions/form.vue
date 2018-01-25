@@ -1,84 +1,92 @@
 <template lang="html">
   <div>
-    <part-panel>
-      <div slot="heading">
-        Nouvelle Action
+    <part-panel color="success">
+      <div slot="heading" >
+        Actions
       </div>
-      <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+      <div slot="body">
         <div class="row">
-          <part-input v-model="form" name="value" label="Nom"></part-input>
+          <div class="col-md-8">
+            <input type="text" name="name" class="form-control" v-model="value">
+          </div>
+          <div class="col-md-4">
+            <div v-if="!editing">
+              <button v-if="!editing" class="btn btn-success" @click="onSubmit">
+                <i class="fa fa-plus m-r-10"></i>Ajouter
+              </button>
+            </div>
+            <div v-else>
+              <button class="btn btn-warning" @click="onSubmit">
+                <i class="fa fa-save"></i>
+              </button>
+              <button class="btn btn-success" @click="prepareAdd">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <part-button-submit :editing="editing"></part-button-submit>
-        </div>
-      </form>
+        <br>
+        <ActionsList></ActionsList>
+      </div>
     </part-panel>
   </div>
 </template>
 
 <script>
-    import { ModelSelect } from 'vue-search-select'
-    import { Form } from './../../api/form.js';
+    import ActionsList from './../actions/list.vue'
     export default {
         components: {
-          ModelSelect
+          ActionsList
         },
         data(){
           return{
-            form : new Form({
-              id:'',
-              value:''
-            }),
-          }
-        },
-        computed:{
-          editing: function(){
-            if (this.$route.params.id) {
-              return true
-            }else{
-              return false
-            }
-          },
-          actionId: function(){
-            return this.$route.params.id
+            id: '',
+            value: '',
+            editing: false,
           }
         },
         created(){
-          if (this.actionId) {
-            axios.get('/actions/'+this.actionId)
-              .then(response => {
-                this.form.load(response.data);
-            });
-          }
+          Event.$on('edit-action', (action) => {
+            this.id    = action.id;
+            this.value = action.value;
+            this.editing = true;
+          });
         },
-
         methods: {
           onSubmit(){
-            if (this.form.id == '') {
-              this.form.post('/actions')
-                .then(data => {
+            if (this.value != '') {
+              if (this.id != '') {
+                axios.put('/actions/'+this.id, {
+                  id: this.id,
+                  value: this.value,
+                })
+                .then((response) => {
                   this.$store.dispatch('LOAD_ACTIONS_LIST')
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.prepareAdd();
                 })
-                .catch(errors =>{
-                  console.log(errors);
+                .catch(function (error) {
+                  console.log(error);
                 });
-            }else{
-              this.form.put('/actions')
-                .then(data => {
+              }else{
+                axios.post('/actions', {
+                  value: this.value,
+                })
+                .then((response) => {
                   this.$store.dispatch('LOAD_ACTIONS_LIST')
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.prepareAdd();
                 })
-                .catch(errors => {
-                  console.log(errors);
+                .catch(function (error) {
+                  console.log(error);
                 });
+              }
             }
           },
-
-          goback(){
-              this.$router.go(-1);
+          prepareAdd(){
+            this.id    = '';
+            this.value = '';
+            this.editing = false;
           }
         }
     }

@@ -77,7 +77,7 @@ module.exports = {
             { name:'Liste Roles', path: 'roles', component: require('./components/roles/list.vue')},
             { name:'Ajout Role', path: 'roles/add', component: require('./components/roles/form.vue')},
             { name:'Modification Role', path: 'roles/edit/:id', component: require('./components/roles/form.vue')},
-          
+
 
             { name:'Liste Permissions', path: 'permissions', component: require('./components/permissions/list.vue')},
             { name:'Ajout Permission', path: 'permissions/add', component: require('./components/permissions/form.vue')},
@@ -107,5 +107,18 @@ module.exports = {
           ]
       },
 
+      /**
+      **    Tickets routes
+      **/
+      {
+         path: '/parametres', component: require('./components/parametres/home.vue'),
+         children: [
+            // { name:'Paramètres générales',  path: '', component: require('./components/parametres/form.vue') },
+            { name:'Gestion des types',  path: 'types', component: require('./components/parametres/types.vue') },
+            { name:'Import/Export',  path: 'imports', component: require('./components/parametres/imports.vue')},
+            { name:'Rapports',  path: 'rapports', component: require('./components/parametres/rapports.vue')},
+            { name:'Paramètres Divers',  path: 'divers', component: require('./components/parametres/divers.vue')},
+          ]
+      },
     ]
   }

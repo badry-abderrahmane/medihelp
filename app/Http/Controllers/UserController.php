@@ -14,7 +14,8 @@ class UserController extends Controller
     {
         $users = User::all();
         $users->filter->roles;
-        return $users;
+
+    return $users;
     }
 
     public function store(UserRequest $request)
@@ -24,7 +25,8 @@ class UserController extends Controller
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);
-        return Response::json(['message' => 'User bien ajouté'], 200);
+
+    return Response::json(['message' => 'User bien ajouté'], 200);
     }
 
     public function attachRole(UserroleRequest $request)
@@ -40,7 +42,8 @@ class UserController extends Controller
     {
         $user = User::findOrfail($id);
         $user->role;
-        return Response::json($user, 200);
+
+    return Response::json($user, 200);
     }
 
     public function update(UserUpdateRequest $request, $id)
@@ -58,12 +61,14 @@ class UserController extends Controller
               'email' => $request['email'],
           ]);
         }
-        return Response::json(['message' => 'User bien mis à jour'], 200);
+
+    return Response::json(['message' => 'User bien mis à jour'], 200);
     }
 
     public function destroy($id)
     {
         User::destroy($id);
-        return Response::json(['message' => 'User bien supprimé'], 200);
+
+    return Response::json(['message' => 'User bien supprimé'], 200);
     }
 }

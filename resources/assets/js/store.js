@@ -16,37 +16,44 @@ export const store = new Vuex.Store({
   },
   mutations: {
     SET_TYPECLIENTS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.typeclients = array
     },
     SET_CLIENTS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      // var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.clients = array
     },
     SET_ACTIONS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.actions = array
     },
     SET_TYPECOMMS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.typecomms = array
     },
     SET_ETATS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.etats = array
     },
     SET_USERS_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.users = array
     },
     SET_ROLES_LIST: (state, { list }) => {
-      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.roles = array
     },

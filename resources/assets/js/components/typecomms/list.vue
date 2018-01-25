@@ -1,41 +1,60 @@
 <template lang="html">
-  <table-warper>
-    <div class="table-responsive" slot="content">
-      <datatable-buttons>
-        <tr slot="thead">
-          <th>#ID</th>
-          <th>Nom</th>
-          <th></th>
-        </tr>
-        <tr slot="tbody" v-for="typecomm in typecomms">
-          <td>{{ typecomm.id }}</td>
-          <td>{{ typecomm.value }}</td>
-          <td>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typecomms/edit/`+typecomm.id })"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-default btn-icon-anim btn-circle" @click="$router.push({ path: `/typecomms/delete/`+typecomm.id })"><i class="fa fa-trash"></i></button>
-          </td>
-        </tr>
-      </datatable-buttons>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table">
+          <tbody>
+              <tr v-for="typecomm in typecomms">
+                  <td>{{ typecomm.text }}</td>
+                  <td>
+                    <button class="btn btn-outline-info" @click="editTypecomm(typecomm)"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-outline-info" @click="deleteThis(typecomm.value)"><i class="fa fa-trash"></i></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </div>
-  </table-warper>
+  </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
-      typecomms:  [],
-    }
+  computed:{
+    typecomms: function(){
+      return this.$store.state.typecomms;
+    },
   },
-
-  created(){
-    axios.get('/typecomms')
-      .then(response => {
-        this.typecomms = response.data;
-        Vue.nextTick(function () {
-          Event.$emit('init-datatable', 'tableAdd');
+  methods:{
+    editTypecomm(typecomm){
+      Event.$emit('edit-typecomm', {
+        id: typecomm.value,
+        value: typecomm.text
+      });
+    },
+    deleteThis(id){
+      this.$swal({
+        title: 'Etes vous sur de vouloir supprimer ce type communication?',
+        text: 'En supprimant ce type communication vous allez supprimer tous ses données!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.value) {
+          this.persistDelete(id);
+        }
+      })
+    },
+    persistDelete(id){
+      axios.delete('/typecomms/'+id)
+        .then(response => {
+          this.$store.dispatch('LOAD_TYPECOMMS_LIST')
+          this.$swal(
+            'Bien Supprimé!',
+            'Type communication #ID '+id+' supprimé',
+            'success'
+          )
         })
-    });
+    }
   }
 }
 </script>
