@@ -12,6 +12,7 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         $roles->filter->perms;
+        $roles->filter->users;
         return $roles;
     }
 
@@ -29,6 +30,7 @@ class RoleController extends Controller
     {
         $role = Role::findOrfail($id);
         $role->perms;
+        $role->users;
         return Response::json($role, 200);
     }
 

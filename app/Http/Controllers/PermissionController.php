@@ -17,7 +17,11 @@ class PermissionController extends Controller
 
   public function store(PermissionRequest $request)
   {
-      $permission = Permission::create($request->toArray());
+      $permission = new Permission();
+      $permission->name         = $request['name'];
+      $permission->display_name = $request['display_name']; // optional
+      $permission->description  = $request['description']; // optional
+      $permission->save();
       return Response::json(['message' => 'Permission bien ajouté'], 200);
   }
 

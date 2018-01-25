@@ -6,13 +6,16 @@
           Liens Utiles
         </div>
         <div class="row m-b-10" slot="body">
-          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+          <div v-if="$route.name != 'Utilisateurs'" class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
+            <button @click="$router.push({ path: `/users` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste utilisateur</button>
+          </div>
+          <div v-if="$route.name != 'Ajout Utilisateur'" class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
             <button @click="$router.push({ path: `/users/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau utilisateur</button>
           </div>
-          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+          <div v-if="$route.name != 'Ajout Role'" class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
             <button @click="$router.push({ path: `/users/roles/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau role</button>
           </div>
-          <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4">
+          <div v-if="$route.name != 'Ajout Permission'" class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
             <button @click="$router.push({ path: `/users/permissions/add` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle permission</button>
           </div>
         </div>

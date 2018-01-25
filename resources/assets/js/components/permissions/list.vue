@@ -20,8 +20,8 @@
           <td>{{ permission.description }}</td>
           <td>{{ permission.created_at }}</td>
           <td>
-            <button class="btn btn-outline-info" @click="$router.push({ path: `/permissions/show/`+permission.id })"><i class="fa fa-eye"></i></button>
-            <button class="btn btn-outline-info" @click="$router.push({ path: `/permissions/edit/`+permission.id })"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-outline-info" @click="$router.push({ path: `/users/permissions/show/`+permission.id })"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-outline-info" @click="$router.push({ path: `/users/permissions/edit/`+permission.id })"><i class="fa fa-pencil"></i></button>
             <button class="btn btn-outline-info" @click="deleteThis(permission.id)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>

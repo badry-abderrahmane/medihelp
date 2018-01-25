@@ -25,7 +25,8 @@ require('./plugins');
 
 require('./lists');
 require('./infos');
-require('./sides');
+// require('./sides');
+require('./modals');
 
 window.Event = new Vue();
 
@@ -48,7 +49,8 @@ const app = new Vue({
     this.$store.dispatch('LOAD_ACTIONS_LIST')
     this.$store.dispatch('LOAD_TYPECOMMS_LIST')
     this.$store.dispatch('LOAD_ETATS_LIST')
-    // this.$store.dispatch('LOAD_PRODUIT_PRIX')
+    this.$store.dispatch('LOAD_USERS_LIST')
+    this.$store.dispatch('LOAD_ROLES_LIST')
   },
   created(){
     Event.$on('init-datatable', (tableid) => {

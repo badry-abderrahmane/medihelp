@@ -21,7 +21,7 @@
           <td>{{ role.created_at }}</td>
           <td>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/roles/show/`+role.id })"><i class="fa fa-eye"></i></button>
-            <button class="btn btn-outline-info" @click="$router.push({ path: `/roles/edit/`+role.id })"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-outline-info" @click="$router.push({ path: `/users/roles/edit/`+role.id })"><i class="fa fa-pencil"></i></button>
             <button class="btn btn-outline-info" @click="deleteThis(role.id)"><i class="fa fa-trash"></i></button>
           </td>
         </tr>

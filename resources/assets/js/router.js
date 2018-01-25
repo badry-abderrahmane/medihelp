@@ -70,26 +70,20 @@ module.exports = {
       { path: '/users', component: require('./components/users/home.vue'),
           children: [
             { name:'Utilisateurs', path: '', component: require('./components/users/list.vue')},
+            { name:'Détail Utilisateur', path: 'show/:id', component: require('./components/users/show.vue')},
             { name:'Ajout Utilisateur', path: 'add', component: require('./components/users/form.vue')},
+            { name:'Modification Utilisateur', path: 'edit/:id', component: require('./components/users/form.vue')},
 
             { name:'Liste Roles', path: 'roles', component: require('./components/roles/list.vue')},
             { name:'Ajout Role', path: 'roles/add', component: require('./components/roles/form.vue')},
+            { name:'Modification Role', path: 'roles/edit/:id', component: require('./components/roles/form.vue')},
+          
 
             { name:'Liste Permissions', path: 'permissions', component: require('./components/permissions/list.vue')},
             { name:'Ajout Permission', path: 'permissions/add', component: require('./components/permissions/form.vue')},
+            { name:'Modification Permission', path: 'permissions/edit/:id', component: require('./components/permissions/form.vue')},
 
-            // { name:'Détail Client', path: 'show/:id', component: require('./components/users/show.vue')},
-            // { name:'Nouveau Client',  path: 'add', component: require('./components/users/form.vue')},
-            // { name:'Modification Client', path: 'edit/:id', component: require('./components/users/form.vue')},
-            //
-            // { name:'Nouveau Contact', path: 'contacts/add/:userid', component: require('./components/contacts/form.vue')},
-            // { name:'Modification Contact', path: 'contacts/edit/:userid/:id', component: require('./components/contacts/form.vue')},
-            //
-            // { name:'Nouvelle Adresse', path: 'adresses/add/:userid', component: require('./components/adresses/form.vue')},
-            // { name:'Modification Adresse', path: 'adresses/edit/:userid/:id', component: require('./components/adresses/form.vue')},
-            //
-            // { name:'Nouveau Ticket', path: 'tickets/add/:userid', component: require('./components/tickets/form.vue')},
-            // { name:'Modification Ticket', path: 'tickets/edit/:userid/:id', component: require('./components/tickets/form.vue')},
+
           ]
       },
 

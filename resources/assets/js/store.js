@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     actions: [],
     typecomms: [],
     etats: [],
-    // produitsprix: [],
+    users: [],
+    roles: [],
   },
   mutations: {
     SET_TYPECLIENTS_LIST: (state, { list }) => {
@@ -39,12 +40,18 @@ export const store = new Vuex.Store({
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.etats = array
     },
-    // SET_PRODUIT_PRIX: (state, { list }) => {
-    //   let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
-    //   for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
-    //   state.produitsprix = array
-    // }
+    SET_USERS_LIST: (state, { list }) => {
+      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
+      state.users = array
+    },
+    SET_ROLES_LIST: (state, { list }) => {
+      let array = [];var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
+      state.roles = array
+    },
   },
+
   actions: {
     LOAD_TYPECLIENTS_LIST: function ({ commit }) {
       axios.get('list/typeclients').then((response) => {
@@ -85,13 +92,22 @@ export const store = new Vuex.Store({
         console.log(err)
       })
     },
-    //
-    // LOAD_PRODUIT_PRIX: function ({ commit }) {
-    //   axios.get('prix/produits').then((response) => {
-    //     commit('SET_PRODUIT_PRIX', { list: response.data })
-    //   }, (err) => {
-    //     console.log(err)
-    //   })
-    // }
+
+    LOAD_USERS_LIST: function ({ commit }) {
+      axios.get('list/users').then((response) => {
+        commit('SET_USERS_LIST', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    },
+
+    LOAD_ROLES_LIST: function ({ commit }) {
+      axios.get('list/roles').then((response) => {
+        commit('SET_ROLES_LIST', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    }
+
   }
 });

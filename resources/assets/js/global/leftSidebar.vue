@@ -53,11 +53,14 @@
                   <li>
                       <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/users` })" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                       <ul aria-expanded="false" class="collapse">
+                          <li><a @click="$router.push({ path: `/users/add` })">Nouveau utilisateur</a></li>
                           <li><a @click="$router.push({ path: `/users` })">Liste utilisateurs</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/users/roles/add` })">Nouveau Role</a></li> -->
                           <li><a @click="$router.push({ path: `/users/roles` })">Liste rôles</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/users/permissions/add` })">Nouvelle permission</a></li> -->
                           <li><a @click="$router.push({ path: `/users/permissions` })">Liste permissions</a></li>
-                          <li><a @click="$router.push({ path: `/users/roles/add` })">Roles utilisateurs</a></li>
-                          <li><a @click="$router.push({ path: `/users/permissions/add` })">Roles permissions</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/users/roles/add` })">Roles utilisateurs</a></li> -->
+                          <!-- <li><a @click="$router.push({ path: `/users/permissions/add` })">Roles permissions</a></li> -->
                       </ul>
                   </li>
                   <li>
