@@ -1,3 +1,4 @@
+
 # Laravel 5 Ticket Management System
 Laravel 5.5 and Vue JS 2.5 project.
 
