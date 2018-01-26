@@ -23,7 +23,8 @@ class CreateAppelsTable extends Migration
             $table->integer('action_id')->unsigned();
             $table->integer('etat_id')->unsigned();
             $table->integer('ticket_id')->unsigned();
-
+            $table->integer('user_id')->unsigned();
+            
             $table->foreign('typecomm_id')
                   ->references('id')->on('typecomms')
                     ->onDelete('cascade');
@@ -35,6 +36,9 @@ class CreateAppelsTable extends Migration
                     ->onDelete('cascade');
             $table->foreign('ticket_id')
                   ->references('id')->on('tickets')
+                    ->onDelete('cascade');
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
                     ->onDelete('cascade');
             $table->timestamps();
         });

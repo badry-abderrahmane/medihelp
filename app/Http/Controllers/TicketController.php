@@ -6,6 +6,7 @@ use App\Ticket;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Response;
+use Auth;
 
 class TicketController extends Controller
 {
@@ -17,13 +18,16 @@ class TicketController extends Controller
           $tickets->filter->client;
           $tickets->filter->emails;
           $tickets->filter->appels;
+          $tickets->filter->responsable(Auth::user());
           return $tickets;
       }
 
       public function store(TicketRequest $request)
       {
           $ticket = Ticket::create($request->toArray());
-          return Response::json(['message' => 'Ticket bien ajouté'], 200);
+          $ticket->users()->sync($request->users);
+
+      return Response::json(['message' => 'Ticket bien ajouté'], 200);
       }
 
       public function show($id)
@@ -34,6 +38,7 @@ class TicketController extends Controller
           $ticket->client;
           $ticket->emails;
           $ticket->appels;
+          $ticket->users;
           return Response::json($ticket, 200);
       }
 
@@ -41,6 +46,7 @@ class TicketController extends Controller
       {
           $ticket = Ticket::findOrfail($id);
           $ticket->update($request->toArray());
+          $ticket->users()->sync($request->users);
           return Response::json(['message' => 'Ticket bien mis à jour'], 200);
       }
 

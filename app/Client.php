@@ -25,4 +25,17 @@ class Client extends Model
       public function adresses(){
           return $this->hasMany('App\Adress');
       }
+
+      public function users()
+      {
+        return $this->belongsToMany('App\User');
+      }
+
+      public function responsable($user)
+      {
+        return $this->responsable = $this->users
+                    ->contains(function($value) use($user) {
+                        return $value->pivot->user_id == $user->id;
+                    });
+      }
 }

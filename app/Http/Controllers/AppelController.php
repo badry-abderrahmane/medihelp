@@ -6,6 +6,7 @@ use App\Appel;
 use Illuminate\Http\Request;
 use App\Http\Requests\AppelRequest;
 use Illuminate\Support\Facades\Response;
+use Auth;
 
 class AppelController extends Controller
 {
@@ -17,11 +18,14 @@ class AppelController extends Controller
         $appels->filter->action;
         $appels->filter->etat;
         $appels->filter->ticket;
+        $appels->filter->user;
         return $appels;
     }
 
     public function store(AppelRequest $request)
     {
+        $user["user_id"] = Auth::user()->id;
+        $request->merge($user);
         $appel = Appel::create($request->toArray());
         return Response::json(['message' => 'Appel bien ajouté'], 200);
     }
@@ -33,6 +37,7 @@ class AppelController extends Controller
         $appel->action;
         $appel->etat;
         $appel->ticket;
+        $appel->user;
         return Response::json($appel, 200);
     }
 

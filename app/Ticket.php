@@ -29,4 +29,17 @@ class Ticket extends Model
     public function appels(){
         return $this->hasMany('App\Appel');
     }
+
+    public function users()
+    {
+      return $this->belongsToMany('App\User');
+    }
+
+    public function responsable($user)
+    {
+      return $this->responsable = $this->users
+                  ->contains(function($value) use($user) {
+                      return $value->pivot->user_id == $user->id;
+                  });
+    }
 }

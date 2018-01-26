@@ -14,6 +14,10 @@ class UserController extends Controller
     {
         $users = User::all();
         $users->filter->roles;
+        $users->filter->clients;
+        $users->filter->tickets;
+        $users->filter->emails;
+        $users->filter->appels;
 
     return $users;
     }
@@ -42,6 +46,10 @@ class UserController extends Controller
     {
         $user = User::findOrfail($id);
         $user->role;
+        $user->clients;
+        $user->tickets;
+        $user->emails;
+        $user->appels;
 
     return Response::json($user, 200);
     }

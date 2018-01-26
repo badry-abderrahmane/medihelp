@@ -6,6 +6,7 @@ use App\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Response;
+use Auth;
 
 class ClientController extends Controller
 {
@@ -17,13 +18,17 @@ class ClientController extends Controller
         $clients->filter->tickets;
         $clients->filter->contacts->filter->tickets;
         $clients->filter->adresses;
+        $clients->filter->users;
+        $clients->filter->responsable(Auth::user());
         return $clients;
     }
 
     public function store(ClientRequest $request)
     {
         $client = Client::create($request->toArray());
-        return Response::json(['message' => 'Client bien ajouté'], 200);
+        $client->users()->sync($request->users);
+
+    return Response::json(['message' => 'Client bien ajouté'], 200);
     }
 
     public function show($id)
@@ -33,6 +38,7 @@ class ClientController extends Controller
         $client->tickets;
         $client->contacts->filter->tickets;
         $client->adresses;
+        $client->users;
         return Response::json($client, 200);
     }
 
@@ -40,7 +46,9 @@ class ClientController extends Controller
     {
         $client = Client::findOrfail($id);
         $client->update($request->toArray());
-        return Response::json(['message' => 'Client bien mis à jour'], 200);
+        $client->users()->sync($request->users);
+
+    return Response::json(['message' => 'Client bien mis à jour'], 200);
     }
 
     public function destroy($id)

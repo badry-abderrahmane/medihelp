@@ -11,9 +11,11 @@
             <div class="col-md-4">
               <div v-bind:class="[ form.errors.get('client_id') ? 'has-danger' : '', 'form-group']">
                 <label for="Clients" class="control-label mb-10">Client</label>
-                <select class="form-control" name="client_id" v-model="form['client_id']" :disabled="existClient">
-                  <option v-for="client in clients" :value="client.value">{{ client.text }}</option>
-                </select>
+                <basic-select :options="clients"
+                              :selected-option="selectedClient"
+                              placeholder="Choisir .."
+                              @select="onSelectClient">
+                </basic-select>
                 <div class="form-control-feedback" v-if="form.errors.has('client_id')" v-text="form.errors.get('client_id')"></div>
               </div>
             </div>
@@ -56,6 +58,17 @@
                 <div class="form-control-feedback" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
               </div>
             </div>
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('user_id') ? 'has-danger' : '', 'form-group']">
+                <label for="Clients" class="control-label mb-10">Responsable</label>
+                <multi-select :options="users"
+                               :selected-options="selectedUsers"
+                               placeholder="Choisir un responsable"
+                               @select="onSelectUser">
+                </multi-select>
+                <div class="form-control-feedback" v-if="form.errors.has('user_id')" v-text="form.errors.get('user_id')"></div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <part-button-submit :editing="editing"></part-button-submit>
@@ -68,10 +81,15 @@
 </template>
 
 <script>
+    import { BasicSelect } from 'vue-search-select'
+    import { MultiSelect } from 'vue-search-select'
     import { ModelSelect } from 'vue-search-select'
+    import _ from 'lodash'
     import { Form } from './../../api/form.js';
     export default {
         components: {
+          BasicSelect,
+          MultiSelect,
           ModelSelect
         },
         data(){
@@ -86,11 +104,14 @@
               note:'',
               contact_id:'',
               action_id:'',
+              users: [],
             }),
-            contacts:'',
+            contacts:[],
             states: [{value:'1',text:'Fermé'},{value:'2',text:'En cours'},{value:'3',text:'Ouvert'}],
             color:'',
-            existClient:'',
+            selectedUsers: [],
+            lastSelectedUsers: {},
+            selectedClient:{},
           }
         },
         computed:{
@@ -120,34 +141,57 @@
               var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
               return v.toString(16);
             });
-          }
+          },
+          users: function(){
+            return this.$store.state.users
+          },
         },
         created(){
           if (this.clientId) {
-            this.existClient = true
             this.form.reference = this.guid+'-'+this.clientId;
             this.form.client_id = this.clientId;
+            this.getContacts(this.clientId)
           }else {
-            this.existClient = false
-          }
-
-          if (this.clientId) {
-            axios.get('/clients/'+this.clientId)
-              .then(response => {
-                this.contacts = response.data.contacts;
-            });
+            this.form.reference = this.guid+'-1122';
           }
 
           if (this.ticketId) {
             axios.get('/tickets/'+this.ticketId)
               .then(response => {
-                this.form.load(response.data);
+                this.form.load(response.data)
+                this.getResponsables()
             });
           }
         },
-
+        mounted(){
+          this.getClient()
+        },
         methods: {
+          getClient(){
+            this.selectedClient = {}
+            this.$store.state.clients.map((value,key) => {
+              if (value.value == this.form.client_id) {
+                this.selectedClient = value
+              }
+            });
+          },
+          onSelectClient (item) {
+            this.selectedClient = item
+            this.getContacts(item.value)
+          },
+          onSelectUser(selectedUsers, lastSelectedUsers) {
+            this.selectedUsers = selectedUsers
+            this.lastSelectedUsers = lastSelectedUsers
+          },
+          reset () {
+            this.selectedUsers = [] // reset
+          },
+          selectOption () {
+            this.selectedUsers = _.unionWith(this.selectedUsers, [this.users[0]], _.isEqual)
+          },
           onSubmit(){
+            this.prepareUsers();
+            this.prepareClient();
             if (this.form.id == '') {
               this.form.post('/tickets')
                 .then(data => {
@@ -168,7 +212,36 @@
                 });
             }
           },
-
+          prepareUsers(){
+            let users = []
+            this.selectedUsers.map(function(value,key){
+              users.push(value.value)
+            })
+            this.form.users = users;
+          },
+          prepareClient(){
+            if (this.selectedClient) {
+              this.form.client_id = this.selectedClient.value
+            }
+          },
+          getResponsables(){
+            this.selectedUsers = []
+            if (this.clientId) {
+              this.$store.state.users.map((value,key)=> {
+                this.form.users.map((val,ke) => {
+                  if (value.value == val.id) {
+                    this.selectedUsers.push(value)
+                  }
+                })
+              });
+            }
+          },
+          getContacts(id){
+            axios.get('/clients/'+id)
+              .then(response => {
+                this.contacts = response.data.contacts;
+            });
+          },
           goback(){
               this.$router.go(-1);
           }
