@@ -6,6 +6,7 @@ use App\Email;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailRequest;
 use Illuminate\Support\Facades\Response;
+use Auth;
 
 class EmailController extends Controller
 {
@@ -21,6 +22,8 @@ class EmailController extends Controller
 
       public function store(EmailRequest $request)
       {
+          $user["user_id"] = Auth::user()->id;
+          $request->merge($user);
           $email = Email::create($request->toArray());
           return Response::json(['message' => 'Email bien ajouté'], 200);
       }

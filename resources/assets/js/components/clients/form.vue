@@ -11,8 +11,11 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="Entreprise" class="control-label mb-10">Type client</label>
-                <model-select :options="typeclients" v-model="form['typeclient_id']">
-               </model-select>
+                <basic-select :options="typeclients"
+                              :selected-option="selectedTypeclient"
+                              placeholder="Choisir .."
+                              @select="onSelectTypeclient">
+                </basic-select>
               </div>
             </div>
             <part-input v-model="form" name="name" label="Nom complet/Raison sociale"></part-input>
@@ -25,6 +28,17 @@
           </div>
           <div class="row">
             <part-input v-model="form" name="secteur" label="Secteur d'activité"></part-input>
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('user_id') ? 'has-danger' : '', 'form-group']">
+                <label for="Clients" class="control-label mb-10">Responsable</label>
+                <multi-select :options="users"
+                               :selected-options="selectedUsers"
+                               placeholder="Choisir un responsable"
+                               @select="onSelectUser">
+                </multi-select>
+                <div class="form-control-feedback" v-if="form.errors.has('user_id')" v-text="form.errors.get('user_id')"></div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <part-button-submit :editing="editing"></part-button-submit>
@@ -37,11 +51,14 @@
 </template>
 
 <script>
-import { ModelSelect } from 'vue-search-select'
+import { BasicSelect } from 'vue-search-select'
+import { MultiSelect } from 'vue-search-select'
+import _ from 'lodash'
 import { Form } from './../../api/form.js';
 export default {
   components: {
-    ModelSelect
+    BasicSelect,
+    MultiSelect
   },
   data(){
       return{
@@ -54,8 +71,12 @@ export default {
           email:'',
           adress:'',
           secteur:'',
+          users:[],
         }),
-        color:'success'
+        color:'success',
+        selectedUsers: [],
+        lastSelectedUsers: {},
+        selectedTypeclient: {}
       }
     },
     computed:{
@@ -75,18 +96,38 @@ export default {
       typeclients: function(){
         return this.$store.state.typeclients
       },
+      users: function(){
+        return this.$store.state.users
+      },
     },
     created(){
       if (this.clientId) {
         axios.get('/clients/'+this.clientId)
           .then(response => {
             this.form.load(response.data);
+            this.getResponsables()
+            this.getTypeClient()
         });
       }
     },
-
     methods: {
+      onSelectUser(selectedUsers, lastSelectedUsers) {
+        this.selectedUsers = selectedUsers
+        this.lastSelectedUsers = lastSelectedUsers
+      },
+      onSelectTypeclient (item) {
+        this.selectedTypeclient = item
+      },
+      // deselect option
+      reset () {
+        this.selectedUsers = [] // reset
+      },
+      // select option from parent component
+      selectOption () {
+        this.selectedUsers = _.unionWith(this.selectedUsers, [this.users[0]], _.isEqual)
+      },
       onSubmit(){
+        this.prepareUsers();
         if (this.form.id == '') {
           this.form.post('/clients')
             .then(data => {
@@ -109,7 +150,35 @@ export default {
             });
         }
       },
-
+      prepareUsers(){
+        let users = []
+        this.selectedUsers.map(function(value,key){
+          users.push(value.value)
+        })
+        this.form.users = users;
+      },
+      getResponsables(){
+        this.selectedUsers = []
+        if (this.clientId) {
+          this.$store.state.users.map((value,key)=> {
+            this.form.users.map((val,ke) => {
+              if (value.value == val.id) {
+                this.selectedUsers.push(value)
+              }
+            })
+          });
+        }
+      },
+      getTypeClient(){
+        this.selectedTypeclient = {}
+        if (this.clientId) {
+          this.$store.state.typeclients.map((value,key)=> {
+            if (value.value == this.form.typeclient_id) {
+              this.selectedTypeclient = value
+            }
+          });
+        }
+      },
       goback(){
           this.$router.go(-1);
       }

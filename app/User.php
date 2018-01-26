@@ -54,4 +54,24 @@ class User extends Authenticatable
     function ability($roles, $permissions, $options)
     {
     }
+
+    public function tickets()
+    {
+      return $this->belongsToMany('App\Ticket');
+    }
+
+    public function clients()
+    {
+      return $this->belongsToMany('App\Client');
+    }
+
+    public function appels()
+    {
+      return $this->hasMany('App\Appel');
+    }
+
+    public function emails()
+    {
+      return $this->hasMany('App\Email');
+    }
 }

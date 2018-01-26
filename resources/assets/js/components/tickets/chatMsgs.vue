@@ -36,7 +36,8 @@
                           <small><i class="m-l-30">Durée: </i><span class="text-info m-l-10" v-text="comm.duree ? comm.duree : 'Async'"></span>
                           <i class="m-l-30">Etat: </i><span class="text-info m-l-10">{{ comm.etat.value}}</span>
                           <i class="m-l-30">Action: </i><span class="text-info m-l-10">{{ comm.action.value}}</span>
-                          <i class="m-l-30">Date: </i><span class="text-info m-l-10">{{ comm.created_at }}</span></small>
+                          <i class="m-l-30">Date: </i><span class="text-info m-l-10">{{ comm.created_at }}</span>
+                          <i class="m-l-30">Responsable: </i><span class="text-info m-l-10">{{ comm.user.name }}</span></small>
                         </p><br>
                         <p class="text-inverse">{{ comm.message }}</p>
                       </div>
@@ -45,22 +46,13 @@
                           <small><i class="m-l-30">Durée: </i><span class="text-info m-l-10" v-text="comm.duree ? comm.duree : 'Async'"></span>
                           <i class="m-l-30">Etat: </i><span class="text-info m-l-10">{{ comm.etat.value}}</span>
                           <i class="m-l-30">Action: </i><span class="text-info m-l-10">{{ comm.action.value}}</span>
-                          <i class="m-l-30">Date: </i><span class="text-info m-l-10">{{ comm.created_at }}</span></small>
+                          <i class="m-l-30">Date: </i><span class="text-info m-l-10">{{ comm.created_at }}</span>
+                          <i class="m-l-30">Responsable: </i><span class="text-info m-l-10">{{ comm.user.name }}</span></small>
                         </p><br>
                         <p class="text-inverse pull-left" >{{ comm.message }}</p>
                       </div>
                   </div>
               </li>
-              <!--chat Row Inverse -->
-              <!-- <li class="reverse">
-                  <div class="chat-time">10:57 am</div>
-                  <div class="chat-content">
-                      <h5>Steave Doe</h5>
-                      <div class="box bg-light-inverse">It’s Great opportunity to work.</div>
-                  </div>
-                  <div class="chat-img"><img src="assets/images/users/5.jpg" alt="user" /></div>
-              </li> -->
-
           </ul>
       </div>
       <div class="card-body b-t">
@@ -78,14 +70,6 @@
             <button class="btn btn-block btn-outline-info" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })"><i class="fa fa-edit m-r-10"></i>Modifier ticket</button>
           </div>
         </div>
-          <!-- <div class="row">
-              <div class="col-8">
-                  <textarea placeholder="Type your message here" class="form-control b-0"></textarea>
-              </div>
-              <div class="col-4 text-right">
-                  <button type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
-              </div>
-          </div> -->
       </div>
   </div>
 </template>
