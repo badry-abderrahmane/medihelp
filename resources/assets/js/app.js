@@ -51,6 +51,7 @@ const app = new Vue({
     this.$store.dispatch('LOAD_ETATS_LIST')
     this.$store.dispatch('LOAD_USERS_LIST')
     this.$store.dispatch('LOAD_ROLES_LIST')
+    this.$store.dispatch('LOAD_TICKETS_LIST')
   },
   created(){
     Event.$on('init-datatable', (tableid) => {

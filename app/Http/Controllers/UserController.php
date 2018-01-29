@@ -18,6 +18,7 @@ class UserController extends Controller
         $users->filter->tickets;
         $users->filter->emails;
         $users->filter->appels;
+        $users->filter->roles;
 
     return $users;
     }
@@ -50,6 +51,7 @@ class UserController extends Controller
         $user->tickets;
         $user->emails;
         $user->appels;
+        $user->roles;
 
     return Response::json($user, 200);
     }

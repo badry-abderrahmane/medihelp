@@ -8,38 +8,6 @@ module.exports = {
       { path: '/support', component: require('./components/support.vue')},
 
       /**
-      **    Typeclient routes
-      **/
-      { name:'List Types Client', path: '/typeclients', component: require('./components/typeclients/home.vue')},
-      { name:'Ajout Type Client', path: '/typeclients/add', component: require('./components/typeclients/form.vue')},
-      { name:'Modification Type Client', path: '/typeclients/edit/:id', component: require('./components/typeclients/form.vue')},
-      { name:'Suppression Type Client', path: '/typeclients/delete/:id', component: require('./components/typeclients/delete.vue')},
-
-      /**
-      **    Typecomm routes
-      **/
-      { name:'List Types Comm', path: '/typecomms', component: require('./components/typecomms/home.vue')},
-      { name:'Ajout Type Comm', path: '/typecomms/add', component: require('./components/typecomms/form.vue')},
-      { name:'Modification Type Comm', path: '/typecomms/edit/:id', component: require('./components/typecomms/form.vue')},
-      { name:'Suppression Type Comm', path: '/typecomms/delete/:id', component: require('./components/typecomms/delete.vue')},
-
-      /**
-      **    Actions routes
-      **/
-      { name:'List Actions', path: '/actions', component: require('./components/actions/home.vue')},
-      { name:'Ajout Action', path: '/actions/add', component: require('./components/actions/form.vue')},
-      { name:'Modification Action', path: '/actions/edit/:id', component: require('./components/actions/form.vue')},
-      { name:'Suppression Action', path: '/actions/delete/:id', component: require('./components/actions/delete.vue')},
-
-      /**
-      **    Etats routes
-      **/
-      { name:'List Etats', path: '/etats', component: require('./components/etats/home.vue')},
-      { name:'Ajout Etat', path: '/etats/add', component: require('./components/etats/form.vue')},
-      { name:'Modification Etat', path: '/etats/edit/:id', component: require('./components/etats/form.vue')},
-      { name:'Suppression Etat', path: '/etats/delete/:id', component: require('./components/etats/delete.vue')},
-
-      /**
       **    Clients routes
       **/
       { path: '/clients', component: require('./components/clients/home.vue'),
@@ -48,19 +16,15 @@ module.exports = {
             { name:'Détail Client', path: 'show/:id', component: require('./components/clients/show.vue')},
             { name:'Nouveau Client',  path: 'add', component: require('./components/clients/form.vue')},
             { name:'Modification Client', path: 'edit/:id', component: require('./components/clients/form.vue')},
-            // { name:'Suppression Client', path: 'delete/:id', component: require('./components/clients/delete.vue')},
 
             { name:'Nouveau Contact', path: 'contacts/add/:clientid', component: require('./components/contacts/form.vue')},
             { name:'Modification Contact', path: 'contacts/edit/:clientid/:id', component: require('./components/contacts/form.vue')},
-            // { name:'Suppression Contact', path: 'contacts/delete/:id', component: require('./components/contacts/delete.vue')},
 
             { name:'Nouvelle Adresse', path: 'adresses/add/:clientid', component: require('./components/adresses/form.vue')},
             { name:'Modification Adresse', path: 'adresses/edit/:clientid/:id', component: require('./components/adresses/form.vue')},
-            // { name:'Suppression Adresse', path: 'adresses/delete/:id', component: require('./components/adresses/delete.vue')},
 
             { name:'Nouveau Ticket', path: 'tickets/add/:clientid', component: require('./components/tickets/form.vue')},
             { name:'Modification Ticket', path: 'tickets/edit/:clientid/:id', component: require('./components/tickets/form.vue')},
-            // { name:'Suppression Ticket', path: 'tickets/delete/:id', component: require('./components/tickets/delete.vue')},
           ]
       },
 
@@ -108,7 +72,7 @@ module.exports = {
       },
 
       /**
-      **    Tickets routes
+      **    Parametres routes
       **/
       {
          path: '/parametres', component: require('./components/parametres/home.vue'),
