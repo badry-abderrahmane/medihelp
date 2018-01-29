@@ -23,10 +23,10 @@
               <ul id="sidebarnav">
                   <li class="nav-small-cap">Navigation</li>
                   <li>
-                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/` })" :class="$route.name == 'Tableau de bord' ? 'active':'' " aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Tableau de bord</span></a>
+                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/` })" :class="$route.name == 'Tableau de bord' ? 'active':'' "><i class="mdi mdi-gauge"></i><span class="hide-menu">Tableau de bord</span></a>
                   </li>
                   <li>
-                    <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/clients` })" :class="$route.name == 'Clients' ? 'active':'' " aria-expanded="false"><i class="mdi mdi-contacts"></i><span class="hide-menu">Clients</span></a>
+                    <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/clients` })" :class="$route.name == 'Clients' ? 'active':'' "><i class="mdi mdi-contacts"></i><span class="hide-menu">Clients</span></a>
                       <ul aria-expanded="false" class="collapse">
                           <li><a @click="$router.push({ path: `/clients/add` })">Nouveau client</a></li>
                           <li><a @click="$router.push({ path: `/clients` })">Liste clients</a></li>
@@ -34,8 +34,8 @@
                           <!-- <li><a @click="$router.push({ path: `/clients/responsables` })">Responsables clients</a></li> -->
                       </ul>
                   </li>
-                  <li>
-                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/tickets` })" :class="$route.name == 'Tickets' ? 'active':'' " aria-expanded="false"><i class="mdi mdi-ticket"></i><span class="hide-menu">Tickets Manager</span></a>
+                  <li v-if="$store.state.role < 4">
+                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/tickets` })" :class="$route.name == 'Tickets' ? 'active':'' "><i class="mdi mdi-ticket"></i><span class="hide-menu">Tickets Manager</span></a>
                       <ul aria-expanded="false" class="collapse">
                           <li><a @click="$router.push({ path: `/tickets/add` })">Nouveau ticket</a></li>
                           <li><a @click="$router.push({ path: `/tickets` })">Liste tickets</a></li>
@@ -50,28 +50,27 @@
                           <li><a @click="$router.push({ path: `/inbox/params` })">Paramètres</a></li>
                       </ul>
                   </li> -->
-                  <li>
-                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/users` })" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
+                  <li v-if="$store.state.role < 2">
+                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/users` })" :class="$route.name == 'Utilisateurs' ? 'active':'' "><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                       <ul aria-expanded="false" class="collapse">
                           <li><a @click="$router.push({ path: `/users/add` })">Nouveau utilisateur</a></li>
                           <li><a @click="$router.push({ path: `/users` })">Liste utilisateurs</a></li>
                           <!-- <li><a @click="$router.push({ path: `/users/roles/add` })">Nouveau Role</a></li> -->
                           <li><a @click="$router.push({ path: `/users/roles` })">Liste rôles</a></li>
                           <!-- <li><a @click="$router.push({ path: `/users/permissions/add` })">Nouvelle permission</a></li> -->
-                          <li><a @click="$router.push({ path: `/users/permissions` })">Liste permissions</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/users/permissions` })">Liste permissions</a></li> -->
                           <!-- <li><a @click="$router.push({ path: `/users/roles/add` })">Roles utilisateurs</a></li> -->
                           <!-- <li><a @click="$router.push({ path: `/users/permissions/add` })">Roles permissions</a></li> -->
                       </ul>
                   </li>
-                  <li>
-                      <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Paramètres système</span></a>
-                      <ul aria-expanded="false" class="collapse">
-                          <!-- <li><a @click="$router.push({ path: `/parametres` })">Paramètres générales</a></li> -->
+                  <li v-if="$store.state.role < 3">
+                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/parametres/types` })"  :class="$route.name == 'Gestion des types' ? 'active':'' " ><i class="mdi mdi-settings"></i><span class="hide-menu">Paramètres système</span></a>
+                      <!-- <ul aria-expanded="false" class="collapse">
                           <li><a @click="$router.push({ path: `/parametres/types` })">Gestion de types</a></li>
                           <li><a @click="$router.push({ path: `/parametres/imports` })">Export/Import</a></li>
                           <li><a @click="$router.push({ path: `/parametres/rapports` })">Rapports</a></li>
                           <li><a @click="$router.push({ path: `/parametres/divers` })">Divers</a></li>
-                      </ul>
+                      </ul> -->
                   </li>
               </ul>
           </nav>
@@ -93,6 +92,7 @@
 
 <script>
 export default {
+
 }
 </script>
 

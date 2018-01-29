@@ -7,10 +7,10 @@
       <TypeclientsForm></TypeclientsForm>
     </div>
     <div class="col-md-3">
-      <TypecommsForm></TypecommsForm>
+      <TypecommsForm v-if="$store.state.role < 2"></TypecommsForm>
     </div>
     <div class="col-md-3">
-      <EtatsForm></EtatsForm>
+      <EtatsForm v-if="$store.state.role < 2"></EtatsForm>
     </div>
   </div>
 </template>

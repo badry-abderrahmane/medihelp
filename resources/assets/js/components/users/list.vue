@@ -23,7 +23,7 @@
               <button @click="changeRole(user.id,role.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-retweet"></i> </button>
 
               &nbsp;
-              <button @click="showPermissions(role.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-shield"></i> </button>
+              <!-- <button @click="showPermissions(role.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-shield"></i> </button> -->
             </div>
             <div v-if="user.roles.length < 1">
               <button @click="addRole(user.id)" type="button" class="btn btn-sm btn-outline-success"><i class="fa fa-plus"></i> Assigner</button>

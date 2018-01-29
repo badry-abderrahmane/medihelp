@@ -21,6 +21,12 @@ Route::get('/wayway', function() {
     return Auth::user();
 });
 
+Route::get('/islogged', function(){
+  $user = Auth::user();
+  $user->roles = $user->roles->filter->perms;
+  return $user;
+});
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');

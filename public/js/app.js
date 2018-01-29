@@ -50611,12 +50611,10 @@ module.exports = __webpack_require__(439);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_filters__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_filters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_filters__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_js__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__router_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_filters__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_filters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_filters__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_js__ = __webpack_require__(292);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -50627,12 +50625,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(31);
 
 window.Vue = __webpack_require__(16);
+// import VueRouter from 'vue-router';
 
 
 
-
-Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue2_filters___default.a);
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue2_filters___default.a);
+// Vue.use(VueRouter);
 
 __webpack_require__(58);
 
@@ -50650,13 +50648,13 @@ __webpack_require__(664);
 window.Event = new Vue();
 
 
-var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({ routes: __WEBPACK_IMPORTED_MODULE_3__router_js__["routes"] });
+// const router = new VueRouter({ routes });
 
 Vue.component('full-app', __webpack_require__(434));
 
 var app = new Vue({
-  store: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* store */],
-  router: router,
+  store: __WEBPACK_IMPORTED_MODULE_0__store__["a" /* store */],
+  router: __WEBPACK_IMPORTED_MODULE_2__router_js__["a" /* router */],
   data: function data() {
     return {
       table: ''
@@ -50672,6 +50670,8 @@ var app = new Vue({
     this.$store.dispatch('LOAD_ROLES_LIST');
     this.$store.dispatch('LOAD_TICKETS_LIST');
 
+    this.$store.dispatch('LOAD_ROLE');
+    this.$store.dispatch('LOAD_USER');
     this.$store.dispatch('LOAD_TICKETS');
   },
   created: function created() {
@@ -54713,7 +54713,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     roles: [],
     tickets: [],
 
-    ticketsAll: []
+    ticketsAll: [],
+    user: [],
+    role: 4
   },
   mutations: {
     SET_TYPECLIENTS_LIST: function SET_TYPECLIENTS_LIST(state, _ref) {
@@ -54800,12 +54802,37 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       var list = _ref9.list;
 
       state.ticketsAll = list;
+    },
+    SET_USER: function SET_USER(state, _ref10) {
+      var user = _ref10.user;
+
+      state.user = user;
+    },
+    SET_ROLE: function SET_ROLE(state, _ref11) {
+      var role = _ref11.role;
+
+      switch (role) {
+        case 'SYSADMIN':
+          state.role = 1;
+          break;
+        case 'ADMIN':
+          state.role = 2;
+          break;
+        case 'SUPPORT':
+          state.role = 3;
+          break;
+        case 'CLIENTS':
+          state.role = 4;
+          break;
+        default:
+          state.role = 4;
+      }
     }
   },
 
   actions: {
-    LOAD_TYPECLIENTS_LIST: function LOAD_TYPECLIENTS_LIST(_ref10) {
-      var commit = _ref10.commit;
+    LOAD_TYPECLIENTS_LIST: function LOAD_TYPECLIENTS_LIST(_ref12) {
+      var commit = _ref12.commit;
 
       axios.get('list/typeclients').then(function (response) {
         commit('SET_TYPECLIENTS_LIST', { list: response.data });
@@ -54814,8 +54841,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_CLIENTS_LIST: function LOAD_CLIENTS_LIST(_ref11) {
-      var commit = _ref11.commit;
+    LOAD_CLIENTS_LIST: function LOAD_CLIENTS_LIST(_ref13) {
+      var commit = _ref13.commit;
 
       axios.get('list/clients').then(function (response) {
         commit('SET_CLIENTS_LIST', { list: response.data });
@@ -54824,8 +54851,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_ACTIONS_LIST: function LOAD_ACTIONS_LIST(_ref12) {
-      var commit = _ref12.commit;
+    LOAD_ACTIONS_LIST: function LOAD_ACTIONS_LIST(_ref14) {
+      var commit = _ref14.commit;
 
       axios.get('list/actions').then(function (response) {
         commit('SET_ACTIONS_LIST', { list: response.data });
@@ -54834,8 +54861,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_TYPECOMMS_LIST: function LOAD_TYPECOMMS_LIST(_ref13) {
-      var commit = _ref13.commit;
+    LOAD_TYPECOMMS_LIST: function LOAD_TYPECOMMS_LIST(_ref15) {
+      var commit = _ref15.commit;
 
       axios.get('list/typecomms').then(function (response) {
         commit('SET_TYPECOMMS_LIST', { list: response.data });
@@ -54844,8 +54871,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_ETATS_LIST: function LOAD_ETATS_LIST(_ref14) {
-      var commit = _ref14.commit;
+    LOAD_ETATS_LIST: function LOAD_ETATS_LIST(_ref16) {
+      var commit = _ref16.commit;
 
       axios.get('list/etats').then(function (response) {
         commit('SET_ETATS_LIST', { list: response.data });
@@ -54854,8 +54881,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_USERS_LIST: function LOAD_USERS_LIST(_ref15) {
-      var commit = _ref15.commit;
+    LOAD_USERS_LIST: function LOAD_USERS_LIST(_ref17) {
+      var commit = _ref17.commit;
 
       axios.get('list/users').then(function (response) {
         commit('SET_USERS_LIST', { list: response.data });
@@ -54864,8 +54891,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_ROLES_LIST: function LOAD_ROLES_LIST(_ref16) {
-      var commit = _ref16.commit;
+    LOAD_ROLES_LIST: function LOAD_ROLES_LIST(_ref18) {
+      var commit = _ref18.commit;
 
       axios.get('list/roles').then(function (response) {
         commit('SET_ROLES_LIST', { list: response.data });
@@ -54874,8 +54901,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_TICKETS_LIST: function LOAD_TICKETS_LIST(_ref17) {
-      var commit = _ref17.commit;
+    LOAD_TICKETS_LIST: function LOAD_TICKETS_LIST(_ref19) {
+      var commit = _ref19.commit;
 
       axios.get('list/tickets').then(function (response) {
         commit('SET_TICKETS_LIST', { list: response.data });
@@ -54884,14 +54911,30 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       });
     },
 
-    LOAD_TICKETS: function LOAD_TICKETS(_ref18) {
-      var commit = _ref18.commit;
+    LOAD_TICKETS: function LOAD_TICKETS(_ref20) {
+      var commit = _ref20.commit;
 
       axios.get('tickets').then(function (response) {
         commit('SET_TICKETS', { list: response.data });
       }, function (err) {
         console.log(err);
       });
+    },
+
+    LOAD_USER: function LOAD_USER(_ref21) {
+      var commit = _ref21.commit;
+
+      axios.get('islogged').then(function (response) {
+        commit('SET_USER', { user: response.data });
+      }, function (err) {
+        console.log(err);
+      });
+    },
+
+    LOAD_ROLE: function LOAD_ROLE(_ref22) {
+      var commit = _ref22.commit;
+
+      commit('SET_ROLE', { role: document.head.querySelector('meta[name="role"]').content });
     }
   }
 });
@@ -59242,7 +59285,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59253,201 +59296,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -59560,12 +59408,28 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _c("ul", { staticClass: "navbar-nav my-lg-0" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
             _c("li", { staticClass: "nav-item dropdown" }, [
-              _vm._m(4),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "nav-link dropdown-toggle text-muted waves-effect waves-dark",
+                  attrs: {
+                    href: "",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                      " +
+                      _vm._s(_vm.user.name.toUpperCase())
+                  ),
+                  _vm._m(2),
+                  _c("i", { staticClass: "fa fa-angle-down m-l-10" })
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -59574,8 +59438,6 @@ var render = function() {
                   _c("ul", { staticClass: "dropdown-user" }, [
                     _c("li", [
                       _c("div", { staticClass: "dw-user-box" }, [
-                        _vm._m(5),
-                        _vm._v(" "),
                         _c("div", { staticClass: "u-text" }, [
                           _c("h4", [_vm._v(_vm._s(_vm.user.name))]),
                           _vm._v(" "),
@@ -59589,7 +59451,7 @@ var render = function() {
                               staticClass: "btn btn-rounded btn-danger btn-sm",
                               attrs: { href: "profile.html" }
                             },
-                            [_vm._v("Voir Profile")]
+                            [_vm._v("Changer Mot de passe")]
                           )
                         ])
                       ])
@@ -59600,23 +59462,7 @@ var render = function() {
                       attrs: { role: "separator" }
                     }),
                     _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _c("li", {
-                      staticClass: "divider",
-                      attrs: { role: "separator" }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _c("li", {
-                      staticClass: "divider",
-                      attrs: { role: "separator" }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(9)
+                    _vm._m(3)
                   ])
                 ]
               )
@@ -59677,29 +59523,6 @@ var staticRenderFns = [
           },
           [_c("i", { staticClass: "ti-menu" })]
         )
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item hidden-sm-down search-box" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "nav-link hidden-sm-down text-muted waves-effect waves-dark",
-            attrs: { href: "javascript:void(0)" }
-          },
-          [_c("i", { staticClass: "ti-search" })]
-        ),
-        _vm._v(" "),
-        _c("form", { staticClass: "app-search" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "Search & enter" }
-          }),
-          _vm._v(" "),
-          _c("a", { staticClass: "srh-btn" }, [
-            _c("i", { staticClass: "ti-close" })
-          ])
-        ])
       ])
     ])
   },
@@ -59707,349 +59530,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item dropdown" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark",
-          attrs: {
-            href: "",
-            "data-toggle": "dropdown",
-            "aria-haspopup": "true",
-            "aria-expanded": "false"
-          }
-        },
-        [
-          _c("i", { staticClass: "mdi mdi-message" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify" }, [
-            _c("span", { staticClass: "heartbit" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "point" })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "dropdown-menu dropdown-menu-right mailbox scale-up" },
-        [
-          _c("ul", [
-            _c("li", [
-              _c("div", { staticClass: "drop-title" }, [
-                _vm._v("Notifications")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("div", { staticClass: "message-center" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "btn btn-danger btn-circle" }, [
-                    _c("i", { staticClass: "fa fa-link" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Luanch Admin")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("Just see the my new admin!")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:30 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "btn btn-success btn-circle" }, [
-                    _c("i", { staticClass: "ti-calendar" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Event today")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("Just a reminder that you have event")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:10 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "btn btn-info btn-circle" }, [
-                    _c("i", { staticClass: "ti-settings" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Settings")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("You can customize this template as you want")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:08 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "btn btn-primary btn-circle" }, [
-                    _c("i", { staticClass: "ti-user" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Pavan kumar")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("Just see the my admin!")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:02 AM")])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link text-center",
-                  attrs: { href: "javascript:void(0);" }
-                },
-                [
-                  _c("strong", [_vm._v("Check all notifications")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "fa fa-angle-right" })
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item dropdown" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "nav-link dropdown-toggle text-muted waves-effect waves-dark",
-          attrs: {
-            href: "",
-            id: "2",
-            "data-toggle": "dropdown",
-            "aria-haspopup": "true",
-            "aria-expanded": "false"
-          }
-        },
-        [
-          _c("i", { staticClass: "mdi mdi-email" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify" }, [
-            _c("span", { staticClass: "heartbit" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "point" })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "dropdown-menu mailbox dropdown-menu-right scale-up",
-          attrs: { "aria-labelledby": "2" }
-        },
-        [
-          _c("ul", [
-            _c("li", [
-              _c("div", { staticClass: "drop-title" }, [
-                _vm._v("You have 4 new messages")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("div", { staticClass: "message-center" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "user-img" }, [
-                    _c("img", {
-                      staticClass: "img-circle",
-                      attrs: { src: "assets/images/users/1.jpg", alt: "user" }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "profile-status online pull-right"
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Pavan kumar")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("Just see the my admin!")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:30 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "user-img" }, [
-                    _c("img", {
-                      staticClass: "img-circle",
-                      attrs: { src: "assets/images/users/2.jpg", alt: "user" }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "profile-status busy pull-right"
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Sonu Nigam")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("I've sung a song! See you at")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:10 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "user-img" }, [
-                    _c("img", {
-                      staticClass: "img-circle",
-                      attrs: { src: "assets/images/users/3.jpg", alt: "user" }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "profile-status away pull-right"
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Arijit Sinh")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("I am a singer!")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:08 AM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "user-img" }, [
-                    _c("img", {
-                      staticClass: "img-circle",
-                      attrs: { src: "assets/images/users/4.jpg", alt: "user" }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "profile-status offline pull-right"
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mail-contnet" }, [
-                    _c("h5", [_vm._v("Pavan kumar")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "mail-desc" }, [
-                      _vm._v("Just see the my admin!")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "time" }, [_vm._v("9:02 AM")])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link text-center",
-                  attrs: { href: "javascript:void(0);" }
-                },
-                [
-                  _c("strong", [_vm._v("See all e-Mails")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "fa fa-angle-right" })
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass:
-          "nav-link dropdown-toggle text-muted waves-effect waves-dark",
-        attrs: {
-          href: "",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "profile-pic",
-          attrs: { src: "assets/images/users/1.jpg", alt: "user" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "u-img" }, [
-      _c("img", { attrs: { src: "assets/images/users/1.jpg", alt: "user" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "ti-user" }),
-        _vm._v(" Mon Profile")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "ti-email" }),
-        _vm._v(" Boîte de messagerie")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "ti-settings" }),
-        _vm._v(" Paramètre de compte")
-      ])
+    return _c("span", { staticClass: "m-l-10 round round-success" }, [
+      _c("i", { staticClass: "fa fa-user" })
     ])
   },
   function() {
@@ -60262,7 +59744,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -60286,7 +59767,6 @@ var render = function() {
               {
                 staticClass: "has-arrow waves-effect waves-dark",
                 class: _vm.$route.name == "Tableau de bord" ? "active" : "",
-                attrs: { "aria-expanded": "false" },
                 on: {
                   click: function($event) {
                     _vm.$router.push({ path: "/" })
@@ -60308,7 +59788,6 @@ var render = function() {
               {
                 staticClass: "has-arrow waves-effect waves-dark",
                 class: _vm.$route.name == "Clients" ? "active" : "",
-                attrs: { "aria-expanded": "false" },
                 on: {
                   click: function($event) {
                     _vm.$router.push({ path: "/clients" })
@@ -60356,248 +59835,185 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass: "has-arrow waves-effect waves-dark",
-                class: _vm.$route.name == "Tickets" ? "active" : "",
-                attrs: { "aria-expanded": "false" },
-                on: {
-                  click: function($event) {
-                    _vm.$router.push({ path: "/tickets" })
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "mdi mdi-ticket" }),
-                _c("span", { staticClass: "hide-menu" }, [
-                  _vm._v("Tickets Manager")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "collapse", attrs: { "aria-expanded": "false" } },
-              [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/tickets/add" })
-                        }
+          _vm.$store.state.role < 4
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "has-arrow waves-effect waves-dark",
+                    class: _vm.$route.name == "Tickets" ? "active" : "",
+                    on: {
+                      click: function($event) {
+                        _vm.$router.push({ path: "/tickets" })
                       }
-                    },
-                    [_vm._v("Nouveau ticket")]
-                  )
-                ]),
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "mdi mdi-ticket" }),
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Tickets Manager")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/tickets" })
-                        }
-                      }
-                    },
-                    [_vm._v("Liste tickets")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/tickets/chat" })
-                        }
-                      }
-                    },
-                    [_vm._v("Chat tickets")]
-                  )
-                ])
-              ]
-            )
-          ]),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse",
+                    attrs: { "aria-expanded": "false" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/tickets/add" })
+                            }
+                          }
+                        },
+                        [_vm._v("Nouveau ticket")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/tickets" })
+                            }
+                          }
+                        },
+                        [_vm._v("Liste tickets")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/tickets/chat" })
+                            }
+                          }
+                        },
+                        [_vm._v("Chat tickets")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass: "has-arrow waves-effect waves-dark",
-                attrs: { "aria-expanded": "false" },
-                on: {
-                  click: function($event) {
-                    _vm.$router.push({ path: "/users" })
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "mdi mdi-account-multiple" }),
-                _c("span", { staticClass: "hide-menu" }, [
-                  _vm._v("Utilisateurs")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "collapse", attrs: { "aria-expanded": "false" } },
-              [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/users/add" })
-                        }
+          _vm.$store.state.role < 2
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "has-arrow waves-effect waves-dark",
+                    class: _vm.$route.name == "Utilisateurs" ? "active" : "",
+                    on: {
+                      click: function($event) {
+                        _vm.$router.push({ path: "/users" })
                       }
-                    },
-                    [_vm._v("Nouveau utilisateur")]
-                  )
-                ]),
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "mdi mdi-account-multiple" }),
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Utilisateurs")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/users" })
-                        }
-                      }
-                    },
-                    [_vm._v("Liste utilisateurs")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/users/roles" })
-                        }
-                      }
-                    },
-                    [_vm._v("Liste rôles")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/users/permissions" })
-                        }
-                      }
-                    },
-                    [_vm._v("Liste permissions")]
-                  )
-                ])
-              ]
-            )
-          ]),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "collapse",
+                    attrs: { "aria-expanded": "false" }
+                  },
+                  [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/users/add" })
+                            }
+                          }
+                        },
+                        [_vm._v("Nouveau utilisateur")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/users" })
+                            }
+                          }
+                        },
+                        [_vm._v("Liste utilisateurs")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.$router.push({ path: "/users/roles" })
+                            }
+                          }
+                        },
+                        [_vm._v("Liste rôles")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("li", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "collapse", attrs: { "aria-expanded": "false" } },
-              [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/parametres/types" })
-                        }
+          _vm.$store.state.role < 3
+            ? _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "has-arrow waves-effect waves-dark",
+                    class:
+                      _vm.$route.name == "Gestion des types" ? "active" : "",
+                    on: {
+                      click: function($event) {
+                        _vm.$router.push({ path: "/parametres/types" })
                       }
-                    },
-                    [_vm._v("Gestion de types")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/parametres/imports" })
-                        }
-                      }
-                    },
-                    [_vm._v("Export/Import")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/parametres/rapports" })
-                        }
-                      }
-                    },
-                    [_vm._v("Rapports")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.$router.push({ path: "/parametres/divers" })
-                        }
-                      }
-                    },
-                    [_vm._v("Divers")]
-                  )
-                ])
-              ]
-            )
-          ])
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "mdi mdi-settings" }),
+                    _c("span", { staticClass: "hide-menu" }, [
+                      _vm._v("Paramètres système")
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e()
         ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "has-arrow waves-effect waves-dark",
-        attrs: { "aria-expanded": "false" }
-      },
-      [
-        _c("i", { staticClass: "mdi mdi-settings" }),
-        _c("span", { staticClass: "hide-menu" }, [_vm._v("Paramètres système")])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -60809,60 +60225,10 @@ var render = function() {
           _vm._v(_vm._s(_vm.$route.name))
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-7 col-4 align-self-center" }, [
-      _c("div", { staticClass: "d-flex m-t-10 justify-content-end" }, [
-        _c("div", { staticClass: "d-flex m-r-20 m-l-10 hidden-md-down" }, [
-          _c("div", { staticClass: "chart-text m-r-10" }, [
-            _c("h6", { staticClass: "m-b-0" }, [
-              _c("small", [_vm._v("Ce Mois")])
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "m-t-0 text-info" }, [_vm._v("58,356")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "spark-chart" }, [
-            _c("div", { attrs: { id: "monthchart" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex m-r-20 m-l-10 hidden-md-down" }, [
-          _c("div", { staticClass: "chart-text m-r-10" }, [
-            _c("h6", { staticClass: "m-b-0" }, [
-              _c("small", [_vm._v("Dernier Mois")])
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "m-t-0 text-primary" }, [_vm._v("48,356")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "spark-chart" }, [
-            _c("div", { attrs: { id: "lastmonthchart" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", {}, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"
-            },
-            [_c("i", { staticClass: "ti-settings text-white" })]
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -67039,18 +66405,20 @@ var render = function() {
                     [_c("i", { staticClass: "fa fa-pencil" })]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      on: {
-                        click: function($event) {
-                          _vm.deleteThis(client.id)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fa fa-trash" })]
-                  )
+                  _vm.$store.state.role < 3
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-info",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteThis(client.id)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-trash" })]
+                      )
+                    : _vm._e()
                 ])
               ])
             })
@@ -68290,18 +67658,20 @@ var render = function() {
               [_c("i", { staticClass: "fa fa-pencil" })]
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-info",
-                on: {
-                  click: function($event) {
-                    _vm.deleteThis(contact.id)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-trash" })]
-            )
+            _vm.$store.state.role < 3
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-info",
+                    on: {
+                      click: function($event) {
+                        _vm.deleteThis(contact.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-trash" })]
+                )
+              : _vm._e()
           ])
         ])
       })
@@ -68524,18 +67894,20 @@ var render = function() {
               [_c("i", { staticClass: "fa fa-pencil" })]
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-info",
-                on: {
-                  click: function($event) {
-                    _vm.deleteThis(adresse.id)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-trash" })]
-            )
+            _vm.$store.state.role < 3
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-info",
+                    on: {
+                      click: function($event) {
+                        _vm.deleteThis(adresse.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-trash" })]
+                )
+              : _vm._e()
           ])
         ])
       })
@@ -68781,18 +68153,20 @@ var render = function() {
               [_c("i", { staticClass: "fa fa-pencil" })]
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-info",
-                on: {
-                  click: function($event) {
-                    _vm.deleteThis(ticket.id)
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-trash" })]
-            )
+            _vm.$store.state.role < 3
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-info",
+                    on: {
+                      click: function($event) {
+                        _vm.deleteThis(ticket.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-trash" })]
+                )
+              : _vm._e()
           ])
         ])
       })
@@ -69920,49 +69294,65 @@ if (false) {
 
 /***/ }),
 /* 292 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = {
-            routes: [{ name: 'Tableau de bord', path: '/', component: __webpack_require__(293) },
-            /**
-            **    general routes
-            **/
-            { path: '/apropos', component: __webpack_require__(298) }, { path: '/support', component: __webpack_require__(303) },
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return router; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_js__ = __webpack_require__(55);
 
-            /**
-            **    Clients routes
-            **/
-            { path: '/clients', component: __webpack_require__(308),
-                        children: [{ name: 'Clients', path: '', component: __webpack_require__(21) }, { name: 'Détail Client', path: 'show/:id', component: __webpack_require__(313) }, { name: 'Nouveau Client', path: 'add', component: __webpack_require__(23) }, { name: 'Modification Client', path: 'edit/:id', component: __webpack_require__(23) }, { name: 'Nouveau Contact', path: 'contacts/add/:clientid', component: __webpack_require__(24) }, { name: 'Modification Contact', path: 'contacts/edit/:clientid/:id', component: __webpack_require__(24) }, { name: 'Nouvelle Adresse', path: 'adresses/add/:clientid', component: __webpack_require__(25) }, { name: 'Modification Adresse', path: 'adresses/edit/:clientid/:id', component: __webpack_require__(25) }, { name: 'Nouveau Ticket', path: 'tickets/add/:clientid', component: __webpack_require__(9) }, { name: 'Modification Ticket', path: 'tickets/edit/:clientid/:id', component: __webpack_require__(9) }]
-            },
 
-            /**
-            **    Users routes
-            **/
-            { path: '/users', component: __webpack_require__(334),
-                        children: [{ name: 'Utilisateurs', path: '', component: __webpack_require__(339) }, { name: 'Détail Utilisateur', path: 'show/:id', component: __webpack_require__(344) }, { name: 'Ajout Utilisateur', path: 'add', component: __webpack_require__(26) }, { name: 'Modification Utilisateur', path: 'edit/:id', component: __webpack_require__(26) }, { name: 'Liste Roles', path: 'roles', component: __webpack_require__(353) }, { name: 'Ajout Role', path: 'roles/add', component: __webpack_require__(27) }, { name: 'Modification Role', path: 'roles/edit/:id', component: __webpack_require__(27) }, { name: 'Liste Permissions', path: 'permissions', component: __webpack_require__(362) }, { name: 'Ajout Permission', path: 'permissions/add', component: __webpack_require__(28) }, { name: 'Modification Permission', path: 'permissions/edit/:id', component: __webpack_require__(28) }]
-            },
 
-            /**
-            **    Tickets routes
-            **/
-            {
-                        path: '/tickets', component: __webpack_require__(371),
-                        children: [{ name: 'Liste Tickets', path: '', component: __webpack_require__(376) }, { name: 'Nouveau Ticket Générale', path: 'add', component: __webpack_require__(9) }, { path: 'chat', component: __webpack_require__(381),
-                                    children: [{ name: 'Chat Tickets', path: '', component: __webpack_require__(386) }, { name: 'Chat Tickets - Détails', path: 'show/:ticketid', component: __webpack_require__(22) }]
-                        }, { name: 'Tickets - Nouveau Appel', path: 'appels/add/:ticketid', component: __webpack_require__(391) }, { name: 'Tickets - Nouveau Email', path: 'emails/add/:ticketid', component: __webpack_require__(396) }]
-            },
 
-            /**
-            **    Parametres routes
-            **/
-            {
-                        path: '/parametres', component: __webpack_require__(401),
-                        children: [
-                        // { name:'Paramètres générales',  path: '', component: require('./components/parametres/form.vue') },
-                        { name: 'Gestion des types', path: 'types', component: __webpack_require__(406) }, { name: 'Import/Export', path: 'imports', component: __webpack_require__(431) }, { name: 'Rapports', path: 'rapports', component: __webpack_require__(432) }, { name: 'Paramètres Divers', path: 'divers', component: __webpack_require__(433) }]
-            }]
-};
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+//define routes
+var routes = [{ name: 'Tableau de bord', path: '/', component: __webpack_require__(293) },
+/**
+**    general routes
+**/
+{ path: '/apropos', component: __webpack_require__(298) }, { path: '/support', component: __webpack_require__(303) },
+
+/**
+**    Clients routes
+**/
+{ path: '/clients', component: __webpack_require__(308),
+              children: [{ name: 'Clients', path: '', component: __webpack_require__(21) }, { name: 'Détail Client', path: 'show/:id', component: __webpack_require__(313) }, { name: 'Nouveau Client', path: 'add', component: __webpack_require__(23) }, { name: 'Modification Client', path: 'edit/:id', component: __webpack_require__(23) }, { name: 'Nouveau Contact', path: 'contacts/add/:clientid', component: __webpack_require__(24) }, { name: 'Modification Contact', path: 'contacts/edit/:clientid/:id', component: __webpack_require__(24) }, { name: 'Nouvelle Adresse', path: 'adresses/add/:clientid', component: __webpack_require__(25) }, { name: 'Modification Adresse', path: 'adresses/edit/:clientid/:id', component: __webpack_require__(25) }, { name: 'Nouveau Ticket', path: 'tickets/add/:clientid', component: __webpack_require__(9) }, { name: 'Modification Ticket', path: 'tickets/edit/:clientid/:id', component: __webpack_require__(9) }]
+},
+
+/**
+**    Users routes
+**/
+{ path: '/users', component: __webpack_require__(334),
+              children: [{ name: 'Utilisateurs', path: '', component: __webpack_require__(339) }, { name: 'Détail Utilisateur', path: 'show/:id', component: __webpack_require__(344) }, { name: 'Ajout Utilisateur', path: 'add', component: __webpack_require__(26) }, { name: 'Modification Utilisateur', path: 'edit/:id', component: __webpack_require__(26) }, { name: 'Liste Roles', path: 'roles', component: __webpack_require__(353) }, { name: 'Ajout Role', path: 'roles/add', component: __webpack_require__(27) }, { name: 'Modification Role', path: 'roles/edit/:id', component: __webpack_require__(27) }, { name: 'Liste Permissions', path: 'permissions', component: __webpack_require__(362) }, { name: 'Ajout Permission', path: 'permissions/add', component: __webpack_require__(28) }, { name: 'Modification Permission', path: 'permissions/edit/:id', component: __webpack_require__(28) }]
+},
+
+/**
+**    Tickets routes
+**/
+{
+              path: '/tickets', component: __webpack_require__(371),
+              children: [{ name: 'Liste Tickets', path: '', component: __webpack_require__(376) }, { name: 'Nouveau Ticket Générale', path: 'add', component: __webpack_require__(9) }, { path: 'chat', component: __webpack_require__(381),
+                            children: [{ name: 'Chat Tickets', path: '', component: __webpack_require__(386) }, { name: 'Chat Tickets - Détails', path: 'show/:ticketid', component: __webpack_require__(22) }]
+              }, { name: 'Tickets - Nouveau Appel', path: 'appels/add/:ticketid', component: __webpack_require__(391) }, { name: 'Tickets - Nouveau Email', path: 'emails/add/:ticketid', component: __webpack_require__(396) }]
+},
+
+/**
+**    Parametres routes
+**/
+{
+              path: '/parametres', component: __webpack_require__(401),
+              children: [
+              // { name:'Paramètres générales',  path: '', component: require('./components/parametres/form.vue') },
+              { name: 'Gestion des types', path: 'types', component: __webpack_require__(406) }, { name: 'Import/Export', path: 'imports', component: __webpack_require__(431) }, { name: 'Rapports', path: 'rapports', component: __webpack_require__(432) }, { name: 'Paramètres Divers', path: 'divers', component: __webpack_require__(433) }]
+}];
+
+var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ routes: routes });
+
+/* unused harmony default export */ var _unused_webpack_default_export = (router);
 
 /***/ }),
 /* 293 */
@@ -70767,23 +70157,26 @@ var render = function() {
                     staticClass: "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
                   },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block waves-effect waves-light btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push({
-                              path:
-                                "/clients/tickets/add/" + _vm.$route.params.id
-                            })
-                          }
-                        }
-                      },
-                      [_vm._v("Nouveau ticket")]
-                    )
+                    _vm.$store.state.role < 4
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block waves-effect waves-light btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.$router.push({
+                                  path:
+                                    "/clients/tickets/add/" +
+                                    _vm.$route.params.id
+                                })
+                              }
+                            }
+                          },
+                          [_vm._v("Nouveau ticket")]
+                        )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -70846,23 +70239,26 @@ var render = function() {
                     staticClass: "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
                   },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block waves-effect waves-light btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push({
-                              path:
-                                "/clients/tickets/add/" + _vm.$route.params.id
-                            })
-                          }
-                        }
-                      },
-                      [_vm._v("Nouveau ticket")]
-                    )
+                    _vm.$store.state.role < 4
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block waves-effect waves-light btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.$router.push({
+                                  path:
+                                    "/clients/tickets/add/" +
+                                    _vm.$route.params.id
+                                })
+                              }
+                            }
+                          },
+                          [_vm._v("Nouveau ticket")]
+                        )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -70925,23 +70321,26 @@ var render = function() {
                     staticClass: "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
                   },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block waves-effect waves-light btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push({
-                              path:
-                                "/clients/tickets/add/" + _vm.$route.params.id
-                            })
-                          }
-                        }
-                      },
-                      [_vm._v("Nouveau ticket")]
-                    )
+                    _vm.$store.state.role < 4
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block waves-effect waves-light btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.$router.push({
+                                  path:
+                                    "/clients/tickets/add/" +
+                                    _vm.$route.params.id
+                                })
+                              }
+                            }
+                          },
+                          [_vm._v("Nouveau ticket")]
+                        )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -70979,20 +70378,22 @@ var render = function() {
                     staticClass: "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
                   },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block waves-effect waves-light btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push({ path: "/tickets" })
-                          }
-                        }
-                      },
-                      [_vm._v("Liste tickets")]
-                    )
+                    _vm.$store.state.role < 4
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block waves-effect waves-light btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.$router.push({ path: "/tickets" })
+                              }
+                            }
+                          },
+                          [_vm._v("Liste tickets")]
+                        )
+                      : _vm._e()
                   ]
                 ),
                 _vm._v(" "),
@@ -71002,20 +70403,22 @@ var render = function() {
                     staticClass: "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
                   },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block waves-effect waves-light btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push({ path: "/tickets/chat" })
-                          }
-                        }
-                      },
-                      [_vm._v("Chat tickets")]
-                    )
+                    _vm.$store.state.role < 4
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block waves-effect waves-light btn-success",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.$router.push({ path: "/tickets/chat" })
+                              }
+                            }
+                          },
+                          [_vm._v("Chat tickets")]
+                        )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -71341,9 +70744,14 @@ var render = function() {
           "div",
           { attrs: { slot: "4" }, slot: "4" },
           [
-            _c("infos-client-tickets", {
-              attrs: { tickets: _vm.client.tickets, clientid: _vm.client.id }
-            })
+            _vm.$store.state.role < 4
+              ? _c("infos-client-tickets", {
+                  attrs: {
+                    tickets: _vm.client.tickets,
+                    clientid: _vm.client.id
+                  }
+                })
+              : _vm._e()
           ],
           1
         )
@@ -73563,34 +72971,6 @@ var render = function() {
                       )
                     ]
                   )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$route.name != "Ajout Permission"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({
-                                path: "/users/permissions/add"
-                              })
-                            }
-                          }
-                        },
-                        [_vm._v("Nouvelle permission")]
-                      )
-                    ]
-                  )
                 : _vm._e()
             ]
           )
@@ -73970,20 +73350,7 @@ var render = function() {
                           },
                           [_c("i", { staticClass: "fa fa-retweet" })]
                         ),
-                        _vm._v("\n\n             \n            "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-outline-success",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.showPermissions(role.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-shield" })]
-                        )
+                        _vm._v("\n\n             \n            ")
                       ])
                     }),
                     _vm._v(" "),
@@ -76217,18 +75584,20 @@ var render = function() {
                     [_c("i", { staticClass: "fa fa-pencil" })]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-info",
-                      on: {
-                        click: function($event) {
-                          _vm.deleteThis(ticket.id)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fa fa-trash" })]
-                  )
+                  _vm.$store.state.role < 3
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-outline-info",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteThis(ticket.id)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-trash" })]
+                      )
+                    : _vm._e()
                 ])
               ])
             })
@@ -78235,266 +77604,7 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c(
       "div",
-      { staticClass: "col-lg-2 col-md-12 col-sm-12 col-xs-12" },
-      [
-        _c("part-panel-default", [
-          _c("div", { attrs: { slot: "heading" }, slot: "heading" }, [
-            _vm._v("\n        Liens Utiles\n      ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "row m-b-10",
-              attrs: { slot: "body" },
-              slot: "body"
-            },
-            [
-              _vm.$route.name != "Paramètres générales"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({ path: "/parametres" })
-                            }
-                          }
-                        },
-                        [_vm._v("Paramètres générales")]
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$route.name != "Gestion des types"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({ path: "/parametres/types" })
-                            }
-                          }
-                        },
-                        [_vm._v("Gestion des types")]
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$route.name != "Import/Export"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({ path: "/parametres/imports" })
-                            }
-                          }
-                        },
-                        [_vm._v("Import/Export")]
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$route.name != "Rapports"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({ path: "/parametres/rapports" })
-                            }
-                          }
-                        },
-                        [_vm._v("Rapports")]
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$route.name != "Paramètres Divers"
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10"
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-block waves-effect waves-light btn-success",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.$router.push({ path: "/parametres/divers" })
-                            }
-                          }
-                        },
-                        [_vm._v("Paramètres Divers")]
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("part-panel-default", [
-          _c("div", { attrs: { slot: "heading" }, slot: "heading" }, [
-            _vm._v("\n        Filter\n      ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row", attrs: { slot: "body" }, slot: "body" },
-            [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text" }
-                  })
-                ])
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("part-panel-default", [
-          _c("div", { attrs: { slot: "heading" }, slot: "heading" }, [
-            _vm._v("\n        Statistiques\n      ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row", attrs: { slot: "body" }, slot: "body" },
-            [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("div", { staticClass: "d-flex flex-row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c("center", [
-                        _c(
-                          "div",
-                          { staticClass: "round align-self-center round-info" },
-                          [_c("i", { staticClass: "ti-user" })]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "m-l-10 align-self-center" }, [
-                          _c("h3", { staticClass: "m-b-0" }, [_vm._v("2690")]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "text-muted m-b-0" }, [
-                            _vm._v("Clients")
-                          ])
-                        ])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c("center", [
-                        _c(
-                          "div",
-                          { staticClass: "round align-self-center round-info" },
-                          [_c("i", { staticClass: "ti-user" })]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "m-l-10 align-self-center" }, [
-                          _c("h3", { staticClass: "m-b-0" }, [_vm._v("112")]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "text-muted m-b-0" }, [
-                            _vm._v("Contacts")
-                          ])
-                        ])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c("center", [
-                        _c(
-                          "div",
-                          { staticClass: "round align-self-center round-info" },
-                          [_c("i", { staticClass: "ti-user" })]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "m-l-10 align-self-center" }, [
-                          _c("h3", { staticClass: "m-b-0" }, [_vm._v("56")]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "text-muted m-b-0" }, [
-                            _vm._v("Tickets")
-                          ])
-                        ])
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-lg-10 col-md-12 col-sm-12 col-xs-12" },
+      { staticClass: "col-lg-12 col-md-12 col-sm-12 col-xs-12" },
       [_c("router-view")],
       1
     )
@@ -79855,9 +78965,19 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-md-3" }, [_c("TypeclientsForm")], 1),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-3" }, [_c("TypecommsForm")], 1),
+    _c(
+      "div",
+      { staticClass: "col-md-3" },
+      [_vm.$store.state.role < 2 ? _c("TypecommsForm") : _vm._e()],
+      1
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-3" }, [_c("EtatsForm")], 1)
+    _c(
+      "div",
+      { staticClass: "col-md-3" },
+      [_vm.$store.state.role < 2 ? _c("EtatsForm") : _vm._e()],
+      1
+    )
   ])
 }
 var staticRenderFns = []

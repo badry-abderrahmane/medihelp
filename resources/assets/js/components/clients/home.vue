@@ -26,7 +26,7 @@
             <button @click="$router.push({ path: `/clients/adresses/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle adresse</button>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
-            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+            <button v-if="$store.state.role < 4" @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
           </div>
         </div>
         <div v-if="$route.name == 'Nouvelle Adresse'" slot="body">
@@ -37,7 +37,7 @@
             <button @click="$router.push({ path: `/clients/contacts/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau contact</button>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
-            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+            <button v-if="$store.state.role < 4" @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
           </div>
         </div>
         <div v-if="$route.name == 'Nouveau Contact'" slot="body">
@@ -48,7 +48,7 @@
             <button @click="$router.push({ path: `/clients/adresses/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouvelle adresse</button>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
-            <button @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
+            <button v-if="$store.state.role < 4" @click="$router.push({ path: `/clients/tickets/add/`+$route.params.id })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Nouveau ticket</button>
           </div>
         </div>
         <div v-if="$route.name == 'Nouveau Ticket' || $route.name == 'Modification Ticket'" slot="body">
@@ -56,10 +56,10 @@
             <button @click="$router.push({ path: `/clients` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste clients</button>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
-            <button  @click="$router.push({ path: `/tickets` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste tickets</button>
+            <button  v-if="$store.state.role < 4" @click="$router.push({ path: `/tickets` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Liste tickets</button>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-4 col-xs-4 m-b-10">
-            <button @click="$router.push({ path: `/tickets/chat` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Chat tickets</button>
+            <button v-if="$store.state.role < 4" @click="$router.push({ path: `/tickets/chat` })" type="button" class="btn btn-block waves-effect waves-light btn-success" >Chat tickets</button>
           </div>
         </div>
       </part-panel-default>

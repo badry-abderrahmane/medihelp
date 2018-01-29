@@ -16,6 +16,8 @@ export const store = new Vuex.Store({
     tickets: [],
 
     ticketsAll: [],
+    user: [],
+    role: 4
   },
   mutations: {
     SET_TYPECLIENTS_LIST: (state, { list }) => {
@@ -68,6 +70,26 @@ export const store = new Vuex.Store({
     },
     SET_TICKETS: (state, { list }) => {
       state.ticketsAll = list
+    },
+    SET_USER: (state, { user }) => {
+      state.user = user
+    },
+    SET_ROLE: (state, { role }) => {
+      switch (role) {
+        case 'SYSADMIN':
+          state.role = 1
+          break;
+        case 'ADMIN':
+          state.role = 2
+          break;
+        case 'SUPPORT':
+          state.role = 3
+          break;
+        case 'CLIENTS':
+          state.role = 4
+          break;
+        default: state.role = 4
+      }
     },
   },
 
@@ -142,6 +164,18 @@ export const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
-    }
+    },
+
+    LOAD_USER: function ({ commit }) {
+      axios.get('islogged').then((response) => {
+        commit('SET_USER', { user: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    },
+
+    LOAD_ROLE: function ({ commit }) {
+      commit('SET_ROLE', { role: document.head.querySelector('meta[name="role"]').content })
+    },
   }
 });
