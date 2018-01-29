@@ -28,6 +28,7 @@ Route::get('/islogged', function(){
 });
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/changepassword', 'UserController@changePassword');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

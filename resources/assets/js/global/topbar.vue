@@ -59,7 +59,7 @@
                                       <div class="u-text">
                                           <h4>{{ user.name }}</h4>
                                           <p class="text-muted">{{ user.email }}</p>
-                                          <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Changer Mot de passe</a></div>
+                                          <a @click="$router.push({ path:'/change/password' })" class="btn waves-effect waves-light btn-danger">Changer Mot de passe</a></div>
                                   </div>
                               </li>
                               <!-- <li role="separator" class="divider"></li> -->

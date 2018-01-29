@@ -24,7 +24,7 @@
         <last-clients></last-clients>
       </div>
       <div class="col-md-8">
-        <last-tickets></last-tickets>
+        <last-tickets v-if="$store.state.role < 4"></last-tickets>
       </div>
     </div>
   </div>

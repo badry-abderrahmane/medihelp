@@ -13,7 +13,7 @@ const routes = [
         **/
         { path: '/apropos', component: require('./components/apropos.vue')},
         { path: '/support', component: require('./components/support.vue')},
-
+        { path: '/change/password', component: require('./components/password.vue')},
         /**
         **    Clients routes
         **/
