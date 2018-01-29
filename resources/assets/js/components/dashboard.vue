@@ -1,23 +1,33 @@
 <template lang="html">
-  <div class="panel panel-primary card-view">
-		<div class="panel-heading">
-			<div class="pull-left">
-				<h6 class="panel-title txt-light">Bienvenue</h6>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="panel-wrapper collapse in">
-			<div class="panel-body">
-        <!-- <h5>Bonjour <strong>{{ user.name }}</strong></h5><br>
-        <blockquote>Bienvenue dans la première version de l'application <strong>MediCom v1.0</strong>.<br> Développée par <strong>Badry Abderrahmane.</strong> <br>En partenariat avec le Leader du marché d'impression<mark>HS Print Service</mark>.</blockquote>
-        <blockquote>Vous avez besoin d'aide? <strong class="text-success">Appelez vite le 06 222 0 444 8</strong>.<br> Ou bien demandez une <strong class="text-primary">Formation Présentielle</strong>.</blockquote>
-        <div class="alert alert-warning alert-dismissable alert-style-1">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<i class="zmdi zmdi-alert-circle-o"></i>Aidez nous à corriger toute anomalie en envoyant un imprimé écran de l'erreur et/ou mauvaise interaction.<br> Vers l'adresse email suivante <strong>medimall.dev@gmail.com</strong>
-				</div> -->
-			</div>
-		</div>
-	</div>
+  <div>
+    <div class="row">
+      <div class="col-md-6">
+        <chart-clients></chart-clients>
+      </div>
+      <div class="col-md-6">
+        <chart-tickets></chart-tickets>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <chart-tickets-doughnut></chart-tickets-doughnut>
+      </div>
+      <div class="col-md-4">
+        <chart-clients-doughnut></chart-clients-doughnut>
+      </div>
+      <div class="col-md-4">
+        <chart-users-doughnut></chart-users-doughnut>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <last-clients></last-clients>
+      </div>
+      <div class="col-md-8">
+        <last-tickets></last-tickets>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

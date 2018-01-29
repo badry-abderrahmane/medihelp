@@ -10,7 +10,7 @@ Vue.component('part-panel-danger', require('./parts/panels/panelDanger.vue'));
 Vue.component('part-panel-profile', require('./parts/panels/panelProfile.vue'));
 Vue.component('part-panel-tabs', require('./parts/panels/panelTabs.vue'));
 Vue.component('part-panel-noheading', require('./parts/panels/panelNoHeading.vue'));
-
+Vue.component('part-panel-white', require('./parts/panels/panelWhite.vue'));
 
 /*
 *
