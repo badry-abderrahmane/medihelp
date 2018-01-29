@@ -19,7 +19,7 @@
       <td>
         <button class="btn btn-outline-info" @click="$router.push({ path: `/tickets/chat/show/`+ticket.id })"><i class="fa fa-eye"></i></button>
         <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/tickets/edit/`+clientid+`/`+ticket.id })"><i class="fa fa-pencil"></i></button>
-        <button class="btn btn-outline-info" @click="deleteThis(ticket.id)"><i class="fa fa-trash"></i></button>
+        <button v-if="$store.state.role < 3" class="btn btn-outline-info" @click="deleteThis(ticket.id)"><i class="fa fa-trash"></i></button>
       </td>
     </tr>
   </datatable-buttons>

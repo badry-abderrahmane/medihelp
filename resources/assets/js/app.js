@@ -8,14 +8,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import VueRouter from 'vue-router';
+// import VueRouter from 'vue-router';
 import { store } from './store';
 import Vue2Filters from 'vue2-filters'
 
 
 
 Vue.use(Vue2Filters)
-Vue.use(VueRouter);
+// Vue.use(VueRouter);
 
 require('./plugins/sweet-alert-plugin');
 
@@ -32,8 +32,8 @@ require('./lasts');
 
 window.Event = new Vue();
 
-import { routes } from './router.js';
-const router = new VueRouter({ routes });
+import { router } from './router.js';
+// const router = new VueRouter({ routes });
 
 Vue.component('full-app', require('./components/home.vue'));
 
@@ -55,6 +55,8 @@ const app = new Vue({
     this.$store.dispatch('LOAD_ROLES_LIST')
     this.$store.dispatch('LOAD_TICKETS_LIST')
 
+    this.$store.dispatch('LOAD_ROLE')
+    this.$store.dispatch('LOAD_USER')
     this.$store.dispatch('LOAD_TICKETS')
   },
   created(){

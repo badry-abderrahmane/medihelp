@@ -17,7 +17,7 @@
         <infos-client-adresses :adresses="client.adresses" :clientid="client.id"></infos-client-adresses>
       </div>
       <div slot="4">
-        <infos-client-tickets :tickets="client.tickets" :clientid="client.id"></infos-client-tickets>
+        <infos-client-tickets v-if="$store.state.role < 4" :tickets="client.tickets" :clientid="client.id"></infos-client-tickets>
       </div>
     </part-panel-tabs>
   </div>

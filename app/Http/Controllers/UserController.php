@@ -7,6 +7,8 @@ use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserroleRequest;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller
 {
@@ -73,6 +75,16 @@ class UserController extends Controller
         }
 
     return Response::json(['message' => 'User bien mis à jour'], 200);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+        $user->update([
+            'password' => bcrypt($request['password']),
+        ]);
+        Auth::logout();
+    return Response::json(['message' => 'Mot de passe bien mis à jour'], 200);
     }
 
     public function destroy($id)

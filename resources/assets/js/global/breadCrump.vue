@@ -7,7 +7,7 @@
               <li class="breadcrumb-item active">{{ $route.name }}</li>
           </ol>
       </div>
-      <div class="col-md-7 col-4 align-self-center">
+      <!-- <div class="col-md-7 col-4 align-self-center">
           <div class="d-flex m-t-10 justify-content-end">
               <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                   <div class="chart-text m-r-10">
@@ -29,7 +29,7 @@
                   <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
               </div>
           </div>
-      </div>
+      </div> -->
   </div>
 </template>
 
