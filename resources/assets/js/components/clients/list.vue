@@ -11,6 +11,7 @@
           <th>Type</th>
           <th>Tel</th>
           <th>Secteur</th>
+          <th>Responsable</th>
           <th></th>
         </tr>
         <tr slot="tbody" v-for="client in clients">
@@ -19,6 +20,9 @@
           <td>{{ client.typeclient.value }}</td>
           <td>{{ client.phone }}</td>
           <td>{{ client.secteur }}</td>
+          <td>
+            <span class="label label-inverse m-r-10" v-for="user in client.users">{{ user.name }}</span>
+          </td>
           <td>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/show/`+client.id })"><i class="fa fa-eye"></i></button>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/edit/`+client.id })"><i class="fa fa-pencil"></i></button>

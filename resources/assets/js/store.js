@@ -13,6 +13,9 @@ export const store = new Vuex.Store({
     etats: [],
     users: [],
     roles: [],
+    tickets: [],
+
+    ticketsAll: [],
   },
   mutations: {
     SET_TYPECLIENTS_LIST: (state, { list }) => {
@@ -56,6 +59,15 @@ export const store = new Vuex.Store({
       //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
       for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
       state.roles = array
+    },
+    SET_TICKETS_LIST: (state, { list }) => {
+      let array = [];
+      //var empty = {};empty['text'] = '';empty['value'] = '';array.push(empty);
+      for (var prop in list) {let item = {};item['text'] = list[prop];item['value'] = prop;array.push(item);}
+      state.tickets = array
+    },
+    SET_TICKETS: (state, { list }) => {
+      state.ticketsAll = list
     },
   },
 
@@ -114,7 +126,22 @@ export const store = new Vuex.Store({
       }, (err) => {
         console.log(err)
       })
-    }
+    },
 
+    LOAD_TICKETS_LIST: function ({ commit }) {
+      axios.get('list/tickets').then((response) => {
+        commit('SET_TICKETS_LIST', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    },
+
+    LOAD_TICKETS: function ({ commit }) {
+      axios.get('tickets').then((response) => {
+        commit('SET_TICKETS', { list: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    }
   }
 });

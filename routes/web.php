@@ -93,3 +93,8 @@ Route::get('list/roles', function(){
   $list = \App\Role::pluck('name','id')->toJson();
   return $list;
 });
+
+Route::get('list/tickets', function(){
+  $list = \App\Ticket::pluck('sujet','id')->toJson();
+  return $list;
+});

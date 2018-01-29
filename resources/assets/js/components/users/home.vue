@@ -23,55 +23,25 @@
 
       <part-panel-default>
         <div slot="heading">
-          Filter
+          Chiffres clés
         </div>
         <div class="row" slot="body">
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" class="form-control">
-            </div>
-          </div>
-
-        </div>
-      </part-panel-default>
-
-      <part-panel-default>
-        <div slot="heading">
-          Statistiques
-        </div>
-        <div class="row" slot="body">
-          <div class="col-md-12">
+          <div class="col-md-12 m-b-10">
             <div class="d-flex flex-row">
-                <div class="col-md-4">
-                  <center>
-                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
-                  <div class="m-l-10 align-self-center">
-                    <h3 class="m-b-0">2690</h3>
-                    <h5 class="text-muted m-b-0">Clients</h5>
-                  </div>
-                </center>
-                </div>
-                <div class="col-md-4">
-                  <center>
-                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
-                  <div class="m-l-10 align-self-center">
-                    <h3 class="m-b-0">112</h3>
-                    <h5 class="text-muted m-b-0">Contacts</h5>
-                  </div>
-                  </center>
-                </div>
-                <div class="col-md-4">
-                  <center>
-                  <div class="round align-self-center round-info"><i class="ti-user"></i></div>
-                  <div class="m-l-10 align-self-center">
-                    <h3 class="m-b-0">56</h3>
-                    <h5 class="text-muted m-b-0">Tickets</h5>
-                  </div>
-                  </center>
-                </div>
+                <div class="round round-lg align-self-center round-info"><i class="mdi mdi-account-multiple"></i></div>
+                <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0 font-light">{{ $store.state.users.length }}</h3>
+                    <h5 class="text-muted m-b-0">Total Utilisateurs</h5></div>
             </div>
           </div>
-
+          <div class="col-md-12 m-b-10">
+            <div class="d-flex flex-row">
+                <div class="round round-lg align-self-center round-info"><i class="mdi mdi-security"></i></div>
+                <div class="m-l-10 align-self-center">
+                    <h3 class="m-b-0 font-light">{{ $store.state.roles.length }}</h3>
+                    <h5 class="text-muted m-b-0">Total Roles</h5></div>
+            </div>
+          </div>
         </div>
       </part-panel-default>
     </div>

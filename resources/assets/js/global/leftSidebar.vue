@@ -31,7 +31,7 @@
                           <li><a @click="$router.push({ path: `/clients/add` })">Nouveau client</a></li>
                           <li><a @click="$router.push({ path: `/clients` })">Liste clients</a></li>
                           <!-- <li><a href="../dark/index3.html">Status clients</a></li> -->
-                          <li><a @click="$router.push({ path: `/clients/responsables` })">Responsables clients</a></li>
+                          <!-- <li><a @click="$router.push({ path: `/clients/responsables` })">Responsables clients</a></li> -->
                       </ul>
                   </li>
                   <li>
@@ -42,14 +42,14 @@
                           <li><a @click="$router.push({ path: `/tickets/chat` })">Chat tickets</a></li>
                       </ul>
                   </li>
-                  <li>
+                  <!-- <li>
                       <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Boîte de messagerie</span></a>
                       <ul aria-expanded="false" class="collapse">
                           <li><a @click="$router.push({ path: `/inbox/add` })">Nouveau courier</a></li>
                           <li><a @click="$router.push({ path: `/inbox` })">Boîte de réception</a></li>
                           <li><a @click="$router.push({ path: `/inbox/params` })">Paramètres</a></li>
                       </ul>
-                  </li>
+                  </li> -->
                   <li>
                       <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/users` })" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                       <ul aria-expanded="false" class="collapse">
