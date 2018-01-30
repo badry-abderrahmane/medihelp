@@ -12,7 +12,7 @@
 export default {
   methods:{
     goback(){
-        this.$router.go(-1);
+        window.history.back();
     }
   }
 }

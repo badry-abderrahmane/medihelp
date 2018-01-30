@@ -23,7 +23,7 @@
               <ul id="sidebarnav">
                   <li class="nav-small-cap">Navigation</li>
                   <li>
-                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/` })" :class="$route.name == 'Tableau de bord' ? 'active':'' "><i class="mdi mdi-gauge"></i><span class="hide-menu">Tableau de bord</span></a>
+                      <a @click="$router.push({ path: `/` })" :class="[$route.name == 'Tableau de bord' ? 'active':'', 'has-arrow waves-effect waves-dark']"><i class="mdi mdi-gauge"></i><span class="hide-menu">Tableau de bord</span></a>
                   </li>
                   <li>
                     <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/clients` })" :class="$route.name == 'Clients' ? 'active':'' "><i class="mdi mdi-contacts"></i><span class="hide-menu">Clients</span></a>

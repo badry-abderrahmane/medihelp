@@ -49,7 +49,7 @@
                       <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <!-- <img src="assets/images/users/1.jpg" alt="user" class="profile-pic" /> -->
                         <!-- <i class="fa fa-user m-r-10"></i><i class="fa fa-angle-down"></i> -->
-                        {{ user.name.toUpperCase() }}<span class="m-l-10 round round-success"><i class="fa fa-user"></i></span><i class="fa fa-angle-down m-l-10"></i>
+                        {{ user.name }}<span class="m-l-10 round round-success"><i class="fa fa-user"></i></span><i class="fa fa-angle-down m-l-10"></i>
                       </a>
                       <div class="dropdown-menu dropdown-menu-right scale-up">
                           <ul class="dropdown-user">
@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  props:["user"]
+  props:["user"],
 }
 </script>
 

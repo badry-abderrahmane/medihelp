@@ -10,22 +10,22 @@
         <small class="text-muted">Responsable:</small><h6>walid</h6>
         <small class="text-muted">Status:</small>
         <h6>
-          <button v-if="ticket.state == 1" class="btn waves-effect waves-light btn-danger btn-sm" @click="$router.push({ path: '/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
+          <button v-if="ticket.state == 1" class="btn waves-effect waves-light btn-danger btn-sm" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
             <i class="fa fa-pencil m-r-10"></i>
             <span class="btn-text">FERME</span>
           </button>
-          <button v-if="ticket.state == 2" class="btn waves-effect waves-light btn-sm btn-warning" @click="$router.push({ path: '/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
+          <button v-if="ticket.state == 2" class="btn waves-effect waves-light btn-sm btn-warning" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
             <i class="fa fa-pencil m-r-10"></i>
             <span class="btn-text">EN COURS</span>
           </button>
-          <button v-if="ticket.state == 3" class="btn waves-effect waves-light btn-sm btn-success" @click="$router.push({ path: '/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
+          <button v-if="ticket.state == 3" class="btn waves-effect waves-light btn-sm btn-success" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
             <i class="fa fa-pencil m-r-10"></i>
             <span class="btn-text">OUVERT</span>
           </button>
         </h6>
         <small class="text-muted">Action:</small>
         <h6>
-          <button class="btn btn-sm btn-outline-primary" @click="$router.push({ path: '/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
+          <button class="btn btn-sm btn-outline-primary" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })">
             <i class="fa fa-pencil m-r-10"></i>
             <span class="btn-text">{{ ticket.action.value }}</span>
           </button>

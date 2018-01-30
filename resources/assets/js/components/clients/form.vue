@@ -129,6 +129,7 @@ export default {
       onSubmit(){
         this.prepareUsers();
         if (this.form.id == '') {
+          this.form.typeclient_id = this.selectedTypeclient.value
           this.form.post('/clients')
             .then(data => {
               this.$store.dispatch('LOAD_CLIENTS_LIST')

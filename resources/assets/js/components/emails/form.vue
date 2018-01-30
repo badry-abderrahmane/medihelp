@@ -24,7 +24,13 @@
             </div>
             <div class="row">
               <part-input v-model="form" name="sujet" label="Sujet"></part-input>
-              <part-input v-model="form" name="date" label="Date et heure"></part-input>
+              <div class="col-md-4">
+                <div v-bind:class="[ form.errors.get('date') ? 'has-danger' : '', 'form-group']">
+                  <label for="Date" class="control-label mb-10">Date</label>
+                  <flat-pickr v-model="form.date" class="form-control"></flat-pickr>
+                  <div class="form-control-feedback" v-if="form.errors.has('date')" v-text="form.errors.get('date')"></div>
+                </div>
+              </div>
               <div class="col-md-4">
                 <div v-bind:class="[ form.errors.get('typecomm_id') ? 'has-danger' : '', 'form-group']">
                   <label for="typecomm_id" class="control-label mb-10">Type de communication</label>
@@ -78,9 +84,12 @@
 <script>
     import { ModelSelect } from 'vue-search-select'
     import { Form } from './../../api/form.js';
+    import flatPickr from 'vue-flatpickr-component';
+
     export default {
         components: {
-          ModelSelect
+          ModelSelect,
+          flatPickr
         },
         data(){
           return{
