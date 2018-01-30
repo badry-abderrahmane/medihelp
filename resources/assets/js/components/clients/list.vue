@@ -21,7 +21,7 @@
           <td>{{ client.phone }}</td>
           <td>{{ client.secteur }}</td>
           <td>
-            <span class="label label-inverse m-r-10" v-for="user in client.users">{{ user.name }}</span>
+            <span class="label label-inverse m-r-5" v-for="user in client.users"><i class="fa fa-user m-r-5"></i>{{ user.name }}</span>
           </td>
           <td>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/show/`+client.id })"><i class="fa fa-eye"></i></button>

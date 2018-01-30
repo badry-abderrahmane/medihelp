@@ -27,7 +27,7 @@ class TicketController extends Controller
           $ticket = Ticket::create($request->toArray());
           $ticket->users()->sync($request->users);
 
-      return Response::json(['message' => 'Ticket bien ajouté'], 200);
+      return Response::json(['message' => 'Ticket bien ajouté','ticket' => $ticket], 200);
       }
 
       public function show($id)

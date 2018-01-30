@@ -19,6 +19,7 @@ Vue.component('part-panel-white', require('./parts/panels/panelWhite.vue'));
 */
 Vue.component('part-input', require('./parts/inputs/input.vue'));
 Vue.component('part-textarea', require('./parts/inputs/textarea.vue'));
+Vue.component('part-input-warper', require('./parts/inputs/warper.vue'));
 
 
 /*

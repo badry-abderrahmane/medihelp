@@ -53,7 +53,6 @@
           </div>
           <div class="row">
             <part-input v-model="form" name="duree" label="Durée"></part-input>
-            <input type="text" placeholder="" data-mask="99%" class="form-control">
             <div class="col-md-4">
               <div v-bind:class="[ form.errors.get('etat_id') ? 'has-danger' : '', 'form-group']">
                 <label for="etat_id" class="control-label mb-10">Etat</label>
