@@ -73,6 +73,10 @@ const app = new Vue({
       this.slimThisChat();
     });
 
+    Event.$on('init-tooltip-all', () => {
+      this.tooltipAll();
+    });
+
     Event.$on('publish-success-message', (message) => {
       this.notifSuccess(message);
     });
@@ -215,5 +219,8 @@ const app = new Vue({
       });
       //this.loadTooltips();
     },
+    tooltipAll(){
+      $('[data-toggle="tooltip"]').tooltip()
+    }
   }
 }).$mount('#app');

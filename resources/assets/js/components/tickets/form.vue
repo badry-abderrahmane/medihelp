@@ -25,7 +25,15 @@
                 <input name="reference" v-model="form['reference']" class="form-control" disabled>
               </div>
             </div>
-            <part-input v-model="form" name="date" label="Date et heure"></part-input>
+            <div class="col-md-4">
+              <div v-bind:class="[ form.errors.get('date') ? 'has-danger' : '', 'form-group']">
+                <label for="Date" class="control-label mb-10">Date</label>
+                <flat-pickr v-model="form.date" class="form-control"></flat-pickr>
+                <div class="form-control-feedback" v-if="form.errors.has('date')" v-text="form.errors.get('date')"></div>
+              </div>
+            </div>
+
+            <!-- <part-input v-model="form" name="date" label="Date et heure" ></part-input> -->
           </div>
           <div class="row">
             <div class="col-md-4">
@@ -62,10 +70,14 @@
               <div v-bind:class="[ form.errors.get('user_id') ? 'has-danger' : '', 'form-group']">
                 <label for="Clients" class="control-label mb-10">Responsable</label>
                 <multi-select :options="users"
+                                v-show="$store.state.role < 3"
                                :selected-options="selectedUsers"
                                placeholder="Choisir un responsable"
                                @select="onSelectUser">
                 </multi-select>
+                <div v-show="$store.state.role > 2">
+                  <span class="label label-inverse" v-for=" user in selectedUsers"> {{ user.text }}</span>
+                </div>
                 <div class="form-control-feedback" v-if="form.errors.has('user_id')" v-text="form.errors.get('user_id')"></div>
               </div>
             </div>
@@ -84,13 +96,17 @@
     import { BasicSelect } from 'vue-search-select'
     import { MultiSelect } from 'vue-search-select'
     import { ModelSelect } from 'vue-search-select'
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+
     import _ from 'lodash'
     import { Form } from './../../api/form.js';
     export default {
         components: {
           BasicSelect,
           MultiSelect,
-          ModelSelect
+          ModelSelect,
+          flatPickr
         },
         data(){
           return{
@@ -147,6 +163,7 @@
           },
         },
         created(){
+          // Check if client ID is set Then load it into form
           if (this.clientId) {
             this.form.reference = this.guid+'-'+this.clientId;
             this.form.client_id = this.clientId;
@@ -154,7 +171,7 @@
           }else {
             this.form.reference = this.guid+'-1122';
           }
-
+          // Check if ticket ID is set Then load data into form
           if (this.ticketId) {
             axios.get('/tickets/'+this.ticketId)
               .then(response => {
@@ -162,6 +179,8 @@
                 this.getResponsables()
             });
           }
+          // Check if the role is able to change responsable or not
+          this.checkRole()
         },
         mounted(){
           this.getClient()
@@ -242,8 +261,20 @@
                 this.contacts = response.data.contacts;
             });
           },
+          checkRole(){
+            if (this.$store.state.role > 2) {
+              this.users.map((value,key) => {
+                if (this.$store.state.user.id == value.value) {
+                  this.selectedUsers.push(value)
+                }
+              })
+            }
+          },
           goback(){
               this.$router.go(-1);
+          },
+          customFormatter(date) {
+            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
           }
         }
     }

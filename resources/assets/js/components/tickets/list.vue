@@ -13,14 +13,14 @@
           <th>Responsable</th>
           <th></th>
         </tr>
-        <tr slot="tbody" v-for="ticket in tickets">
+        <tr slot="tbody" v-for="ticket in tickets" v-if="ticket.responsable || $store.state.role < 3">
           <td>{{ ticket.id }}</td>
           <td>{{ ticket.date }}</td>
           <td>{{ ticket.sujet }}</td>
           <td>
-            <span v-if="ticket.state == 1" class="label label-danger">Ouvert</span>
+            <span v-if="ticket.state == 1" class="label label-danger">Fermé</span>
             <span v-if="ticket.state == 2" class="label label-warning">En cours</span>
-            <span v-if="ticket.state == 3" class="label label-success">Fermé</span>
+            <span v-if="ticket.state == 3" class="label label-success">Ouvert</span>
           </td>
           <td>{{ ticket.contact.name }}</td>
           <td>

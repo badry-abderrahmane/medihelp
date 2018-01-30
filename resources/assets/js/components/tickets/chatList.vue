@@ -7,7 +7,9 @@
           </div>
           <ul class="chatonline style-none ">
               <li v-for="ticket in tickets">
-                  <a @click="$router.push({ path: '/tickets/chat/show/'+ticket.id })">
+                  <a @click="$router.push({ path: '/tickets/chat/show/'+ticket.id })"
+                      v-bind:class="[ ticketid == ticket.id ? 'active' : '', '']"
+                      data-toggle="tooltip" :title="ticket.sujet" data-placement="right">
                     <span>
                       <h6>
                         <button v-if="ticket.state == 1" class="btn btn-danger btn-xs m-r-10">F</button>
@@ -33,12 +35,17 @@ export default {
     }
   },
   computed:{
-
+    ticketid: function(){
+      return this.$route.params.ticketid
+    }
   },
   created(){
     axios.get('/tickets')
       .then(response => {
         this.tickets = response.data
+        Vue.nextTick(function () {
+          Event.$emit('init-tooltip-all', '');
+        })
     });
   },
   methods:{
