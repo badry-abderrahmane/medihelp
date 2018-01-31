@@ -52,12 +52,16 @@
     <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12" >
       <router-view></router-view>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
+  methods:{
+    doit(){
+      console.log('balalala');
+    }
+  }
 }
 </script>
 

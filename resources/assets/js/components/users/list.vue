@@ -47,6 +47,9 @@
         <show-user-permissions :roleid="roleid" slot="body"></show-user-permissions>
       </modal-large>
     </div>
+    <button @click="$router.push({ path: '/users/add' })" class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
+      <i class="ti ti-plus text-white"></i>
+    </button>
   </table-warper>
 </template>
 
