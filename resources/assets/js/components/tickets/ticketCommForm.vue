@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="jumbotron p-1">
           <center>
-            <label for="one"><strong>Choix Support :</strong></label>
+            <label for="one" class="font-weight-bold">Choix Support :</label>
             <input type="radio" id="one" value="1" v-model="commtype">
             <label for="one">Téléphone</label>
             <input type="radio" id="two" value="2" v-model="commtype">
@@ -14,32 +14,36 @@
       </div>
     </div>
     <!-- FORM -->
-    <div class="row">
-      <part-input-warper name="typecomm_id" label="Type de comm" :form="form" vclass="col-md-3">
-        <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']" slot="input">
-          <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
-        </select>
-      </part-input-warper>
-      <part-input-warper name="etat_id" label="Etat" :form="form" vclass="col-md-3">
-        <select class="form-control" name="etat_id" v-model="form['etat_id']" slot="input">
-          <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
-        </select>
-      </part-input-warper>
-      <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-3">
-        <select class="form-control" name="action_id" v-model="form['action_id']" slot="input">
-          <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
-        </select>
-      </part-input-warper>
-      <part-input-warper v-if="commtype == 1" name="duree" label="Durée(min)" :form="form" vclass="col-md-3">
-        <input type="text" class="form-control" name="duree" v-model="form['duree']" slot="input">
-      </part-input-warper>
-    </div>
-    <div class="row">
-      <part-input-warper name="message" label="Message" :form="form" vclass="col-md-12">
-        <textarea name="message" rows="8" class="form-control" v-model="form['message']" slot="input"></textarea>
-      </part-input-warper>
-    </div>
-
+    <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
+        <div class="row">
+          <part-input-warper name="typecomm_id" label="Type de comm" :form="form" vclass="col-md-3">
+            <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']" slot="input">
+              <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
+            </select>
+          </part-input-warper>
+          <part-input-warper name="etat_id" label="Etat" :form="form" vclass="col-md-3">
+            <select class="form-control" name="etat_id" v-model="form['etat_id']" slot="input">
+              <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
+            </select>
+          </part-input-warper>
+          <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-3">
+            <select class="form-control" name="action_id" v-model="form['action_id']" slot="input">
+              <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
+            </select>
+          </part-input-warper>
+          <part-input-warper v-if="commtype == 1" name="duree" label="Durée(min)" :form="form" vclass="col-md-3">
+            <input type="text" class="form-control" name="duree" v-model="form['duree']" slot="input">
+          </part-input-warper>
+        </div>
+        <div class="row">
+          <part-input-warper name="message" label="Message" :form="form" vclass="col-md-12">
+            <textarea name="message" rows="8" class="form-control" v-model="form['message']" slot="input"></textarea>
+          </part-input-warper>
+        </div>
+        <div class="row">
+          <part-button-submit :editing="false"></part-button-submit>
+        </div>
+    </form>
   </div>
 </template>
 
@@ -64,7 +68,6 @@ export default {
         etat_id: '',
         ticket_id: '',
       }),
-      choice: true,
       commtype: 1,
     }
   },
@@ -83,8 +86,26 @@ export default {
     this.loadTicket();
   },
   methods:{
-    start(){
-      this.choice = false
+    onSubmit(){
+      if (this.commtype == 1) {
+        this.form.post('/appels')
+          .then(data => {
+            Event.$emit('publish-success-message', data.message);
+            this.$router.push({ path: '/tickets' });
+          })
+          .catch(errors =>{
+            console.log(errors);
+          });
+      }else{
+        this.form.post('/emails')
+          .then(data => {
+            Event.$emit('publish-success-message', data.message);
+            this.$router.push({ path: '/tickets' });
+          })
+          .catch(errors =>{
+            console.log(errors);
+          });
+      }
     },
     loadTicket(){
       this.form.date = this.ticket.date
