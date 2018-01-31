@@ -16,6 +16,7 @@
       <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <!-- toast CSS -->
       <link href="../assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+      <link href="../assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
       <!-- Custom CSS -->
       <link href="css/style.css" rel="stylesheet">
       <!-- You can change the theme colors from here -->
@@ -73,7 +74,8 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
-
+    <script src="../assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+    
     <script src="/js/app.js" charset="utf-8"></script>
 </body>
 </html>

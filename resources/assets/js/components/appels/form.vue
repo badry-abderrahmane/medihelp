@@ -8,70 +8,44 @@
         </div>
         <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="Contacts" class="control-label mb-10">Référence ticket</label>
-                <input  class="form-control" v-model="reference" disabled>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="Contacts" class="control-label mb-10">Contact</label>
-                <input  class="form-control" v-model="contact" disabled>
-              </div>
-            </div>
-
+            <part-input-warper name="reference" label="Référence ticket" :form="form" vclass="col-md-6">
+              <input  class="form-control" v-model="reference" slot="input" disabled>
+            </part-input-warper>
+            <part-input-warper name="contact" label="Contact" :form="form" vclass="col-md-6">
+              <input  class="form-control" v-model="contact" slot="input" disabled>
+            </part-input-warper>
           </div>
           <div class="row">
             <part-input v-model="form" name="sujet" label="Sujet"></part-input>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('date') ? 'has-danger' : '', 'form-group']">
-                <label for="Date" class="control-label mb-10">Date</label>
-                <flat-pickr v-model="form.date" class="form-control"></flat-pickr>
-                <div class="form-control-feedback" v-if="form.errors.has('date')" v-text="form.errors.get('date')"></div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('typecomm_id') ? 'has-danger' : '', 'form-group']">
-                <label for="typecomm_id" class="control-label mb-10">Type de communication</label>
-                <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']">
-                  <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
-                </select>
-                <div class="form-control-feedback" v-if="form.errors.has('typecomm_id')" v-text="form.errors.get('typecomm_id')"></div>
-              </div>
-            </div>
+            <part-input-warper name="date" label="Date" :form="form" vclass="col-md-4">
+              <flat-pickr v-model="form.date" class="form-control" slot="input"></flat-pickr>
+            </part-input-warper>
+            <part-input-warper name="typecomm_id" label="Type de communication" :form="form" vclass="col-md-4">
+              <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']" slot="input">
+                <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
+              </select>
+            </part-input-warper>
+          </div>
+          <div class="row">
+            <part-input-warper name="message" label="Message" :form="form" vclass="col-md-12">
+              <textarea name="message" rows="8" class="form-control" v-model="form['message']" slot="input"></textarea>
+            </part-input-warper>
+          </div>
+          <div class="row">
+            <part-input-warper name="duree" label="Durée" :form="form" vclass="col-md-4">
+              <input slot="input" id="tch1" type="text" name="tch1" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
+            </part-input-warper>
+            <part-input-warper name="etat_id" label="Etat" :form="form" vclass="col-md-4">
+              <select class="form-control" name="etat_id" v-model="form['etat_id']" slot="input">
+                <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
+              </select>
+            </part-input-warper>
+            <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-4">
+              <select class="form-control" name="action_id" v-model="form['action_id']" slot="input">
+                <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
+              </select>
+            </part-input-warper>
 
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div v-bind:class="[ form.errors.get('message') ? 'has-danger' : '', 'form-group']">
-                <label for="Message" class="control-label mb-10">Message</label>
-                <textarea name="name" rows="8" class="form-control" v-model="form['message']"></textarea>
-                <div class="form-control-feedback" v-if="form.errors.has('message')" v-text="form.errors.get('message')"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <part-input v-model="form" name="duree" label="Durée"></part-input>
-            <input type="text" placeholder="" data-mask="99%" class="form-control">
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('etat_id') ? 'has-danger' : '', 'form-group']">
-                <label for="etat_id" class="control-label mb-10">Etat</label>
-                <select class="form-control" name="etat_id" v-model="form['etat_id']">
-                  <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
-                </select>
-                <div class="form-control-feedback" v-if="form.errors.has('etat_id')" v-text="form.errors.get('etat_id')"></div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('action_id') ? 'has-danger' : '', 'form-group']">
-                <label for="Actions" class="control-label mb-10">Action</label>
-                <select class="form-control" name="action_id" v-model="form['action_id']">
-                  <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
-                </select>
-                <div class="form-control-feedback" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
-              </div>
-            </div>
           </div>
           <div class="row">
             <part-button-submit :editing="editing"></part-button-submit>
@@ -156,14 +130,25 @@
             });
           }
         },
-
+        mounted(){
+          $("input[name='tch1']").TouchSpin({
+              min: 0,
+              max: 100,
+              step: 0.1,
+              decimals: 2,
+              boostat: 5,
+              maxboostedstep: 10,
+              postfix: 'min.sec'
+          });
+        },
         methods: {
           onSubmit(){
+            this.form.duree = $('#tch1').val();
             if (this.form.id == '') {
               this.form.post('/appels')
                 .then(data => {
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.$router.push({ path: '/tickets/chat/show/'+this.ticketId })
                 })
                 .catch(errors =>{
                   console.log(errors);
@@ -172,17 +157,13 @@
               this.form.put('/appels')
                 .then(data => {
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.$router.push({ path: '/tickets/chat/show/'+this.ticketId })
                 })
                 .catch(errors => {
                   console.log(errors);
                 });
             }
           },
-
-          goback(){
-              this.$router.go(-1);
-          }
         }
     }
 </script>

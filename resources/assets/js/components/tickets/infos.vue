@@ -7,7 +7,7 @@
         <small class="text-muted">Date d'incident:</small><h6>{{ ticket.date }}</h6>
         <small class="text-muted">Appels:</small><h6>{{ countAppels }}</h6>
         <small class="text-muted">Emails:</small><h6>{{ countEmails }}</h6>
-        <small class="text-muted">Responsable:</small><h6>walid</h6>
+        <small class="text-muted">Responsable:</small><p><span class="label label-inverse m-r-5" v-for="user in ticket.users"><i class="fa fa-user m-r-5"></i>{{ user.name }}</span></p>
         <small class="text-muted">Status:</small>
         <h6>
           <button v-if="ticket.state == 1" class="btn waves-effect waves-light btn-danger btn-sm" @click="$router.push({ path: '/clients/tickets/edit/'+ticket.client.id+'/'+ticket.id })">

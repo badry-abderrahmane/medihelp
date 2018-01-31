@@ -8,67 +8,51 @@
         </div>
         <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
           <div class="row">
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('client_id') ? 'has-danger' : '', 'form-group']">
-                <label for="Clients" class="control-label mb-10">Client</label>
-                <basic-select :options="clients"
-                              :selected-option="selectedClient"
-                              placeholder="Choisir .."
-                              @select="onSelectClient">
-                </basic-select>
-                <div class="form-control-feedback" v-if="form.errors.has('client_id')" v-text="form.errors.get('client_id')"></div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="Clients" class="control-label mb-10">Référence</label>
-                <input name="reference" v-model="form['reference']" class="form-control" disabled>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('date') ? 'has-danger' : '', 'form-group']">
-                <label for="Date" class="control-label mb-10">Date</label>
-                <flat-pickr v-model="form.date" class="form-control"></flat-pickr>
-                <div class="form-control-feedback" v-if="form.errors.has('date')" v-text="form.errors.get('date')"></div>
-              </div>
-            </div>
-
-            <!-- <part-input v-model="form" name="date" label="Date et heure" ></part-input> -->
+            <!-- // INPUT -->
+            <part-input-warper name="client_id" label="Client" :form="form" vclass="col-md-4">
+              <basic-select :options="clients"
+                            :selected-option="selectedClient"
+                            placeholder="Choisir .."
+                            @select="onSelectClient"
+                            slot="input">
+              </basic-select>
+            </part-input-warper>
+            <!-- // INPUT -->
+            <part-input-warper name="reference" label="Référence" :form="form" vclass="col-md-4">
+              <input name="reference" v-model="form['reference']" class="form-control" disabled slot="input">
+            </part-input-warper>
+            <!-- // INPUT -->
+            <part-input-warper name="date" label="Date" :form="form" vclass="col-md-4">
+              <flat-pickr v-model="form.date" class="form-control" slot="input"></flat-pickr>
+            </part-input-warper>
           </div>
           <div class="row">
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('state') ? 'has-danger' : '', 'form-group']">
-                <label for="State" class="control-label mb-10">Status</label>
-                <model-select :options="states" v-model="form['state']">
-               </model-select>
-               <div class="form-control-feedback" v-if="form.errors.has('state')" v-text="form.errors.get('state')"></div>
-              </div>
-            </div>
+            <!-- // INPUT -->
+            <part-input-warper name="state" label="Status" :form="form" vclass="col-md-4">
+              <model-select :options="states" v-model="form['state']" slot="input">
+             </model-select>
+            </part-input-warper>
+            <!-- // INPUT -->
             <part-input v-model="form" name="sujet" label="Sujet"></part-input>
+            <!-- // INPUT -->
             <part-input v-model="form" name="note" label="Note"></part-input>
           </div>
           <div class="row">
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('contact_id') ? 'has-danger' : '', 'form-group']">
-                <label for="Contacts" class="control-label mb-10">Contact</label>
-                <select class="form-control" name="contact_id" v-model="form['contact_id']">
-                  <option v-for="contact in contacts" :value="contact.id">{{ contact.name }}</option>
-                </select>
-                <div class="form-control-feedback" v-if="form.errors.has('contact_id')" v-text="form.errors.get('contact_id')"></div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('state') ? 'has-danger' : '', 'form-group']">
-                <label for="Actions" class="control-label mb-10">Action</label>
-                <select class="form-control" name="action_id" v-model="form['action_id']">
-                  <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
-                </select>
-                <div class="form-control-feedback" v-if="form.errors.has('action_id')" v-text="form.errors.get('action_id')"></div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div v-bind:class="[ form.errors.get('user_id') ? 'has-danger' : '', 'form-group']">
-                <label for="Clients" class="control-label mb-10">Responsable</label>
+            <!-- // INPUT -->
+            <part-input-warper name="contact_id" label="Contact" :form="form" vclass="col-md-4">
+              <select class="form-control" name="contact_id" v-model="form['contact_id']" slot="input">
+                <option v-for="contact in contacts" :value="contact.id">{{ contact.name }}</option>
+              </select>
+            </part-input-warper>
+            <!-- // INPUT -->
+            <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-4">
+              <select class="form-control" name="action_id" v-model="form['action_id']" slot="input">
+                <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
+              </select>
+            </part-input-warper>
+            <!-- // INPUT -->
+            <part-input-warper name="user_id" label="Responsable" :form="form" vclass="col-md-4">
+              <div slot="input">
                 <multi-select :options="users"
                                 v-show="$store.state.role < 3"
                                :selected-options="selectedUsers"
@@ -78,9 +62,8 @@
                 <div v-show="$store.state.role > 2">
                   <span class="label label-inverse" v-for=" user in selectedUsers"> {{ user.text }}</span>
                 </div>
-                <div class="form-control-feedback" v-if="form.errors.has('user_id')" v-text="form.errors.get('user_id')"></div>
               </div>
-            </div>
+            </part-input-warper>
           </div>
           <div class="row">
             <part-button-submit :editing="editing"></part-button-submit>
@@ -89,6 +72,10 @@
         </form>
       </part-panel>
     </div>
+    <modal-large v-if="showModal" @close="showModal = false">
+      <h3 slot="header">Première communication</h3>
+      <form-ticket-comm :ticket="storedTicket" slot="body"></form-ticket-comm>
+    </modal-large>
   </div>
 </template>
 
@@ -97,17 +84,11 @@
     import { MultiSelect } from 'vue-search-select'
     import { ModelSelect } from 'vue-search-select'
     import flatPickr from 'vue-flatpickr-component';
-    import 'flatpickr/dist/flatpickr.css';
-
     import _ from 'lodash'
     import { Form } from './../../api/form.js';
+
     export default {
-        components: {
-          BasicSelect,
-          MultiSelect,
-          ModelSelect,
-          flatPickr
-        },
+        components: { BasicSelect,MultiSelect,ModelSelect,flatPickr},
         data(){
           return{
             form : new Form({
@@ -128,17 +109,15 @@
             selectedUsers: [],
             lastSelectedUsers: {},
             selectedClient:{},
+
+            storedTicket: 0,
+            showModal: false,
           }
         },
         computed:{
           editing: function(){
-            if (this.$route.params.id) {
-              this.color='warning'
-              return true
-            }else{
-              this.color='success'
-              return false
-            }
+            if (this.$route.params.id) { this.color='warning'; return true }
+            else{ this.color='success'; return false }
           },
           ticketId: function(){
             return this.$route.params.id
@@ -215,7 +194,10 @@
               this.form.post('/tickets')
                 .then(data => {
                   Event.$emit('publish-success-message', data.message);
-                  this.goback();
+                  this.storedTicket = data.ticket
+                  Vue.nextTick( () => {
+                    this.showModal = true
+                  })
                 })
                 .catch(errors =>{
                   console.log(errors);

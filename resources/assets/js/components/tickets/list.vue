@@ -22,7 +22,7 @@
             <span v-if="ticket.state == 2" class="label label-warning">En cours</span>
             <span v-if="ticket.state == 3" class="label label-success">Ouvert</span>
           </td>
-          <td>{{ ticket.contact.name }}</td>
+          <td><p><span class="label label-inverse m-r-10" v-for="user in ticket.users"><i class="fa fa-user m-r-5"></i>{{ user.name }}</span></p></td>
           <td>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/tickets/chat/show/`+ticket.id })"><i class="fa fa-eye"></i></button>
             <button class="btn btn-outline-info" @click="$router.push({ path: `/clients/tickets/edit/`+ticket.client.id+`/`+ticket.id })"><i class="fa fa-pencil"></i></button>

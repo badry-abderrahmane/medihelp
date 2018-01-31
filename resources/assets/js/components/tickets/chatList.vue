@@ -9,6 +9,7 @@
               <li v-for="ticket in tickets">
                   <a @click="$router.push({ path: '/tickets/chat/show/'+ticket.id })"
                       v-bind:class="[ ticketid == ticket.id ? 'active' : '', '']"
+                      v-if="ticket.responsable || $store.state.role < 3"
                       data-toggle="tooltip" :title="ticket.sujet" data-placement="right">
                     <span>
                       <h6>
