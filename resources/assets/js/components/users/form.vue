@@ -71,7 +71,7 @@ export default {
             .then(data => {
               //this.$store.dispatch('LOAD_CLIENTS_LIST')
               Event.$emit('publish-success-message', data.message);
-              this.goback();
+              this.$router.push({ path:'/users'});
             })
             .catch(errors =>{
               console.log(errors);
@@ -81,17 +81,13 @@ export default {
             .then(data => {
               //this.$store.dispatch('LOAD_CLIENTS_LIST')
               Event.$emit('publish-success-message', data.message);
-              this.goback();
+              this.$router.push({ path:'/users'});
             })
             .catch(errors => {
               console.log(errors);
             });
         }
       },
-
-      goback(){
-          this.$router.go(-1);
-      }
     }
 }
 </script>

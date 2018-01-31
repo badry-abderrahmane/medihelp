@@ -16,23 +16,23 @@
     <!-- FORM -->
     <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" slot="body">
         <div class="row">
-          <part-input-warper name="typecomm_id" label="Type de comm" :form="form" vclass="col-md-3">
+          <part-input-warper name="typecomm_id" label="Type de comm" :form="form" vclass="col-md-6">
             <select class="form-control" name="typecomm_id" v-model="form['typecomm_id']" slot="input">
               <option v-for="typecomm in typecomms" :value="typecomm.value">{{ typecomm.text }}</option>
             </select>
           </part-input-warper>
-          <part-input-warper name="etat_id" label="Etat" :form="form" vclass="col-md-3">
+          <part-input-warper name="etat_id" label="Etat" :form="form" vclass="col-md-6">
             <select class="form-control" name="etat_id" v-model="form['etat_id']" slot="input">
               <option v-for="etat in etats" :value="etat.value">{{ etat.text }}</option>
             </select>
           </part-input-warper>
-          <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-3">
+          <part-input-warper name="action_id" label="Action à faire" :form="form" vclass="col-md-6">
             <select class="form-control" name="action_id" v-model="form['action_id']" slot="input">
               <option v-for="action in actions" :value="action.value">{{ action.text }}</option>
             </select>
           </part-input-warper>
-          <part-input-warper v-if="commtype == 1" name="duree" label="Durée(min)" :form="form" vclass="col-md-3">
-            <input type="text" class="form-control" name="duree" v-model="form['duree']" slot="input">
+          <part-input-warper v-show="commtype == 1" name="duree" label="Durée" :form="form" vclass="col-md-6">
+            <input slot="input" id="tch1" type="text" name="tch1" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
           </part-input-warper>
         </div>
         <div class="row">
@@ -85,13 +85,18 @@ export default {
   created(){
     this.loadTicket();
   },
+  mounted(){
+    this.initTouchSpin()
+  },
   methods:{
     onSubmit(){
+      this.form.duree = $('#tch1').val();
+      var ticketID = this.form.ticket_id;
       if (this.commtype == 1) {
         this.form.post('/appels')
           .then(data => {
             Event.$emit('publish-success-message', data.message);
-            this.$router.push({ path: '/tickets' });
+            this.$router.push({ path: '/tickets/chat/show/'+ticketID })
           })
           .catch(errors =>{
             console.log(errors);
@@ -100,7 +105,7 @@ export default {
         this.form.post('/emails')
           .then(data => {
             Event.$emit('publish-success-message', data.message);
-            this.$router.push({ path: '/tickets' });
+            this.$router.push({ path: '/tickets/chat/show/'+ticketID })
           })
           .catch(errors =>{
             console.log(errors);
@@ -111,6 +116,17 @@ export default {
       this.form.date = this.ticket.date
       this.form.sujet = this.ticket.sujet
       this.form.ticket_id = this.ticket.id
+    },
+    initTouchSpin(){
+      $("input[name='tch1']").TouchSpin({
+          min: 0,
+          max: 100,
+          step: 0.1,
+          decimals: 2,
+          boostat: 5,
+          maxboostedstep: 10,
+          postfix: 'min.sec'
+      });
     }
   }
 }
