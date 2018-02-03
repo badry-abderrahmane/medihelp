@@ -14,6 +14,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/mail/send', 'MailController@send');
+
 Auth::routes();
 
 Route::get('/wayway', function() {
