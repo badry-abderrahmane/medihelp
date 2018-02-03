@@ -22,6 +22,7 @@
         "bulma-pageloader": "^0.1.0",
         "chart.js": "^2.7.1",
         "sweetalert2": "^7.4.0",
+        "v-offline": "^1.0.7",
         "vue-chartjs": "^3.1.0",
         "vue-flatpickr-component": "^6.2.0",
         "vue-multiselect": "^2.0.8",

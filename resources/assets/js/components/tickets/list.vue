@@ -30,11 +30,11 @@
           </td>
         </tr>
       </datatable-buttons>
-    </div>
-    <div>
+      <div>
         <button @click="$router.push({ path: '/tickets/add' })" class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10">
           <i class="ti ti-plus text-white"></i>
         </button>
+      </div>
     </div>
   </table-warper>
 </template>

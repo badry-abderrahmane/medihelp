@@ -81873,23 +81873,23 @@ var render = function() {
             })
           ],
           2
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
+            on: {
+              click: function($event) {
+                _vm.$router.push({ path: "/clients/add" })
+              }
+            }
+          },
+          [_c("i", { staticClass: "ti ti-plus text-white" })]
         )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass:
-          "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
-        on: {
-          click: function($event) {
-            _vm.$router.push({ path: "/clients/add" })
-          }
-        }
-      },
-      [_c("i", { staticClass: "ti ti-plus text-white" })]
     )
   ])
 }
@@ -109846,23 +109846,23 @@ var render = function() {
               ],
               1
             )
-          : _vm._e()
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
+            on: {
+              click: function($event) {
+                _vm.$router.push({ path: "/users/add" })
+              }
+            }
+          },
+          [_c("i", { staticClass: "ti ti-plus text-white" })]
+        )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass:
-          "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
-        on: {
-          click: function($event) {
-            _vm.$router.push({ path: "/users/add" })
-          }
-        }
-      },
-      [_c("i", { staticClass: "ti ti-plus text-white" })]
     )
   ])
 }
@@ -110524,23 +110524,23 @@ var render = function() {
             })
           ],
           2
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
+            on: {
+              click: function($event) {
+                _vm.$router.push({ path: "/users/roles/add" })
+              }
+            }
+          },
+          [_c("i", { staticClass: "ti ti-plus text-white" })]
         )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass:
-          "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
-        on: {
-          click: function($event) {
-            _vm.$router.push({ path: "/users/roles/add" })
-          }
-        }
-      },
-      [_c("i", { staticClass: "ti ti-plus text-white" })]
     )
   ])
 }
@@ -112040,26 +112040,26 @@ var render = function() {
             })
           ],
           2
-        )
+        ),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "button",
+            {
+              staticClass:
+                "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
+              on: {
+                click: function($event) {
+                  _vm.$router.push({ path: "/tickets/add" })
+                }
+              }
+            },
+            [_c("i", { staticClass: "ti ti-plus text-white" })]
+          )
+        ])
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "button",
-        {
-          staticClass:
-            "right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10",
-          on: {
-            click: function($event) {
-              _vm.$router.push({ path: "/tickets/add" })
-            }
-          }
-        },
-        [_c("i", { staticClass: "ti ti-plus text-white" })]
-      )
-    ])
+    )
   ])
 }
 var staticRenderFns = []
@@ -116019,7 +116019,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -116030,6 +116030,30 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_v_offline__ = __webpack_require__(694);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -116116,10 +116140,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    offline: __WEBPACK_IMPORTED_MODULE_0_v_offline__["a" /* default */]
+  },
   data: function data() {
     return {
-      user: ''
+      user: '',
+      status: true
     };
   },
   created: function created() {
@@ -116128,6 +116157,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get('/wayway').then(function (response) {
       _this.user = response.data;
     });
+  },
+
+  methods: {
+    handleConnectivityChange: function handleConnectivityChange(status) {
+      this.status = status;
+    },
+    reload: function reload() {
+      this.$router.go({ path: '/' });
+    }
   }
 });
 
@@ -116143,33 +116181,72 @@ var render = function() {
     "div",
     { attrs: { id: "main-wrapper" } },
     [
-      _c("global-topbar", { attrs: { user: _vm.user } }),
+      _vm.status
+        ? _c(
+            "div",
+            [
+              _c("global-topbar", { attrs: { user: _vm.user } }),
+              _vm._v(" "),
+              _c("global-left-sidebar"),
+              _vm._v(" "),
+              _c("div", { staticClass: "page-wrapper" }, [
+                _c(
+                  "div",
+                  { staticClass: "container-fluid" },
+                  [
+                    _c("global-bread-crump"),
+                    _vm._v(" "),
+                    _c("router-view"),
+                    _vm._v(" "),
+                    _c("global-right-sidebar")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("footer", { staticClass: "footer" }, [
+                  _vm._v(
+                    "\n            © 2018 Material HelpDesk v1.8\n        "
+                  )
+                ])
+              ])
+            ],
+            1
+          )
+        : _c("div", [_vm._m(0)]),
       _vm._v(" "),
-      _c("global-left-sidebar"),
-      _vm._v(" "),
-      _c("div", { staticClass: "page-wrapper" }, [
-        _c(
-          "div",
-          { staticClass: "container-fluid" },
-          [
-            _c("global-bread-crump"),
-            _vm._v(" "),
-            _c("router-view"),
-            _vm._v(" "),
-            _c("global-right-sidebar")
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("footer", { staticClass: "footer" }, [
-          _vm._v("\n            © 2018 Material HelpDesk v1.8\n        ")
-        ])
-      ])
+      _c("offline", {
+        on: { "detected-condition": _vm.handleConnectivityChange }
+      })
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      { staticClass: "error-page", attrs: { id: "wrapper" } },
+      [
+        _c("div", { staticClass: "error-box" }, [
+          _c("div", { staticClass: "error-body text-center" }, [
+            _c("h1", [_c("i", { staticClass: "mdi mdi-emoticon-sad" })]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "text-uppercase m-t-30" }, [
+              _vm._v("Aucune connexion Internet")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("footer", { staticClass: "footer text-center" }, [
+            _vm._v("© 2018 STG HelpDesk.")
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -116184,6 +116261,56 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 693 */,
+/* 694 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var VOffline = { render: function render() {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_vm.onLine ? _c('div', { class: _vm.onlineClass }, [_vm._t("online")], 2) : _c('div', { class: _vm.offlineClass }, [_vm._t("offline")], 2)]);
+  }, staticRenderFns: [],
+  name: 'v-offline',
+  props: {
+    onlineClass: {
+      type: String,
+      required: false
+    },
+    offlineClass: {
+      type: String,
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      onLine: navigator.onLine || false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.addEventListener('load', function () {
+      _this.updateOnlineStatus();
+      window.addEventListener('online', _this.updateOnlineStatus);
+      window.addEventListener('offline', _this.updateOnlineStatus);
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('online', this.updateOnlineStatus);
+    window.removeEventListener('offline', this.updateOnlineStatus);
+  },
+
+  methods: {
+    updateOnlineStatus: function updateOnlineStatus() {
+      this.isOnline = navigator.onLine || false;
+      this.$emit('detected-condition', this.isOnline);
+    }
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (VOffline);
+
 
 /***/ })
 /******/ ]);

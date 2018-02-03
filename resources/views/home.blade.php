@@ -44,6 +44,7 @@
       <full-app></full-app>
     </div>
 
+
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -75,7 +76,7 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="../assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script src="../assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
-    
+
     <script src="/js/app.js" charset="utf-8"></script>
 </body>
 </html>
