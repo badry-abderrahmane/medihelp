@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@index');
+
+Route::get('/mail/send', 'MailController@send');
 
 Auth::routes();
 
