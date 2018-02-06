@@ -4,24 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Mail;
+use App\Services\MailService;
 
 class MailController extends Controller
 {
+  public function send(Request $request){
 
-    public function send(Request $request){
+    $send_instance = new MailService;
 
+    $email = $request;
+    // $email->title = 'STG Support Feedback';
+    // $email->body  = 'This is support ticket feedback';
+    // $email->from  = 'abderrahmane@t.stg.ma';
+    // $email->to    = 'walid@stg.ma';
 
-        Mail::send('emails.support', ['title' => 'Test Support HelpDesk', 'content' => 'Messge Ticket HelpDesk'], function ($message)
-        {
+    $response = $send_instance->send($email);
 
-            $message->from('support@t.stg.ma', 'STG Support Technique');
+    var_dump($response);
 
-            $message->to('badry1992@gmail.com');
+  return response()->json(['message' => 'Request completed']);
+  }
 
-        });
-
-    return response()->json(['message' => 'Request completed']);
-    }
 
 }
