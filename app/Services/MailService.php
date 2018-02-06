@@ -15,7 +15,7 @@ class MailService
           $message->replyTo($email->address, $name = null);
 
           $message->subject($email->subject);
-          
+
           $message->priority($email->level);
           $message->from($email->from, 'STG Maroc');
           $message->to($email->to);
