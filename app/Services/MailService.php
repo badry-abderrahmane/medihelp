@@ -17,7 +17,7 @@ class MailService
           $message->subject($email->subject);
 
           $message->priority($email->level);
-          $message->from($email->from, 'STG Maroc');
+          $message->from($email->from, 'STG SUPPORT');
           $message->to($email->to);
       });
     } catch (\Exception $e) {
@@ -26,7 +26,5 @@ class MailService
 
   return 'Mail Sent';
   }
-
-
 
 }
