@@ -11,18 +11,9 @@ class MailController extends Controller
   public function send(Request $request){
 
     $send_instance = new MailService;
+    $response      = $send_instance->send($request);
 
-    $email = $request;
-    // $email->title = 'STG Support Feedback';
-    // $email->body  = 'This is support ticket feedback';
-    // $email->from  = 'abderrahmane@t.stg.ma';
-    // $email->to    = 'walid@stg.ma';
-
-    $response = $send_instance->send($email);
-
-    var_dump($response);
-
-  return response()->json(['message' => 'Request completed']);
+  return response()->json(['message' => $response]);
   }
 
 
