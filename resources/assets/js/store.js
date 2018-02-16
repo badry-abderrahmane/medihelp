@@ -17,7 +17,11 @@ export const store = new Vuex.Store({
 
     ticketsAll: [],
     user: [],
-    role: 4
+    role: 4,
+
+    // MAILBOX
+    folders:[],
+    mails: [],
   },
   mutations: {
     SET_TYPECLIENTS_LIST: (state, { list }) => {
@@ -73,6 +77,12 @@ export const store = new Vuex.Store({
     },
     SET_USER: (state, { user }) => {
       state.user = user
+    },
+    SET_MAILBOX_FOLDERS: (state, { folders }) => {
+      state.folders = folders
+    },
+    SET_MAILBOX_MAILS: (state, { mails }) => {
+      state.mails = mails
     },
     SET_ROLE: (state, { role }) => {
       switch (role) {
@@ -176,6 +186,22 @@ export const store = new Vuex.Store({
 
     LOAD_ROLE: function ({ commit }) {
       commit('SET_ROLE', { role: document.head.querySelector('meta[name="role"]').content })
+    },
+
+    LOAD_MAILBOX_FOLDERS: function ({ commit }) {
+      axios.get('mail/folders').then((response) => {
+        commit('SET_MAILBOX_FOLDERS', { folders: response.data })
+      }, (err) => {
+        console.log(err)
+      })
+    },
+
+    LOAD_MAILBOX_MAILS: function ({ commit }) {
+      axios.get('mail/get').then((response) => {
+        commit('SET_MAILBOX_MAILS', { mails: response.data })
+      }, (err) => {
+        console.log(err)
+      })
     },
   }
 });
