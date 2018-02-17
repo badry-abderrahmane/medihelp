@@ -26,11 +26,10 @@ Route::prefix('mail')->group(function () {
     Route::post('transfer', 'MailController@transfer');
     Route::post('attachTicket', 'MailController@attachTicket');
     Route::post('unread', 'MailController@unread');
+    Route::post('config', 'MailController@config');
+    Route::get('incoming', 'MailController@testIncoming');
+    Route::get('outgoing', 'MailController@testOutgoing');
 });
-
-
-
-
 
 
 Auth::routes();

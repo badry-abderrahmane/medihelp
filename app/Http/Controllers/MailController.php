@@ -9,15 +9,53 @@ use App\Services\MailService;
 use Ddeboer\Imap\Server;
 use Ddeboer\Imap\Search\Date\Since;
 use Carbon\Carbon;
+use Auth;
 
 class MailController extends Controller
 {
-  protected $server;
-  protected $connection;
+  public $server;
+  public $connection;
 
-  function __construct() {
+  public function connect()
+  {
+    $user = Auth::user();
     $this->server = new Server('imap.gmail.com');
-    $this->connection = $this->server->authenticate('abderrahmane@t.stg.ma', 'stgmaroc2018');
+    $this->connection = $this->server->authenticate($user->email, $user->mailpass);
+  }
+
+  public function config(Request $request)
+  {
+    $user = Auth::user();
+    $var = $user->update([
+        'mailpass' => $request->password,
+    ]);
+
+  return response()->json(['message' => 'Paramètres mis à jour']);
+  }
+
+  public function testIncoming()
+  {
+
+    $folders = $this->getFolders();
+
+  return $folders;
+  }
+
+  public function testOutgoing()
+  {
+    $email = new \stdClass;
+    $email->title   = 'Perte de carburant';
+    $email->body    = 'This is support ticket feedback';
+    $email->from    = 'abderrahmane@t.stg.ma';
+    $email->to      = 'badry1992@gmail.com';
+    $email->address = 'badry1992@gmail.com';
+    $email->subject = 'Ticket ID: 5585654 - Perte de carburant';
+
+    $send_instance = new MailService;
+
+    $response      = $send_instance->send($email);
+
+  return response()->json(['message' => $response]);
   }
 
   public function send(Request $request){
@@ -31,6 +69,7 @@ class MailController extends Controller
 
   public function getFolders()
   {
+    $this->connect();
     $mailboxes = $this->connection->getMailboxes();
     $folders = array();
     $i = 0;

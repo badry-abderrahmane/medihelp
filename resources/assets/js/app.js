@@ -61,7 +61,7 @@ const app = new Vue({
 
     // MAILBOX
     this.$store.dispatch('LOAD_MAILBOX_FOLDERS')
-    this.$store.dispatch('LOAD_MAILBOX_MAILS')
+    //this.$store.dispatch('LOAD_MAILBOX_MAILS')
   },
   created(){
     Event.$on('init-datatable', (tableid) => {
