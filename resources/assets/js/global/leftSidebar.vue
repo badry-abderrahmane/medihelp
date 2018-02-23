@@ -42,14 +42,14 @@
                           <li><a @click="$router.push({ path: `/tickets/chat` })">Chat tickets</a></li>
                       </ul>
                   </li>
-                  <!-- <li>
-                      <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Boîte de messagerie</span></a>
+                  <li>
+                      <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/inbox/get/INBOX` })" aria-expanded="false" :class="$route.name == 'Mailbox' ? 'active':'' "><i class="mdi mdi-email"></i><span class="hide-menu">Boîte de messagerie</span></a>
                       <ul aria-expanded="false" class="collapse">
-                          <li><a @click="$router.push({ path: `/inbox/add` })">Nouveau courier</a></li>
-                          <li><a @click="$router.push({ path: `/inbox` })">Boîte de réception</a></li>
-                          <li><a @click="$router.push({ path: `/inbox/params` })">Paramètres</a></li>
+                          <li><a @click="$router.push({ path: `/inbox/new/email` })">Nouveau courier</a></li>
+                          <li><a @click="$router.push({ path: `/inbox/get/INBOX` })">Boîte de réception</a></li>
+                          <li><a @click="$router.push({ path: `/inbox/parametres` })">Paramètres</a></li>
                       </ul>
-                  </li> -->
+                  </li>
                   <li v-if="$store.state.role < 2">
                       <a class="has-arrow waves-effect waves-dark" @click="$router.push({ path: `/users` })" :class="$route.name == 'Utilisateurs' ? 'active':'' "><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Utilisateurs</span></a>
                       <ul aria-expanded="false" class="collapse">

@@ -16,6 +16,22 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/mail/send', 'MailController@send');
 
+Route::get('/mail/get', 'MailController@getMail');
+Route::prefix('mail')->group(function () {
+    Route::get('folders', 'MailController@getFolders');
+    Route::get('get', 'MailController@getMail');
+    Route::get('get/folder/{folder}', 'MailController@getMailFolder');
+    Route::post('toSpam', 'MailController@toSpam');
+    Route::post('toTrash', 'MailController@toTrash');
+    Route::post('transfer', 'MailController@transfer');
+    Route::post('attachTicket', 'MailController@attachTicket');
+    Route::post('unread', 'MailController@unread');
+    Route::post('config', 'MailController@config');
+    Route::get('incoming', 'MailController@testIncoming');
+    Route::get('outgoing', 'MailController@testOutgoing');
+});
+
+
 Auth::routes();
 
 Route::get('/wayway', function() {

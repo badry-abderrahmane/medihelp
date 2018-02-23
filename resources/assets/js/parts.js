@@ -47,3 +47,12 @@ Vue.component('part-button-goback', require('./parts/buttons/buttonGoback.vue'))
 */
 Vue.component('modal', require('./parts/modals/default.vue'));
 Vue.component('modal-large', require('./parts/modals/large.vue'));
+
+
+/*
+*
+* Spinners components
+*
+*/
+Vue.component('spinner-rect', require('./parts/spinners/rect.vue'));
+// Vue.component('modal-large', require('./parts/modals/large.vue'));

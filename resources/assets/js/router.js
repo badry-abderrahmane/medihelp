@@ -78,6 +78,18 @@ const routes = [
             ]
         },
 
+
+        /**
+        **    Inbox routes
+        **/
+        {
+           path: '/inbox', component: require('./components/inbox/home.vue'),
+           children: [
+              { name:'Mailbox',  path: 'get/:folder', component: require('./components/inbox/folder.vue') },
+            ]
+        },
+        { name:'Paramètres Inbox',  path: '/inbox/parametres', component: require('./components/inbox/parametres.vue') },
+
         /**
         **    Parametres routes
         **/

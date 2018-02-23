@@ -58,6 +58,10 @@ const app = new Vue({
     this.$store.dispatch('LOAD_ROLE')
     this.$store.dispatch('LOAD_USER')
     this.$store.dispatch('LOAD_TICKETS')
+
+    // MAILBOX
+    this.$store.dispatch('LOAD_MAILBOX_FOLDERS')
+    //this.$store.dispatch('LOAD_MAILBOX_MAILS')
   },
   created(){
     Event.$on('init-datatable', (tableid) => {
